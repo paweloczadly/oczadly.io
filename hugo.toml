@@ -1,0 +1,87 @@
+baseURL = "https://oczadly.io"
+theme = "LoveIt"
+defaultContentLanguage = "en"
+languageCode = "en"
+languageName = "English"
+title = "oczadly.io - production-ready tooling. Clean solutions."
+
+[languages]
+  [languages.en]
+    weight = 1
+    languageCode = "en"
+    languageName = "English"
+    [[languages.en.menu.main]]
+      weight = 1
+      identifier = "posts"
+      name = "Posts"
+      url = "/posts/"
+    [[languages.en.menu.main]]
+      weight = 2
+      identifier = "about"
+      name = "About"
+      url = "/about/"
+
+  [languages.pl]
+    weight = 2
+    languageCode = "pl"
+    languageName = "Polski"
+    [[languages.pl.menu.main]]
+      weight = 1
+      identifier = "posts"
+      name = "Wpisy"
+      url = "/posts/"
+    [[languages.pl.menu.main]]
+      weight = 2
+      identifier = "about"
+      name = "O blogu"
+      url = "/about/"
+
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "posts"
+    pre = ""
+    post = ""
+    name = "Posts"
+    url = "/posts/"
+    title = ""
+
+[params]
+  [params.author]
+    name = "Paweł Oczadły"
+    email = "p@oczadly.io"
+
+  [params.footer]
+    hugo = false
+    since = 2025
+
+  [params.header]
+    [params.header.title]
+      pre = "<svg width=\"150\" height=\"35\" viewBox=\"0 0 150 35\" xmlns=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#8bc5a7\">oczadly</text><text x=\"68\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#123b34\">.io</text></svg>"
+      # Override the default name parameter
+      name = ""
+
+  [params.home]
+    [params.home.profile]
+      enable = true
+      avatarURL = "/images/logo-male.png"
+      title = "<svg width=\"100\" height=\"35\" viewBox=\"0 0 100 35\" xmlns=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#8bc5a7\">oczadly</text><text x=\"68\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#123b34\">.io</text></svg>"
+      subtitle = "Reusable, production-ready solutions for cloud architecture, platform engineering and AI-native tooling."
+  
+  [params.page]
+    [params.page.share]
+      X = true
+      Facebook = true
+      Linkedin = true
+      # Disable the ones which are enabled by default
+      HackerNews = false
+      Line = false
+      Weibo = false
+      Diaspora = false
+      Telegram = false
+
+  [params.social]
+    Email = "p@oczadly.io"
+    GitHub = "paweloczadly"
+    Linkedin = "paweloczadly"
+    Strava = "67135909"

@@ -1,0 +1,14 @@
+name: Hugo Build
+description: Checkout, setup Hugo, and build the site with minification.
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: '0.147.0'
+        extended: true
+
+    - name: Build with Hugo
+      run: hugo --minify
+      shell: bash
