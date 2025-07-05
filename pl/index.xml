@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>oczadly.io - production-ready tooling. Clean solutions.</title><link>https://oczadly.io/pl/</link><description>This is my cool site</description><generator>Hugo -- gohugo.io</generator><language>pl</language><managingEditor>p@oczadly.io (Paweł Oczadły)</managingEditor><webMaster>p@oczadly.io (Paweł Oczadły)</webMaster><lastBuildDate>Sat, 05 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://oczadly.io/pl/index.xml" rel="self" type="application/rss+xml"/><item><title>Start bloga oczadly.io</title><link>https://oczadly.io/pl/posts/2025-07-05-starting-oczadly-io/</link><pubDate>Sat, 05 Jul 2025 00:00:00 +0000</pubDate><author>Paweł Oczadły</author><guid>https://oczadly.io/pl/posts/2025-07-05-starting-oczadly-io/</guid><description><![CDATA[<p>Witaj na moim blogu!</p>
+<p>Stworzyłem go, aby dokumentować i dzielić się swoimi osobistymi doświadczeniami w budowaniu rozwiązań z zakresu architektury chmurowej, platform engineeringu oraz AI-native tooling.</p>
+<p>Blog będzie pełnił rolę mojego <strong>osobistego notesu inżynierskiego</strong> – miejsca, w którym zapisuję uporządkowane lekcje, wzorce i decyzje w sposób przejrzysty i dostępny.</p>
+<hr>
+<h2 id="czego-możesz-się-spodziewać">Czego możesz się spodziewać</h2>
+<ul>
+<li>Praktycznych wpisów skupionych na implementacji.</li>
+<li>Uporządkowanych wzorców do budowania skalowalnych platform.</li>
+<li>Insightów dotyczących Gradle, OpenTofu, workflowów GitOps i AI-native systems.</li>
+<li>Czystych, minimalistycznych, pozbawionych szumu treści.</li>
+</ul>
+<hr>
+<p>🚀 Zaczynamy.</p>]]></description></item></channel></rss>
