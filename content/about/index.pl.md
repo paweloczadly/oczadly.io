@@ -13,7 +13,7 @@ type: "page"
 
 ## Platform Engineer. Gradler.
 
-Buduję systemy, nie „setupy”. Skupiam się na tworzeniu czystych, powtarzalnych narzędzi developerskich oraz infrastruktury, które skalują się, testują i integrują płynnie z workflow inżynierskim.
+Buduję systemy, nie "setupy". Skupiam się na tworzeniu czystych, powtarzalnych narzędzi developerskich oraz infrastruktury, które skalują się, testują i integrują płynnie z workflow inżynierskim.
 
 ### Praca
 
