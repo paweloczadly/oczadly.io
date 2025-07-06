@@ -38,3 +38,5 @@ Instead of leaving you with just a welcome and a list of future topics, I want t
 3️⃣ The **site is built and published through a CI/CD process** using [Hugo](https://gohugo.io/) and [GitHub Actions](https://github.com/features/actions), as defined in [this PR](https://github.com/paweloczadly/oczadly.io/pull/1).
 
 The main idea behind this setup was to **create a single place that connects all parts of the system**. This place is the [paweloczadly/iac](https://github.com/paweloczadly/iac) repository, which defines how the blog is deployed, ensuring that everything is defined in code - **done thoroughly and properly**, just the way I like it. It also makes it easy to recover in case of failure and provides a clean foundation for evolving and extending future projects.
+
+Today I launched oczadly.io. My corner of the internet, on my terms.

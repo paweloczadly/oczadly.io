@@ -38,3 +38,5 @@ Blog będzie pełnił rolę mojego **osobistego notesu inżynierskiego** – mie
 3️⃣ **Strona jest budowana i publikowana w procesie CI/CD** przez [Hugo](https://gohugo.io/) i [GitHub Actions](https://github.com/features/actions), zdefiniowane w [tym PR](https://github.com/paweloczadly/oczadly.io/pull/1).
 
 Głównym motywem przewodnim całej opisanej konfiguracji było stworzenie centralnego miejsca, które łączy wszystkie elementy całości. Tym miejscem jest repozytorium [paweloczadly/iac](https://github.com/paweloczadly/iac), które jest fundamentem definiującym sposób uruchomienia bloga. Dzięki temu wszystko jest zdefiniowane w kodzie - czyli **dokładnie i porządnie**, tak jak lubię. A do tego umożliwia odtworzenie w przypadku awarii oraz daje łatość w dalszym rozwijaniu kolejnych projektów.
+
+Dzisiaj uruchomiłem blog oczadly.io. Mój kawałek internetu, na moich zasadach.
