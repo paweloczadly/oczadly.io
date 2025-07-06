@@ -57,7 +57,7 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
 
   [params.header]
     [params.header.title]
-      pre = "<svg width=\"150\" height=\"35\" viewBox=\"0 0 150 35\" xmlns=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#8bc5a7\">oczadly</text><text x=\"68\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#123b34\">.io</text></svg>"
+      pre = "<text class=\"logo\"><span class=\"oczadly\">oczadly</span><span class=\"dot-io\">.io</span></text>"
       # Override the default name parameter
       name = ""
 
@@ -65,7 +65,7 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
     [params.home.profile]
       enable = true
       avatarURL = "/images/logo-male.png"
-      title = "<svg width=\"100\" height=\"35\" viewBox=\"0 0 100 35\" xmlns=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#8bc5a7\">oczadly</text><text x=\"68\" y=\"31\" font-family=\"Inter, sans-serif\" font-size=\"18\" font-weight=\"550\" fill=\"#123b34\">.io</text></svg>"
+      title = "<text class=\"logo\"><span class=\"oczadly\">oczadly</span><span class=\"dot-io\">.io</span></text>"
       subtitle = "Reusable, production-ready solutions for cloud architecture, platform engineering and AI-native tooling."
   
   [params.page]
