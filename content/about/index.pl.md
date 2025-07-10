@@ -53,7 +53,7 @@ Poza przechowywaniem kodu w repozytoriach chciałem mieć miejsce do dokumentowa
 
 Wszystko w sposób przejrzysty i dostępny.
 
-Ten blog jest moim osobistym notesem inżynierskim – przestrzenią, do której wracam podczas projektowania systemów, podobnie jak wraca się do ADR-ów przy podejmowaniu decyzji architektonicznych.
+Ten blog jest moim osobistym inżynierskim kompendium – przestrzenią, do której wracam podczas projektowania systemów, podobnie jak wraca się do ADR-ów przy podejmowaniu decyzji architektonicznych.
 
 To mój sposób na uchwycenie wzorców, lekcji i decyzji produkcyjnych, które pomagają mi – i być może innym – budować **czyste, skalowalne i łatwe w utrzymaniu platformy**.
 
