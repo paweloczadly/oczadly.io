@@ -53,7 +53,7 @@ Besides keeping my code in repositories, I wanted a place to document **structur
 
 Everything in a clear and accessible way.
 
-This blog serves as my personal engineering notebook—a space I return to when designing systems, just like revisiting ADRs during architecture work.
+This blog serves as my personal engineering compendium — a space I return to when designing systems, just like revisiting ADRs during architecture work.
 
 It's my way of capturing patterns, learnings, and production-ready decisions that help me—and hopefully others—build **clean, scalable, and maintainable platforms**.
 
