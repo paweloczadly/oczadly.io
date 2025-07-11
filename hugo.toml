@@ -38,6 +38,7 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
 
 [markup]
   [markup.highlight]
+    lineNos = true
     noClasses = false
 
 [menu]
