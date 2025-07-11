@@ -36,6 +36,10 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
       name = "O blogu"
       url = "/about/"
 
+[markup]
+  [markup.highlight]
+    noClasses = false
+
 [menu]
   [[menu.main]]
     weight = 1
