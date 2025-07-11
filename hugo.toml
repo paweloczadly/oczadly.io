@@ -71,7 +71,7 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
   [params.home]
     [params.home.profile]
       enable = true
-      avatarURL = "/images/logo-male.png"
+      avatarURL = "/images/logo-avatar.png"
       title = "<text class=\"logo\"><span class=\"oczadly\">oczadly</span><span class=\"dot-io\">.io</span></text>"
       subtitle = "Reusable, production-ready solutions for cloud architecture, platform engineering and AI-native tooling."
   
