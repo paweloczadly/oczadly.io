@@ -19,9 +19,9 @@ Buduję systemy, nie "setupy". Skupiam się na tworzeniu czystych, powtarzalnych
 
 Obecnie pracuję w **[Gradle](https://gradle.org/)**, budując systemy i wewnętrzne platformy developerskie.
 
-> ***Uwaga:***
->
-> *Wpisy dotyczące Gradle, DPE University, Build Scans czy Develocity odzwierciedlają moje **osobiste doświadczenia i perspektywy**. Nie są oficjalnymi rekomendacjami produktów ani stanowiskiem firmy, lecz insightami, które zdobyłem, pracując z tymi narzędziami w realnych workflow inżynierskich.*
+{{< admonition tip "Uwaga" >}}
+*Wpisy dotyczące Gradle, DPE University, Build Scans czy Develocity odzwierciedlają moje **osobiste doświadczenia i perspektywy**. Nie są oficjalnymi rekomendacjami produktów ani stanowiskiem firmy, lecz insightami, które zdobyłem, pracując z tymi narzędziami w realnych workflow inżynierskich.*
+{{< /admonition >}}
 
 ---
 
