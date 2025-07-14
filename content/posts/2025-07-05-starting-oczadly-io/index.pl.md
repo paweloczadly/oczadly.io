@@ -5,7 +5,7 @@ description: "Witaj na moim blogu"
 draft: false
 resources:
 - name: "featured-image"
-  src: "featured-image.png"
+  src: "featured-image.jpg"
 ---
 
 Witaj na moim blogu!
