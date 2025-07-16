@@ -11,6 +11,8 @@ resources:
   src: install.sh
 ---
 
+Do you like this blog and my work? {{< buymeacoffee >}}
+
 ## Dlaczego kolejny plugin Gradle
 
 Ostatnio chciałem poszerzyć swoją wiedzę o [Build Scanach](https://docs.gradle.org/8.14.3/userguide/build_scans.html), [Develocity](https://gradle.com/develocity/) i ich praktycznym zastosowaniu, dlatego zacząłem przerabiać kursy na naszej platformie [DPE University](https://dpeuniversity.gradle.com/app/catalog). Na co dzień mam styczność z [Develocity](https://gradle.com/develocity/) od strony operacyjnej i produkcyjnej – utrzymuję między innymi [instancje open source](https://github.com/gradle/develocity-oss-projects), więc zależało mi na lepszym zrozumieniu produktu, a zwłaszcza użycia od strony użytkowników, w mojej codziennej pracy inżyniera.
@@ -72,7 +74,7 @@ To oszczędność czasu, spójność konfiguracji i od razu wpięcie w Wasz work
 
 Po zainstalowaniu gradle-springinitializr-plugin możesz generować projekty Spring Boot bezpośrednio z Gradle, bez opuszczania terminala.
 
-Plugin udostępnia pojedynczy task initSpringBootProject, który pobiera projekt z Spring Initializr. Zamiast klikać w interfejs webowy, wystarczy uruchomić:
+Plugin udostępnia pojedynczy task initSpringBootProject, który pobiera projekt z Spring Initializr i następnie rozpakowuje go. Zamiast klikać w interfejs webowy, wystarczy uruchomić:
 
 ```bash
 $ gradle initSpringBootProject
@@ -80,10 +82,11 @@ $ gradle initSpringBootProject
 
 Otrzymasz:
 
-```
+```text
 > Task :initSpringBootProject
 Downloading Spring Boot starter project...
-Project downloaded to: /Users/pawel/build/generated-project/starter.zip
+Project downloaded to: /opt/my-projects/build/generated-project/starter.zip
+Project extracted to: /opt/my-projects/build/generated-project/demo
 
 BUILD SUCCESSFUL in 1s
 ```
@@ -104,7 +107,7 @@ $ gradle initSpringBootProject \
     -PpackageName=com.mycompany.myspringapp \
     -Ppackaging="war" \
     -PjavaVersion="21" \
-    -PoutputDir=my-spring-app
+    -PoutputDir="/opt/my-projects/my-spring-boot-app"
 ```
 
 Dzięki temu możesz generować czyste, spójne projekty, gotowe do pracy w Twoim workflow CI/CD i zgodne z zespołowymi konwencjami – bez manualnych kroków.
@@ -200,16 +203,18 @@ Zobacz oficjalną [dokumentację Gradle dotyczącą configuration cache](https:/
 
 Plugin akceptuje wszystkie parametry dostępne na stronie https://start.spring.io - te same, które możesz ustawić w webowym UI Spring Initializr.
 
-* `projectType`: pole Project w Spring Initializr. Domyślnie **Gradle**.
-* `language`: pole Language w Spring Initializr. Domyślnie **Java**.
-* `bootVersion`: pole Spring Boot w Spring Initializr. Domyślnie **3.5.3**.
-* `groupId`: pole Group w sekcji Project Metadata w Spring Initializr. Domyślnie **com.example**.
-* `artifactId`: pole Artifact w sekcji Project Metadata w Spring Initializr. Domyślnie **demo**.
-* `projectName`: pole Name w sekcji Project Metadata w Spring Initializr. Domyślnie **demo**.
-* `projectDescription`: pole Description w sekcji Project Metadata w Spring Initializr. Domyślnie: **Demo project for Spring Boot**.
-* `packageName`: pole Package name w sekcji Project Metadata w Spring Initializr. Domyślnie: **com.example.demo**.
-* `packaging`: pole Packaging w sekcji Project Metadata w Spring Initializr. Domyślnie: **Jar**.
-* `javaVersion`: pole Java w sekcji Project Metadata w Spring Initializr. Domyślnie: **17**.
+| Parametr             | Pole w Spring Initializr               | Domyślna wartość                 |
+| -------------------- | -------------------------------------- | -------------------------------- |
+| `projectType`        | Project                                | **Gradle**                       |
+| `language`           | Language                               | **Java**                         |
+| `bootVersion`        | Spring Boot                            | **3.5.3**                        |
+| `groupId`            | Group w sekcji Project Metadata        | **com.example**                  |
+| `artifactId`         | Artifact w sekcji Project Metadata     | **demo**                         |
+| `projectName`        | Name w sekcji Project Metadata         | **demo**                         |
+| `projectDescription` | Description w sekcji Project Metadata  | **Demo project for Spring Boot** |
+| `packageName`        | Package name w sekcji Project Metadata | **com.example.demo**             |
+| `packaging`          | Packaging w sekcji Project Metadata    | **Jar**                          |
+| `javaVersion`        | Java w sekcji Project Metadata         | **17**                           |
 
 W przypadku, gdy wartość nie jest przekazana do taska, na przykład:
 
@@ -246,7 +251,11 @@ Jeśli użytkownik poda błędną wartość parametru, która nie jest wspierana
 
 ```shell
 $ gradle initSpringBootProject -Planguage=clojure
+```
 
+Dostanie komunikat:
+
+```text
 > Task :initSpringBootProject FAILED
 
 FAILURE: Build failed with an exception.
@@ -268,95 +277,131 @@ BUILD FAILED in 5s
 
 Na podstawie ścieżki [Gradle Build Caching](https://dpeuniversity.gradle.com/app/learning_paths/b82f8dd7-d61e-450f-820e-3e719ef70bee) na DPE University oraz wiedzy tam nabytej w pluginie zostało dodane wsparcie do [incremental build](https://docs.gradle.org/8.14.3/userguide/incremental_build.html) oraz [Build Cache](https://docs.gradle.org/8.14.3/userguide/build_cache.html). Dzięki temu kolejne uruchomienia są natychmiastowe, a rezultaty mogą być ponownie użyte.
 
-Task `initSpringBootProject` deklaruje `outputDir` jako `@OutputDirectory`, powiązane z `DirectoryProperty`. Dzięki temu Gradle ma pełną kontrolę nad śledzeniem stanu katalogu wynikowego, co pozwala na:
+Task `initSpringBootProject` deklaruje zarówno dane wejściowe (`@Input`), jak i dane wyjściowe (`@OutputDirectory` - w tym przypadku `outputDir`, powiązany z `DirectoryProperty`). To zgodne z definicją poprawnie skonfigurowanego taska w Gradle, opisaną [tutaj](https://docs.gradle.org/8.14.3/userguide/incremental_build.html#sec:task_inputs_outputs).
 
-* Wsparcie dla incremental build i pomijanie taska (`UP-TO-DATE`), jeśli nic się nie zmienilo.
-* Wsparcie dla build cache i przywrócenie wyników taska (`FROM-CACHE`), jeśli pliki zostały usunięte.
+Dzięki temu Gradle ma pełną kontrolę nad śledzeniem stanu wejść i wyjść, co umożliwia:
 
-Poniżej znajduje się przykład jak task się zachowuje w obu przypadkach.
+* Pomijanie taska (`UP-TO-DATE`), jeśli dane wyjściowe się nie zmieniły - incremental build.
+* Przywrócenie wyników (`FROM-CACHE`), jeśli dane wyjściowe są w lokalnym cache - build cache.
+
+Poniżej znajduje się przykład, jak task zachowuje się w obu przypadkach.
 
 #### Incremental build
 
 Przy pierwszym uruchomieniu pobierany jest projekt ze Spring Initializr:
 
 ```shell
-$ gradle initSpringBootProject -PoutputDir=/Users/paweloczadly/my-spring-boot-app --console=plain --info
+$ gradle initSpringBootProject -PoutputDir=/opt/my-projects/my-spring-boot-app --console=plain --info
+```
+
+Zostanie wyświetlone:
+
+```text
 
 ...
 
-:initSpringBootProject (Thread[#67,Execution worker Thread 2,5,main]) started.
+Task name matched 'initSpringBootProject'
+Selected primary task 'initSpringBootProject' from project :
+Tasks to be executed: [task ':initSpringBootProject']
+Tasks that were excluded: []
+Resolve mutations for :initSpringBootProject (Thread[included builds,5,main]) started.
+:initSpringBootProject (Thread[included builds,5,main]) started.
 
 > Task :initSpringBootProject
-Build cache key for task ':initSpringBootProject' is 994f91705bf7acb0c7fc0cc899de7b9a
+Build cache key for task ':initSpringBootProject' is 75b4d5a65d989aa6453584fe39baeab5
 Task ':initSpringBootProject' is not up-to-date because:
   No history is available.
 Downloading Spring Boot starter project...
-Project downloaded to: /Users/paweloczadly/my-spring-boot-app/starter.zip
-Stored cache entry for task ':initSpringBootProject' with cache key 994f91705bf7acb0c7fc0cc899de7b9a
+Project downloaded to: /opt/my-projects/my-spring-boot-app/starter.zip
+Project extracted to: /opt/my-projects/my-spring-boot-app/demo
+Stored cache entry for task ':initSpringBootProject' with cache key 75b4d5a65d989aa6453584fe39baeab5
 
-BUILD SUCCESSFUL in 15s
+BUILD SUCCESSFUL in 12s
 5 actionable tasks: 1 executed, 4 up-to-date
 ```
 
 Natomiast, przy ponownym uruchomieniu z tym samym parametrem `-PoutputDir`:
 
 ```shell
-$ gradle initSpringBootProject -PoutputDir=/Users/paweloczadly/my-spring-boot-app --console=plain --info
-
-...
-
-> Task :initSpringBootProject UP-TO-DATE
-Build cache key for task ':initSpringBootProject' is 994f91705bf7acb0c7fc0cc899de7b9a
-Skipping task ':initSpringBootProject' as it is up-to-date.
-
-BUILD SUCCESSFUL in 438ms
-1 actionable task: 1 up-to-date
+$ gradle initSpringBootProject -PoutputDir=/opt/my-projects/my-spring-boot-app --console=plain --info
 ```
 
-Wykorzystywany zostanie incremental build, co potwierdza oznaczenie `UP-TO-DATE`.
+Z racji tego, że dane wyjściowe się nie zmieniły, będzie widoczne:
+
+```text
+...
+
+Task name matched 'initSpringBootProject'
+Selected primary task 'initSpringBootProject' from project :
+Tasks to be executed: [task ':initSpringBootProject']
+Tasks that were excluded: []
+Resolve mutations for :initSpringBootProject (Thread[Execution worker Thread 4,5,main]) started.
+:initSpringBootProject (Thread[Execution worker Thread 4,5,main]) started.
+
+> Task :initSpringBootProject UP-TO-DATE
+Build cache key for task ':initSpringBootProject' is 75b4d5a65d989aa6453584fe39baeab5
+Skipping task ':initSpringBootProject' as it is up-to-date.
+
+BUILD SUCCESSFUL in 383ms
+5 actionable tasks: 5 up-to-date
+```
+
+Co potwierdza, że wykorzystany jest incremental build przez oznaczenie taska etykietą `UP-TO-DATE`.
 
 #### Build Cache
 
-Gdy plik `/Users/paweloczadly/my-spring-boot-app/starter.zip` zostanie skasowany, a task zostanie uruchomiony ponownie:
+Gdy plik `/opt/my-projects/my-spring-boot-app/starter.zip` zostanie skasowany, a task zostanie uruchomiony ponownie:
 
 ```shell
-$ gradle initSpringBootProject -PoutputDir=/Users/paweloczadly/my-spring-boot-app --console=plain --info
+$ gradle initSpringBootProject -PoutputDir=/opt/my-projects/my-spring-boot-app --console=plain --info
+```
+
+Z racji tego, że dane wyjściowe wcześniej zostały dodane do lokalnego cache, w odpowiedzi będzie widoczne poniższe:
+
+```text
 
 ...
 
-:initSpringBootProject (Thread[#102,Execution worker Thread 5,5,main]) started.
+Task name matched 'initSpringBootProject'
+Selected primary task 'initSpringBootProject' from project :
+Tasks to be executed: [task ':initSpringBootProject']
+Tasks that were excluded: []
+Resolve mutations for :initSpringBootProject (Thread[included builds,5,main]) started.
+:initSpringBootProject (Thread[included builds,5,main]) started.
 
 > Task :initSpringBootProject FROM-CACHE
-Build cache key for task ':initSpringBootProject' is 994f91705bf7acb0c7fc0cc899de7b9a
+Build cache key for task ':initSpringBootProject' is 75b4d5a65d989aa6453584fe39baeab5
 Task ':initSpringBootProject' is not up-to-date because:
-  Output property 'outputDir' file /Users/paweloczadly/my-spring-boot-app has been removed.
-  Output property 'outputDir' file /Users/paweloczadly/my-spring-boot-app/starter.zip has been removed.
-Loaded cache entry for task ':initSpringBootProject' with cache key 994f91705bf7acb0c7fc0cc899de7b9a
+  Output property 'outputDir' file /opt/my-projects/my-spring-boot-app has been removed.
+  Output property 'outputDir' file /opt/my-projects/my-spring-boot-app/demo has been removed.
+  Output property 'outputDir' file /opt/my-projects/my-spring-boot-app/demo/build.gradle has been removed.
+  and more...
+Loaded cache entry for task ':initSpringBootProject' with cache key 75b4d5a65d989aa6453584fe39baeab5
 
-BUILD SUCCESSFUL in 498ms
+BUILD SUCCESSFUL in 416ms
 5 actionable tasks: 1 from cache, 4 up-to-date
 ```
 
-Zostanie wykorzystany lokalny build cache, co potwierdza oznaczenie `FROM-CACHE`. 
+Co mówi o wykorzystaniu lokalnego build cache, potwierdzone przez oznaczenie `FROM-CACHE`. 
 
 {{< admonition success "Wnioski ze ścieżki Gradle Build Cache (DPE University)" >}}
 Podczas przerabiania ścieżki [Gradle Build Caching](https://dpeuniversity.gradle.com/app/learning_paths/b82f8dd7-d61e-450f-820e-3e719ef70bee) na DPE University zaciekawiło mnie, jak dokładnie działa lokalny build cache i co właściwie trafia do jego środka. Postanowiłem to rozłożyć na czynniki pierwsze.
 
-Po wykonaniu taska `initSpringBootProject` uwagę zwraca klucz build cache: `994f91705bf7acb0c7fc0cc899de7b9a`. To archiwum, które znajduje się w katalogu `$GRADLE_HOME/caches/build-cache-1`. Po rozpakowaniu można zobaczyć m.in. plik `METADATA`, który zawiera następujące informacje:
+Po wykonaniu taska `initSpringBootProject` uwagę zwraca klucz build cache: `75b4d5a65d989aa6453584fe39baeab5`. To archiwum, które znajduje się w katalogu `$GRADLE_USER_HOME/caches/build-cache-1`. Po rozpakowaniu można zobaczyć m.in. plik `METADATA`, który zawiera następujące informacje:
 
 ```properties
 #Generated origin information
 #Sun Jul 13 13:47:46 CEST 2025
-buildCacheKey=994f91705bf7acb0c7fc0cc899de7b9a
-buildInvocationId=unvev47z5bbdnodiwbt2zneg6q
-creationTime=1752407266256
-executionTime=798
-gradleVersion=8.14.1
+executionTime=787
+creationTime=1752677283570
 identity=\:initSpringBootProject
+buildInvocationId=b6ynyhegwjcl5ojld4csg2g7ee
+buildCacheKey=75b4d5a65d989aa6453584fe39baeab5
 type=org.gradle.api.internal.tasks.execution.TaskExecution
+gradleVersion=8.14
 ```
 
-W folderze `tree-outputDir/` znajduje się zarchiwizowany plik `starter.zip`, czyli dokładnie to, co wcześniej zostało pobrane ze Spring Initializr i zapisane jako wynik działania taska.
+W folderze `tree-outputDir/` znajduje się zarchiwizowany plik `starter.zip` oraz folder z projektem, czyli dokładnie to, co wcześniej zostało pobrane ze Spring Initializr i zapisane jako wynik działania taska.
 {{< /admonition >}}
 
 Więcej o incremental build oraz Build Cache, możesz znaleźć w oficjalnej dokumentacji:
