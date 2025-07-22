@@ -6,7 +6,7 @@
 
 ![CI](https://github.com/paweloczadly/oczadly.io/actions/workflows/gh-pages.yml/badge.svg)
 
-Clean, minimal, production-ready engineering blog by Paweł Oczadły.
+Clean, minimal blog by Paweł Oczadły.
 
 ---
 
