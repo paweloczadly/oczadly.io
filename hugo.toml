@@ -79,6 +79,7 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
   
   [params.page]
     [params.page.share]
+      enable = true
       X = true
       Facebook = true
       Linkedin = true
