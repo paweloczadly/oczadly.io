@@ -54,6 +54,7 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
 [params]
   description = "Patterns for platform engineering and AI workflows."
   title = "oczadly.io - production-ready tooling. Clean solutions."
+  images = []
 
   [params.author]
     name = "Paweł Oczadły"

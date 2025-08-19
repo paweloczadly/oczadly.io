@@ -3,6 +3,7 @@ title: "Starting oczadly.io"
 date: 2025-07-05
 description: "Welcome to my blog"
 draft: false
+images: []
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
