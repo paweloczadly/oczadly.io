@@ -78,6 +78,11 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
       subtitle = "Reusable, production-ready solutions for cloud architecture, platform engineering and AI-native tooling."
   
   [params.page]
+    [params.page.seo]
+      images = []
+      [params.page.seo.publisher]
+        name = "xxxx"
+        logoUrl = "/images/logo-male.png"
     [params.page.share]
       enable = true
       X = true
