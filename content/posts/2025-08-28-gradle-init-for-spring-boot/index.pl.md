@@ -25,7 +25,7 @@ Plugin jest open source i dostępny w [Gradle - Plugins](https://plugins.gradle.
 
 Stwórz plik `build.gradle` oraz dodaj poniższe:
 
-```
+```groovy
 plugins {
     id 'io.oczadly.springinitializr' version '1.0.0'
 }
@@ -33,7 +33,7 @@ plugins {
 
 Następnie stwórz plik `settings.gradle` i dodaj konfigurację:
 
-```
+```groovy
 rootProject.name = 'examples-simple-groovy'
 ```
 
@@ -82,7 +82,7 @@ Po zainstalowaniu [gradle-springinitializr-plugin](https://plugins.gradle.org/pl
 
 Plugin udostępnia pojedynczy task `initSpringBootProject`, który pobiera projekt z [Spring Initializr](https://start.spring.io/) i następnie rozpakowuje go. Zamiast klikać w interfejs webowy, wystarczy uruchomić:
 
-```bash
+```shell
 gradle initSpringBootProject
 ```
 
@@ -101,7 +101,7 @@ Domyślnie projekt zostanie pobrany i rozpakowany do `build/generated-project/de
 
 Plugin pozwala także ustawić dowolny parametr dostępny w [Spring Initializr](https://start.spring.io/):
 
-```bash
+```shell
 gradle initSpringBootProject \
     -PprojectType="gradle-project-kotlin" \
     -Planguage="kotlin" \

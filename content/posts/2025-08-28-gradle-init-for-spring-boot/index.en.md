@@ -24,7 +24,7 @@ The plugin is open-source and available on the [Gradle - Plugins](https://plugin
 
 Create the `build.gradle` file and add the following:
 
-```
+```groovy
 plugins {
     id 'io.oczadly.springinitializr' version '1.0.0'
 }
@@ -32,7 +32,7 @@ plugins {
 
 Create the settings.gradle file and add this configuration:
 
-```
+```groovy
 rootProject.name = 'examples-simple-groovy'
 ```
 
@@ -89,7 +89,7 @@ gradle initSpringBootProject
 
 You will get:
 
-```
+```text
 > Task :initSpringBootProject
 Downloading Spring Boot starter project...
 Project downloaded to: /opt/my-projects/build/generated-project/starter.zip
@@ -243,7 +243,7 @@ gradle initSpringBootProject -Planguage=clojure
 
 Will result in the message:
 
-```
+```text
 > Task :initSpringBootProject FAILED
 
 FAILURE: Build failed with an exception.
@@ -432,7 +432,7 @@ BUILD SUCCESSFUL in 3s
 
 The tests did not pass, and I was getting the following message in the logs:
 
-```
+```text
 Condition not satisfied:
 
 FilesTestUtils.projectFilesExist unzipDir, 'build.gradle', 'src/main/java/com/example/demo/DemoApplication.java'
