@@ -30,7 +30,7 @@ plugins {
 }
 ```
 
-Create the settings.gradle file and add this configuration:
+Create the `settings.gradle` file and add this configuration:
 
 ```groovy
 rootProject.name = 'examples-simple-groovy'
@@ -121,7 +121,7 @@ This way you generate clean, consistent projects ready for your CI/CD workflow a
 
 The plugin also supports an experimental interactive mode inspired by `gradle init`:
 
-![gradle init dla Spring Boot](https://raw.githubusercontent.com/paweloczadly/gradle-springinitializr-plugin/refs/tags/v1.0.0/docs/images/demo.gif "gradle init dla Spring Boot")
+![gradle init dla Spring Boot](https://raw.githubusercontent.com/paweloczadly/gradle-springinitializr-plugin/refs/tags/v1.0.0/docs/images/demo.gif "gradle init for Spring Boot")
 
 This allows you to enter all project parameters without remembering command line flags – the plugin guides you step by step through choosing [Spring Boot](https://spring.io/projects/spring-boot) version, language, project type, and dependencies. It’s particularly useful for new team members or when you want to quickly prepare a project aligned with your organization’s standards.
 
