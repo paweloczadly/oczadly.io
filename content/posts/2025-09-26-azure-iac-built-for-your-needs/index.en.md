@@ -804,7 +804,7 @@ The radar chart below provides a visual overview of the key differences.
 {{< echarts >}}
 {
   "title": {
-    "text": "Porównanie podejść IaC z organization-template",
+    "text": "IaC Architecture Patterns: Complete Comparison",
     "top": "1%",
     "left": "center"
   },
