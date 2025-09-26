@@ -1,0 +1,504 @@
+<!doctype html><html lang=pl><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Azure IaC zbudowana dla Twoich potrzeb - oczadly.io - production-ready tooling. Clean solutions.</title><meta name=Description content="Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."><meta property="og:url" content="https://oczadly.io/pl/posts/2025-09-26-azure-iac-built-for-your-needs/">
+<meta property="og:site_name" content="oczadly.io - production-ready tooling. Clean solutions."><meta property="og:title" content="Azure IaC zbudowana dla Twoich potrzeb"><meta property="og:description" content="Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."><meta property="og:locale" content="pl"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-09-26T00:00:00+00:00"><meta property="article:modified_time" content="2025-09-26T00:00:00+00:00"><meta property="og:image" content="https://oczadly.io/posts/2025-09-26-azure-iac-built-for-your-needs/featured-image.png"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://oczadly.io/posts/2025-09-26-azure-iac-built-for-your-needs/featured-image.png"><meta name=twitter:title content="Azure IaC zbudowana dla Twoich potrzeb"><meta name=twitter:description content="Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://oczadly.io/pl/posts/2025-09-26-azure-iac-built-for-your-needs/><link rel=prev href=https://oczadly.io/pl/posts/2025-08-28-gradle-init-for-spring-boot/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Azure IaC zbudowana dla Twoich potrzeb","inLanguage":"pl","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/oczadly.io\/pl\/posts\/2025-09-26-azure-iac-built-for-your-needs\/"},"image":[{"@type":"ImageObject","url":"https:\/\/oczadly.io\/posts\/2025-09-26-azure-iac-built-for-your-needs\/featured-image.png","width":1536,"height":1024}],"genre":"posts","wordcount":4095,"url":"https:\/\/oczadly.io\/pl\/posts\/2025-09-26-azure-iac-built-for-your-needs\/","datePublished":"2025-09-26T00:00:00+00:00","dateModified":"2025-09-26T00:00:00+00:00","publisher":{"@type":"Organization","name":"xxxx","logo":{"@type":"ImageObject","url":"https:\/\/oczadly.io\/images\/logo-male.png","width":390,"height":376}},"author":{"@type":"Person","name":"Paweł Oczadły"},"description":"Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/pl/ title="oczadly.io - production-ready tooling. Clean solutions."><span class=header-title-pre><text class=logo><span class=oczadly>oczadly</span><span class=dot-io>.io</span></text></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/pl/posts/>Wpisy </a><a class=menu-item href=/pl/about/>O blogu </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Przełącz schemat">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class="menu-item language" title="Wybierz język"><i class="fa fa-globe fa-fw" aria-hidden=true></i>
+<select class=language-select id=language-select-desktop onchange="location=this.value"><option value=/posts/2025-09-26-azure-iac-built-for-your-needs/>English</option><option value=/pl/posts/2025-09-26-azure-iac-built-for-your-needs/ selected>Polski</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/pl/ title="oczadly.io - production-ready tooling. Clean solutions."><span class=header-title-pre><text class=logo><span class=oczadly>oczadly</span><span class=dot-io>.io</span></text></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/pl/posts/ title>Wpisy</a><a class=menu-item href=/pl/about/ title>O blogu</a><a href=javascript:void(0); class="menu-item theme-switch" title="Przełącz schemat">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i>
+</a><a href=javascript:void(0); class=menu-item title="Wybierz język"><i class="fa fa-globe fa-fw" aria-hidden=true></i>
+<select class=language-select onchange="location=this.value"><option value=/posts/2025-09-26-azure-iac-built-for-your-needs/>English</option><option value=/pl/posts/2025-09-26-azure-iac-built-for-your-needs/ selected>Polski</option></select></a></div></div></header><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Spis treści</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Azure IaC zbudowana dla Twoich potrzeb</h1><h2 class=single-subtitle>Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM.</h2><div class=post-meta><div class=post-meta-line><span class=post-author><a href=/pl/ title=Author rel=author class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>Paweł Oczadły</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2025-09-26>2025-09-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;4095 słów&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;20 minuty&nbsp;</div></div><div class=featured-image><img class=lazyload src=/svg/loading.min.svg data-src=/posts/2025-09-26-azure-iac-built-for-your-needs/featured-image.png data-srcset="/posts/2025-09-26-azure-iac-built-for-your-needs/featured-image.png, /posts/2025-09-26-azure-iac-built-for-your-needs/featured-image.png 1.5x, /posts/2025-09-26-azure-iac-built-for-your-needs/featured-image.png 2x" data-sizes=auto alt=/posts/2025-09-26-azure-iac-built-for-your-needs/featured-image.png title="Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>Spis treści</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#założenia>Założenia</a></li><li><a href=#jak-można-zaprojektować-iac-w-azure>Jak można zaprojektować IaC w Azure</a><ul><li><a href=#monorepo>Monorepo</a></li><li><a href=#monorepo--lokalne-moduły>Monorepo + lokalne moduły</a></li><li><a href=#repo-per-usługa--repo-per-module>Repo per usługa + repo per module</a></li><li><a href=#monorepo--repo-per-module>Monorepo + repo per module</a></li><li><a href=#porównanie>Porównanie</a></li></ul></li><li><a href=#jak-ja-projektuję-iac-w-azure>Jak ja projektuję IaC w Azure</a><ul><li><a href=#core-organization-template>Core: <code>organization-template</code></a></li><li><a href=#infrastruktura-aplikacji>Infrastruktura aplikacji</a></li><li><a href=#porównanie-1>Porównanie</a></li></ul></li><li><a href=#podsumowanie>Podsumowanie</a></li></ul></nav></div></div><div class=content id=content><p>Przez lata pracy miałem okazję uczestniczyć w wielu projektach i widzieć różne podejścia do organizacji infrastruktury jako kod przy użyciu <a href=https://developer.hashicorp.com/terraform target=_blank rel="noopener noreffer">Terraforma</a>. Niektóre z nich działały lepiej, inne gorzej. Część świetnie sprawdzała się na początku, ale w miarę rozwoju projektu — przy dodawaniu nowych zasobów pod presją czasu i priorytetów organizacji — kod stawał się trudny w utrzymaniu. Infrastruktura nadal była zapisana w kodzie, ale każda zmiana zajmowała więcej czasu, a refaktoryzacja przestawała być opłacalna.</p><p>Dzięki tym doświadczeniom wiem, jak <strong>ja sam</strong> chciałbym budować infrastrukturę jako kod w nowych projektach — i jak podszedłbym do migracji istniejących zasobów chmurowych do repozytoriów.</p><p>Pomyślałem też, że seria tych artykułów będzie dobrą okazją do uporządkowania wiedzy o <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a> — w sposób praktyczny, z realną wartością zarówno dla mnie, jak i dla Ciebie.</p><p>Zapraszam Cię zatem do serii <strong>&ldquo;Infrastruktura w skali z Azure i OpenTofu&rdquo;</strong>. Poniżej znajdziesz listę artykułów i to, czego możesz się z nich dowiedzieć.</p><div class="details admonition abstract open"><div class="details-summary admonition-title"><i class="icon fas fa-list-ul fa-fw" aria-hidden=true></i>Opis serii<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content><p>Ten artykuł jest częścią serii <strong>&ldquo;Infrastruktura w skali z Azure i OpenTofu&rdquo;</strong>. Całość składa się z poniższych wpisów.</p><ul><li><p><i class="far fa-square fa-fw" aria-hidden=true></i> <a href=# rel><strong>Azure IaC zbudowana dla Twoich potrzeb</strong></a> (czytasz go właśnie teraz).</p><p>Poznasz podejścia do projektowania infrastruktury jako kod — ich zalety oraz ograniczenia. Zobaczysz szkielet, który możesz wdrożyć u siebie lub w swoim zespole.</p></li><li><p><i class="far fa-square fa-fw" aria-hidden=true></i> Zbuduj elastyczne moduły infrastruktury oraz ich rejestr.</p><p>Dowiesz się, jak tworzyć moduły <a href=https://opentofu.org/ target=_blank rel="noopener noreffer">OpenTofu</a> zgodnie z dobrymi praktykami: elastyczne, wersjonowane i gotowe na współdzielenie. Pokażę też, jak uruchomić własny lekki rejestr.</p></li><li><p><i class="far fa-square fa-fw" aria-hidden=true></i> Zaprojektuj CI/CD dla kodu Twojej infrastruktury jako kod.</p><p>Zobaczysz, jak może wyglądać skuteczne CI/CD dla Twojej infrastruktury. Omówimy narzędzia, schematy integracji i automatyzacje ułatwiające rozwój, wdrożenia i utrzymanie.</p></li></ul></div></div></div><h2 id=założenia>Założenia</h2><p>Zanim zaczniemy, ustalmy kilka podstawowych założeń. W tej serii korzystam z:</p><ul><li><a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a> — bo chcę przy okazji uporządkować swoją wiedzę z tej chmury, tworząc coś realnie przydatnego.</li><li><a href=https://opentofu.org/ target=_blank rel="noopener noreffer">OpenTofu</a> — bo to w pełni open source’owa alternatywa dla <a href=https://developer.hashicorp.com/terraform target=_blank rel="noopener noreffer">Terraforma</a>.</li><li><a href=https://github.com/ target=_blank rel="noopener noreffer">GitHub</a> — bo to najczęściej wybierane narzędzie do hostowania kodu i automatyzacji CI/CD.</li></ul><p>Choć seria koncentruje się na <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a>, <a href=https://opentofu.org/ target=_blank rel="noopener noreffer">OpenTofu</a> i <a href=https://github.com/ target=_blank rel="noopener noreffer">GitHubie</a>, większość omawianych wzorców możesz zaadaptować do innych chmur, używać z <a href=https://developer.hashicorp.com/terraform target=_blank rel="noopener noreffer">Terraformem</a>, <a href=https://gitlab.com/ target=_blank rel="noopener noreffer">GitLabem</a> czy dowolnym innym narzędziem CI/CD.</p><h2 id=jak-można-zaprojektować-iac-w-azure>Jak można zaprojektować IaC w Azure</h2><p>Zacznijmy od przeglądu podejść do organizowania infrastruktury jako kod w <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a>, z użyciem <a href=https://opentofu.org/ target=_blank rel="noopener noreffer">OpenTofu</a>. Pokażę Ci kilka modeli, z którymi spotkałem się w praktyce – wraz z ich zaletami i ograniczeniami.</p><p>Po tej sekcji przedstawię podejście, które sam wybrałem do tworzenia infrastruktury jako kod w moich projektach.</p><div class="details admonition note open"><div class="details-summary admonition-title"><i class="icon fas fa-pencil-alt fa-fw" aria-hidden=true></i>Uwaga<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>W przykładach celowo nie używam <code>for_each</code> ani <code>count</code>. Chcę, aby skupiały się one na <strong>strukturze repozytoriów, wersjonowaniu modułów oraz granicach stanu</strong>, a nie na detalach implementacyjnych. Te mechanizmy pojawią się w kolejnych wpisach z serii.</div></div></div><h3 id=monorepo>Monorepo</h3><p>W tym podejściu cała infrastruktura jako kod znajduje się w jednym repozytorium. Najczęściej jest ona podzielona na środowiska, na przykład <code>dev</code> (1️⃣) i <code>prod</code> (2️⃣), a w nich na katalogi, takie jak <code>databases</code> (3️⃣) czy <code>network</code> (4️⃣), w których definiuje się zasoby (<code>resource</code>) i/lub moduły (<code>module</code>). Pliki stanu zawierają wiele elementów, co z czasem utrudnia ich utrzymanie.</p><p>Przykładowa struktura repozytorium w takim podejściu może wyglądać tak:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>tofu-infrastructure
+</span></span><span class=line><span class=cl>├── dev 1️⃣
+</span></span><span class=line><span class=cl>│   ├── databases 3️⃣
+</span></span><span class=line><span class=cl>│   │   ├── main.tf
+</span></span><span class=line><span class=cl>│   │   └── providers.tf
+</span></span><span class=line><span class=cl>│   └── network 4️⃣
+</span></span><span class=line><span class=cl>│       ├── main.tf
+</span></span><span class=line><span class=cl>│       └── providers.tf
+</span></span><span class=line><span class=cl>└── prod 2️⃣
+</span></span><span class=line><span class=cl>    ├── databases 3️⃣
+</span></span><span class=line><span class=cl>    │   ├── main.tf
+</span></span><span class=line><span class=cl>    │   └── providers.tf
+</span></span><span class=line><span class=cl>    └── network 4️⃣
+</span></span><span class=line><span class=cl>        ├── main.tf
+</span></span><span class=line><span class=cl>        └── providers.tf
+</span></span></code></pre></td></tr></table></div></div><p>A tak typowe pliki środowiskowe.</p><ul><li><code>prod/databases/main.tf</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>resource</span> <span class=s2>&#34;azurerm_postgresql_flexible_server&#34; &#34;checkout_db&#34;</span> {<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>resource</span> <span class=s2>&#34;azurerm_postgresql_flexible_server&#34; &#34;shipping_db&#34;</span> {<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>dev/databases/main.tf</code></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>resource</span> <span class=s2>&#34;azurerm_postgresql_flexible_server&#34; &#34;checkout_db&#34;</span> {<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>resource</span> <span class=s2>&#34;azurerm_postgresql_flexible_server&#34; &#34;shipping_db&#34;</span> {<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>Dodanie nowego zasobu wymaga zadeklarowania go we wszystkich odpowiednich miejscach.</p><p>Wdrożenie nowego środowiska polega na utworzeniu dodatkowego folderu w monorepo i zdefiniowaniu w nim wymaganych zasobów.</p><p>Dodawanie nowych funkcjonalności lub refaktoryzacja często wiążą się ze zmianami w wielu miejscach – zarówno w ramach jednego środowiska, jak i pomiędzy nimi. Ten rozproszony zakres zmian zwiększa nakład pracy, przez co takie inicjatywy często nie są realizowane.</p><p>Podbijanie wersji providerów lub modułów wymaga modyfikacji w wielu folderach jednocześnie, co zniechęca do bieżącej aktualizacji i zwiększa ryzyko zaległości technicznych.</p><h4 id=zalety-i-ograniczenia>Zalety i ograniczenia</h4><p>✅ <strong>Szybki start</strong>. Idealne na proof of concept lub krótkie eksperymenty.</p><p>❌ <strong>Chaos przy większej skali</strong>. Wzrost liczby zasobów utrudnia utrzymanie i aktualizacje.</p><p>❌ <strong>Duży stan</strong>. Duże pliki stanu spowalniają pracę i utrudniają wdrażanie zmian.</p><div class="details admonition question open"><div class="details-summary admonition-title"><i class="icon fas fa-question-circle fa-fw" aria-hidden=true></i>Kiedy wybrać?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>Moim zdaniem: <em>tylko dla bardzo małych projektów lub własnych eksperymentów. W przypadku produkcyjnych rozwiązań zdecydowanie je odradzam.</em></div></div></div><hr><h3 id=monorepo--lokalne-moduły>Monorepo + lokalne moduły</h3><p>W tym podejściu zasoby definiowane są jako lokalne moduły. Repozytorium zawiera katalog <code>modules</code> (1️⃣), w którym znajdują się wersjonowane moduły infrastrukturalne. Każde środowisko (np. <code>dev</code> (2️⃣), <code>prod</code> (3️⃣)) posiada osobne katalogi z plikami stanu, które wykorzystują te moduły.</p><p>Pliki stanu nadal obejmują wiele zasobów, co z czasem utrudnia pracę i ogranicza niezależność zmian.</p><p>W praktyce wygląda to tak, jak poniżej:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>tofu-infrastructure
+</span></span><span class=line><span class=cl>├── environments
+</span></span><span class=line><span class=cl>│   ├── dev 2️⃣
+</span></span><span class=line><span class=cl>│   │   ├── databases
+</span></span><span class=line><span class=cl>│   │   │   ├── main.tf
+</span></span><span class=line><span class=cl>│   │   │   └── providers.tf
+</span></span><span class=line><span class=cl>│   │   └── network
+</span></span><span class=line><span class=cl>│   │       ├── main.tf
+</span></span><span class=line><span class=cl>│   │       └── providers.tf
+</span></span><span class=line><span class=cl>│   └── prod 3️⃣
+</span></span><span class=line><span class=cl>│       ├── databases
+</span></span><span class=line><span class=cl>│       │   ├── main.tf
+</span></span><span class=line><span class=cl>│       │   └── providers.tf
+</span></span><span class=line><span class=cl>│       └── network
+</span></span><span class=line><span class=cl>│           ├── main.tf
+</span></span><span class=line><span class=cl>│           └── providers.tf
+</span></span><span class=line><span class=cl>└── modules 1️⃣
+</span></span><span class=line><span class=cl>    ├── database-1.0
+</span></span><span class=line><span class=cl>    ├── database-1.1
+</span></span><span class=line><span class=cl>    ├── database-1.2
+</span></span><span class=line><span class=cl>    └── vnet-1.0
+</span></span></code></pre></td></tr></table></div></div><p>A tak typowe wywołanie modułów.</p><ul><li><code>environments/prod/databases/main.tf</code>:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;checkout_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span> <span class=o>=</span> <span class=s2>&#34;../../../modules/database-1.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;shipping_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span> <span class=o>=</span> <span class=s2>&#34;../../../modules/database-1.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>/* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>environments/dev/databases/main.tf</code>:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;checkout_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span> <span class=o>=</span> <span class=s2>&#34;../../../modules/database-1.1&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;shipping_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span> <span class=o>=</span> <span class=s2>&#34;../../../modules/database-1.2&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>/* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span></code></pre></td></tr></table></div></div><p>Dodanie kolejnych zasobów polega zazwyczaj na ponownym wywołaniu istniejącego modułu. Dzięki temu kod jest mniej zduplikowany – powtarzają się jedynie deklaracje modułów.</p><p>Wdrożenie nowego środowiska wymaga utworzenia katalogu i dodania w nim wywołań lokalnych modułów.</p><p>Gdy potrzebna jest zmiana w module albo jego refaktoryzacja, tworzy się nowy katalog z nową wersją (np. <code>database-1.1</code>) i tam wprowadza modyfikacje. Jednak przy rosnącej liczbie wersji modułów i aplikacji, z czasem narasta dług techniczny związany z testowaniem oraz utrzymywaniem zgodności między wersjami.</p><p>Aktualizacja wersji providerów lub modułów nadal wymaga zmian w wielu miejscach jednocześnie, ale dzięki modularności jest to bardziej kontrolowalne niż wcześniej. Jeżeli chcemy zachować jednolitą wersję modułu we wszystkich środowiskach, trzeba zaktualizować każdą referencję.</p><h4 id=zalety-i-ograniczenia-1>Zalety i ograniczenia</h4><p>✅ <strong>Lepsze współdzielenie logiki</strong>. Lokalne moduły można ponownie używać, co sprzyja standaryzacji.</p><p>✅ <strong>Większa czytelność niż w czystym monorepo</strong>. Katalog <code>modules</code> tworzy pewną strukturę.</p><p>❌ <strong>Fałszywe poczucie porządku</strong>. Użycie modułów sprawia wrażenie dobrej architektury, ale bez jasnych konwencji projekt może się szybko skomplikować.</p><p>❌ <strong>Koszt aktualizacji i testowania</strong>. Aktualizacje wersji to wielokrotne zmiany i konieczność utrzymania wielu wersji lokalnego modułu zanim nowa wersja zostanie dodana we wszystkich miejscach.</p><p>❌ <strong>Wciąż zbyt wiele zasobów w jednym stanie</strong>. Pliki stanu są nadal zbyt obszerne, co utrudnia równoległy rozwój.</p><div class="details admonition question open"><div class="details-summary admonition-title"><i class="icon fas fa-question-circle fa-fw" aria-hidden=true></i>Kiedy wybrać?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>Moim zdaniem: <em>dla bardzo małych zespołów i niewielkiej infrastruktury to rozwiązanie może sprawdzać się nawet w środowisku produkcyjnym. Przy większej skali utrzymywanie wielu wersji lokalnych modułów szybko staje się uciążliwe.</em></div></div></div><hr><h3 id=repo-per-usługa--repo-per-module>Repo per usługa + repo per module</h3><p>To podejście jest przeciwieństwem monorepo. Przypomina to architekturę mikroserwisów: każda część jest izolowana i zarządzana osobno. Każde repozytorium odpowiada za konkretną usługę lub obszar infrastruktury — np. <code>tofu-networking</code> dla sieci, <code>tofu-databases</code> dla warstwy danych (1️⃣). Wewnątrz każdego z nich znajdują się katalogi środowiskowe — np. <code>dev</code> (2️⃣) i <code>prod</code> (3️⃣).</p><p>Repozytoria zawierają wywołania modułów, natomiast sama logika tworzenia zasobów znajduje się w osobnych repozytoriach z modułami — np. <a href=https://github.com/Azure/terraform-azurerm-avm-res-resources-resourcegroup target=_blank rel="noopener noreffer">terraform-azurerm-avm-res-resources-resourcegroup</a> z <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">Azure Verified Modules</a> lub w prywatnym rejestrze w Twojej organizacji. Moduły mogą być wywoływane z rejestru (po wersji) lub bezpośrednio z repozytorium (po commicie lub tagu), zgodnie z <a href=https://opentofu.org/docs/language/modules/sources/ target=_blank rel="noopener noreffer">dokumentacją OpenTofu</a>.</p><p>Można też trzymać moduły lokalnie — w katalogu <code>modules</code> wewnątrz repozytorium usługi. Warto jednak pamiętać o ich ograniczeniach opisanych wcześniej.</p><p>Chociaż same repozytoria są mniejsze, pliki stanu często obejmują wiele zasobów — co z czasem może utrudniać utrzymanie.</p><p>Przykładowa struktura repozytorium dla warstwy baz danych:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>tofu-databases 1️⃣
+</span></span><span class=line><span class=cl>├── dev 2️⃣
+</span></span><span class=line><span class=cl>│   ├── main.tf
+</span></span><span class=line><span class=cl>│   └── providers.tf
+</span></span><span class=line><span class=cl>└── prod 3️⃣
+</span></span><span class=line><span class=cl>    ├── main.tf
+</span></span><span class=line><span class=cl>    └── providers.tf
+</span></span></code></pre></td></tr></table></div></div><p>Typowe pliki środowiskowe:</p><ul><li><code>prod/main.tf</code>:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;checkout_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.0.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;shipping_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.0.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>/* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>dev/main.tf</code>:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;checkout_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.1.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;shipping_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.2.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>/* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span></code></pre></td></tr></table></div></div><p>Dodawanie nowych zasobów przez moduły jest szybkie. Mniejsze repozytoria ograniczają konflikty i blokowanie pracy — typowe problemy dużego monorepo.</p><p>Trzeba jednak pamiętać, że duża liczba repozytoriów dedykowanych konkretnym usługom może być uciążliwa przy tworzeniu nowych środowisk. W takim przypadku w każdym z tych repozytoriów trzeba utworzyć pull request z dodaniem nowego folderu środowiska.</p><p>Zmiany w module nie wpływają bezpośrednio na kod repozytorium usługi, co upraszcza rozwój i testowanie. Trzeba jednak uważać na zależności — jeśli moduł A udostępnia outputy wykorzystywane przez moduł B, zmiana outputów wymaga odświeżenia stanu modułu zależnego.</p><p>Warto zadbać o CI/CD dla modułów, co przyspiesza ich rozwój i poprawia jakość.</p><p>Utrzymanie wymaga dyscypliny. Wersje modułów i providerów trzeba aktualizować w wielu repozytoriach. Automatyzacja (np. Renovate) i jasne praktyki zespołowe znacząco to ułatwiają.</p><h4 id=zalety-i-ograniczenia-2>Zalety i ograniczenia</h4><p>✅ <strong>Niski próg wejścia</strong>. Dzięki niewielkim rozmiarom repozytoriów, nowy inżynier szybko zrozumie, za co odpowiada konkretne repo.</p><p>✅ <strong>Bezpieczna refaktoryzacja</strong>. Zmiany logiczne nie wpływają bezpośrednio na stan środowisk. Można testować osobno.</p><p>❌ <strong>Złożony onboarding środowiska</strong>. Dodanie nowego środowiska wymaga zmian w wielu repozytoriach (i wielu PR-ach).</p><p>❌ <strong>Rosnący stan</strong>. Duże pliki stanu nadal ograniczają pracę równoległą i spowalniają plan / apply.</p><div class="details admonition question open"><div class="details-summary admonition-title"><i class="icon fas fa-question-circle fa-fw" aria-hidden=true></i>Kiedy wybrać?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>Moim zdaniem: <em>dla większych zespołów i bardziej rozbudowanej infrastruktury, szczególnie gdy nie zachodzi potrzeba częstego dodawania i usuwania środowisk. Warto zadbać o CI/CD dla modułów oraz automatyzację aktualizacji wersji.</em></div></div></div><hr><h3 id=monorepo--repo-per-module>Monorepo + repo per module</h3><p>Podejście łączące centralizację root modułów z wersjonowaniem logiki infrastruktury w osobnych repozytoriach modułów. Root moduły, zawierające pliki stanu, znajdują się w jednym repozytorium. Typowo struktura jest podzielona według środowisk (<code>dev</code> (1️⃣), <code>prod</code> (2️⃣), itd.). Wewnątrz każdego z nich znajdują się katalogi definiujące obszary infrastruktury - np. <code>databases</code> (3️⃣) i <code>network</code> (4️⃣).</p><p>Moduły infrastrukturalne umieszczone są w osobnych repozytoriach – jak w poprzednim podejściu – i mogą być wywoływane ze zdalnego rejestru (z określoną wersją) lub bezpośrednio z repozytorium (poprzez commit lub tag).</p><p>Dzięki centralizacji plików stanu, koordynacja wdrożeń między zespołami jest łatwiejsza. Jednak pliki stanu nadal często obejmują wiele zasobów, co może utrudniać niezależny rozwój i testowanie.</p><p>Przykładowa struktura jest podobna do już wcześniej przedstawionych. Może wyglądać następująco:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>tofu-infrastructure
+</span></span><span class=line><span class=cl>├── dev 1️⃣
+</span></span><span class=line><span class=cl>│   ├── databases 3️⃣
+</span></span><span class=line><span class=cl>│   │   ├── main.tf
+</span></span><span class=line><span class=cl>│   │   └── providers.tf
+</span></span><span class=line><span class=cl>│   └── network 4️⃣
+</span></span><span class=line><span class=cl>│       ├── main.tf
+</span></span><span class=line><span class=cl>│       └── providers.tf
+</span></span><span class=line><span class=cl>└── prod 2️⃣
+</span></span><span class=line><span class=cl>    ├── databases 3️⃣
+</span></span><span class=line><span class=cl>    │   ├── main.tf
+</span></span><span class=line><span class=cl>    │   └── providers.tf
+</span></span><span class=line><span class=cl>    └── network 4️⃣
+</span></span><span class=line><span class=cl>        ├── main.tf
+</span></span><span class=line><span class=cl>        └── providers.tf
+</span></span></code></pre></td></tr></table></div></div><p>Typowe wywołania modułów w środowiskach wyglądają następująco:</p><ul><li><code>prod/databases/main.tf</code>:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;checkout_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.0.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;shipping_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.0.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>/* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><code>dev/databases/main.tf</code>:</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;checkout_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.1.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;shipping_db&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;modules.example.net/database/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;1.2.0&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>/* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span></code></pre></td></tr></table></div></div><p>Dodawanie kolejnych zasobów, podobnie jak w monorepo z lokalnymi modułami, polega zazwyczaj na ponownym wywołaniu istniejącego modułu. Dzięki modularności unika się powielania logiki.</p><p>Dodanie nowego środowiska polega na utworzeniu folderu w strukturze katalogów oraz inicjalizacji backendu stanu. Dzięki centralizacji wszystko znajduje się w jednym repozytorium, co przyspiesza onboarding — o ile struktura katalogów jest dobrze zorganizowana.</p><p>Zmiany w module wymagają utworzenia nowej wersji (np. 1.1.0) i jej wdrożenia w konkretnym katalogu środowiskowym. Dzięki temu dodawanie nowych funkcjonalności lub przeprowadzanie refaktoryzacji jest proste do zrobienia. Należy jednak pamiętać o CI/CD dla modułów, które ułatwią dostarczanie.</p><p>Utrzymanie jest umiarkowanie złożone. Wersjonowanie modułów zapewnia przewidywalność zmian. Jednocześnie centralizacja stanu może sprawić, że zmiany w komponentach wspólnych (np. aktualizacja providera) będą miały szerszy zasięg i wymagają większej uwagi przy testowaniu.</p><h4 id=zalety-i-ograniczenia-3>Zalety i ograniczenia</h4><p>✅ <strong>Jedno źródło prawdy</strong>. Wszyscy widzą całość infrastruktury w jednym miejscu.</p><p>✅ <strong>Prostszy onboarding środowiska</strong>. Dodanie nowego środowiska (np. <code>trial</code> lub <code>test</code>) wymaga jedynie stworzenia nowego folderu w monorepo i dodaniu wywołań potrzebnych modułów.</p><p>✅ <strong>Prostszy rozwój i utrzymanie</strong>. Dodawanie nowej logiki lub refaktoryzacja istniejącego kodu są bezpieczniejsze i bardziej komfortowe.</p><p>❌ <strong>Zbyt duże pliki stanu</strong>. Centralizacja stanu może skutkować konfliktem przy zmianach, wolniejszym plan i problemami z równoległym developmentem.</p><div class="details admonition question open"><div class="details-summary admonition-title"><i class="icon fas fa-question-circle fa-fw" aria-hidden=true></i>Kiedy wybrać?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>Moim zdaniem: <em>To podejście może sprawdzić się dobrze w średnich oraz dużych zespołach, które chcą zachować centralne repozytorium, ale korzystać z elastyczności i wersjonowania modułów. Wymaga dobrej dyscypliny w strukturze folderów, CI/CD dla modułów oraz automatyzacji aktualizacji wersji.</em></div></div></div><hr><h3 id=porównanie>Porównanie</h3><p>Podsumowując tą sekcję, zestawiłem wszystkie podejścia w jednej tabeli, aby ułatwić dobór strategii dopasowanej do specyfiki zespołu, skali środowiska oraz sposobu zarządzania infrastrukturą.</p><table><thead><tr><th>Podejście</th><th style=text-align:center>Dodawanie zasobów</th><th style=text-align:center>Onboarding środowiska</th><th style=text-align:center>Refactoring</th><th style=text-align:center>Utrzymanie</th><th style=text-align:center>Wielkość stanu</th></tr></thead><tbody><tr><td><a href=#monorepo rel>Monorepo</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>szybki</td><td style=text-align:center>trudny</td><td style=text-align:center>trudne</td><td style=text-align:center>duża</td></tr><tr><td><a href=#monorepo--lokalne-modu%c5%82y rel>Monorepo + lokalne moduły</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>szybki</td><td style=text-align:center>średni</td><td style=text-align:center>średnie</td><td style=text-align:center>duża</td></tr><tr><td><a href=#repo-per-us%c5%82uga--repo-per-module rel>Repo per usługa + repo per module</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>wolny</td><td style=text-align:center>łatwy</td><td style=text-align:center>średnie</td><td style=text-align:center>średnia</td></tr><tr><td><a href=#monorepo--repo-per-module rel>Monorepo + repo per module</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>szybki</td><td style=text-align:center>łatwy</td><td style=text-align:center>średnie</td><td style=text-align:center>duża</td></tr></tbody></table><p>Poniższy diagram radarowy wizualizuje kluczowe cechy każdego podejścia, ułatwiając wybór najlepiej dopasowanej strategii.</p><div class=echarts id=id-1 style=width:100%;height:30rem></div><hr><h2 id=jak-ja-projektuję-iac-w-azure>Jak ja projektuję IaC w Azure</h2><p>Po omówieniu różnych strategii organizacji infrastruktury jako kodu, czas pokazać strukturę wykorzystywaną przeze mnie — skalowalną, modularną i zgodną z <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">Azure Verified Modules</a>. Bazuje ona na podejściu <a href=#monorepo--repo-per-module rel>Monorepo + repo per module</a>, ale została wzbogacona o kilka istotnych niuansów.</p><p>Całość dzieli się na dwie części:</p><ul><li>Core</li><li>Infrastruktura aplikacji</li></ul><p>W kolejnych sekcjach opisuję szczegółowo każdą z nich.</p><h3 id=core-organization-template>Core: <code>organization-template</code></h3><p>Część monorepo nazywam <a href=https://github.com/infra-at-scale/organization-template target=_blank rel="noopener noreffer">organization-template</a> i traktuję jako solidny punkt wyjścia dla każdej organizacji — niezależnie od skali czy złożoności. Znajdziesz tam gotowy do użycia kod <a href=https://opentofu.org/ target=_blank rel="noopener noreffer">OpenTofu</a> oparty o <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">Azure Verified Modules</a>, który pomoże Ci stworzyć fundamenty dla Twojej organizacji w <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a>.</p><h4 id=zawartość>Zawartość</h4><p>W skład <a href=https://github.com/infra-at-scale/organization-template target=_blank rel="noopener noreffer">organization-template</a> wchodzą między innymi:</p><ul><li>Definicja roli IAM oraz aplikacji w <a href=https://www.microsoft.com/security/business/microsoft-entra target=_blank rel="noopener noreffer">Microsoft Entra ID</a>.</li><li>Definicja <a href=https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group target=_blank rel="noopener noreffer">Resource Groups</a> potrzebnych w Twoich <a href="https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions" target=_blank rel="noopener noreffer">Subscriptions</a>.</li><li>Definicja warstwy sieciowej dla Twoich aplikacji.</li></ul><p>Struktura jest prosta: czytelna, łatwa w utrzymaniu i gotowa do rozbudowy.</p><h4 id=konwencja-nazewnicza>Konwencja nazewnicza</h4><p>W głównym katalogu znajdują się katalogi odpowiedzialne za poszczególne obszary infrastruktury. Nazwane są zgodnie z poniższą konwencją:</p><data id=id-2 data-raw></data><p>Na przykład:</p><ul><li><a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/02-iam-applications target=_blank rel="noopener noreffer">02-iam-applications</a></li><li><a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups target=_blank rel="noopener noreffer">03-resourcegroups</a></li></ul><p>Jeżeli dwa lub więcej katalogów mają ten sam numer, na przykład <a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-backupvaults target=_blank rel="noopener noreffer">04-backupvaults</a> i <a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-networking-nsgs target=_blank rel="noopener noreffer">04-networking-nsgs</a> mogą być wykonywane równolegle, ponieważ nie mają między sobą zależności.</p><p>Dzięki tej konwencji nazewniczej w głównym katalogu od razu wiadomo, jaka jest kolejność wykonywania. Taka numeracja i struktura katalogów pozwala z jednej strony jasno odczytać kolejność, a z drugiej — umożliwia równoległe wykonywanie części modułów, co skraca czas wdrożeń.</p><p>W przypadku rozbudowy o kolejne obszary dodaje się nowy katalog z odpowiednią numeracją, w razie potrzeby zmieniając istniejącą numerację. Jeżeli poszczególne obszary nie są od siebie zależne mogą być umieszczane na tym samym poziomie poprzez dodanie tego samego numeru.</p><h4 id=hierarchia>Hierarchia</h4><p>Każdy obszar infrastruktury ma odpowiednią hierarchię:</p><data id=id-3 data-raw></data><p>Na przykład:</p><ul><li><a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/02-iam-applications/github-actions target=_blank rel="noopener noreffer">02-iam-applications/github-actions</a> – aplikacje w <a href=https://www.microsoft.com/security/business/microsoft-entra target=_blank rel="noopener noreffer">Microsoft Entra ID</a> nie są przypisane do <a href="https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions" target=_blank rel="noopener noreffer">Subscription</a> ani <a href=https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group target=_blank rel="noopener noreffer">Resource Group</a> dlatego oba parametry są pominięte.</li><li><a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups/your-subscription/rg-default-eastus target=_blank rel="noopener noreffer">03-resourcegroups/your-subscription/rg-default-eastus</a> – ponieważ <a href=https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group target=_blank rel="noopener noreffer">Resource Group&rsquo;a</a> <code>rg-default-eastus</code> należy do <a href="https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions" target=_blank rel="noopener noreffer">Subscription</a> <code>dev</code>, tylko <code>${optional-subscription-name}</code> jest zdefiniowane.</li><li><a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus target=_blank rel="noopener noreffer">05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus</a> – ponieważ <a href=https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview target=_blank rel="noopener noreffer">Azure Virtual Network</a> <code>vnet-default-eastus</code> należy do <a href=https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group target=_blank rel="noopener noreffer">Resource Group&rsquo;y</a> <code>dev</code>, która z kolei należy do <a href="https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions" target=_blank rel="noopener noreffer">Subscription</a> <code>dev</code>, zdefiniowane są zarówno <code>${optional-resources-group-name}</code>, jak i <code>${optional-subscription-name}</code>.</li></ul><p>Hierarchia ta nawiązuje do konwencji nazewniczej zasobów w <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a>. Na przykład:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>/subscriptions/${subscription-id}/resourceGroups/rg-default-eastus/providers/Microsoft.Network/virtualNetworks/vnet-default-eastus
+</span></span></code></pre></td></tr></table></div></div><p>Ułatwia to nawigację po strukturze katalogów.</p><p>W podejściu, które preferuję stany są mniejsze. Na przykład każdy <a href=https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview target=_blank rel="noopener noreffer">VNet</a> ma swój osobny stan.</p><p>Dzięki temu zmiany są szybsze do wprowadzenia, a przy okazji kod jest łatwiejszy do zrozumienia. Mniejsze stany ułatwiają też równoległe wdrażanie i uniknięcie konfliktów między zespołami.</p><p>Ponadto, ścieżki do stanów w <a href=https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview target=_blank rel="noopener noreffer">Storage Account</a> odpowiadają ścieżką w projekcie. Na przykład dla <a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups/your-subscription/rg-default-eastus target=_blank rel="noopener noreffer">03-resourcegroups/your-subscription/rg-default-eastus</a> wygląda to następująco:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>terraform</span> {
+</span></span><span class=line><span class=cl>  <span class=k>backend</span> <span class=s2>&#34;azurerm&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>    key</span> <span class=o>=</span> <span class=s2>&#34;03-resourcegroups/your-subscription/rg-default-eastus/terraform.tfstate&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>    /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h4 id=zawartość-root-modułu>Zawartość root modułu</h4><p>Root moduł to katalog, który inicjuje backend stanu (<code>terraform</code> block) i zarządza konkretnym zestawem zasobów. Typowo zawiera on pliki takie jak:</p><ul><li><code>data.tf</code> – data lookups oraz wykorzystanie remote states z innych root modułów.</li><li><code>locals.tf</code> - powtarzalne wartości są definiowane tutaj.</li><li><code>main.tf</code> - wywołanie modułów i/lub tworzenie zasobów.</li><li><code>outputs.tf</code> - zwracanie wartości potrzebne w innych root modułach.</li><li><code>providers.tf</code> - deklaracja providerów oraz remote state.</li></ul><p>Root moduły do nadawania nazw zasobą wykorzystują moduł <a href=https://registry.terraform.io/modules/Azure/naming/azurerm/latest target=_blank rel="noopener noreffer">naming</a>, który generuje zgodne z konwencją nazwy zasobów w <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a>. Dla zasobów, które nie są aktualnie wspierane w tym module nazwy są tworzone zgodnie z <a href=https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-abbreviations target=_blank rel="noopener noreffer">zaleceniami dotyczącymi skrótów dla zasobów platformy Azure</a>.</p><p>Do tego w root modułach wykorzystane są <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">Azure Verified Modules</a>. Na przykład <a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus target=_blank rel="noopener noreffer">05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus</a> korzysta z <a href=https://registry.terraform.io/modules/Azure/avm-res-network-virtualnetwork/azurerm/latest target=_blank rel="noopener noreffer">avm-res-network-virtualnetwork</a>, a jego kod wygląda tak, jak poniżej:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;naming&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;Azure/naming/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;0.4.2&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>  suffix</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;apps&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>}
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>module</span> <span class=s2>&#34;vnet&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  source</span>  <span class=o>=</span> <span class=s2>&#34;Azure/avm-res-network-virtualnetwork/azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  version</span> <span class=o>=</span> <span class=s2>&#34;0.10.0&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>  address_space</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;10.0.0.0/16&#34;</span><span class=p>]</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>  # Resource group location can be used from other module via remote state:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>  location</span> <span class=o>=</span> <span class=k>data</span><span class=p>.</span><span class=k>terraform_remote_state</span><span class=p>.</span><span class=k>rg_default_eastus</span><span class=p>.</span><span class=k>outputs</span><span class=p>.</span><span class=k>resource</span><span class=p>.</span><span class=k>location</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>  # VNet name set with the help of the naming module:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>  name</span> <span class=o>=</span> <span class=k>module</span><span class=p>.</span><span class=k>naming</span><span class=p>.</span><span class=k>virtual_network</span><span class=p>.</span><span class=k>name</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>  # Resource group name can be used from other module via remote state:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>  resource_group_name</span> <span class=o>=</span> <span class=k>data</span><span class=p>.</span><span class=k>terraform_remote_state</span><span class=p>.</span><span class=k>rg_default_eastus</span><span class=p>.</span><span class=k>outputs</span><span class=p>.</span><span class=k>resource</span><span class=p>.</span><span class=k>name</span>
+</span></span><span class=line><span class=cl><span class=n>  subnets</span> <span class=o>=</span> {
+</span></span><span class=line><span class=cl><span class=n>    &#34;${module.naming.subnet.name}-1&#34;</span> <span class=o>=</span> {
+</span></span><span class=line><span class=cl><span class=n>      name</span>             <span class=o>=</span> <span class=s2>&#34;${module.naming.subnet.name}-1&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>      address_prefixes</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;10.0.0.0/24&#34;</span><span class=p>]</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>      # NSG can be used from other module via remote state:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>      network_security_group</span> <span class=o>=</span> <span class=k>data</span><span class=p>.</span><span class=k>terraform_remote_state</span><span class=p>.</span><span class=k>nsg_default_apps</span><span class=p>.</span><span class=k>outputs</span><span class=p>.</span><span class=k>resource</span>
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl><span class=n>    &#34;${module.naming.subnet.name}-2&#34;</span> <span class=o>=</span> {
+</span></span><span class=line><span class=cl><span class=n>      name</span>             <span class=o>=</span> <span class=s2>&#34;${module.naming.subnet.name}-2&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>      address_prefixes</span> <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;10.0.1.0/24&#34;</span><span class=p>]</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>      # NSG can be used from other module via remote state:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>      network_security_group</span> <span class=o>=</span> <span class=k>data</span><span class=p>.</span><span class=k>terraform_remote_state</span><span class=p>.</span><span class=k>nsg_default_apps</span><span class=p>.</span><span class=k>outputs</span><span class=p>.</span><span class=k>resource</span>
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  }<span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>  /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>Świadomie nie tworzę własnych wrapperów modułowych w miejscach, gdzie istniejące zasoby są proste lub istnieje perspektywa pojawienia się oficjalnego modułu <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">AVM</a>.</p><p>Moim celem jest dostarczenie użytkownikowi jak najbardziej natywnego i idiomatycznego doświadczenia pracy z <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a>, zgodnego z <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">AVM</a> i gotowego do migracji na oficjalne moduły, gdy tylko się pojawią.</p><h4 id=zależności-między-root-modułami>Zależności między root modułami</h4><p>Jak już pewnie zdążyłeś zauważyć, root moduły zamiast hardkodować wartości argumentów używają wartości zwróconych z innych root modułów. Na przykład:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=c1># Resource group name can be used from other module via remote state:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=n>resource_group_name</span> <span class=o>=</span> <span class=k>data</span><span class=p>.</span><span class=k>terraform_remote_state</span><span class=p>.</span><span class=k>rg_default_eastus</span><span class=p>.</span><span class=k>outputs</span><span class=p>.</span><span class=k>resource</span><span class=p>.</span><span class=k>name</span>
+</span></span></code></pre></td></tr></table></div></div><p>Dzieje się to użyciu remote state file, jak poniżej:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>data</span> <span class=s2>&#34;terraform_remote_state&#34; &#34;rg_default_eastus&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  backend</span> <span class=o>=</span> <span class=s2>&#34;azurerm&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  config</span> <span class=o>=</span> {
+</span></span><span class=line><span class=cl><span class=n>    key</span> <span class=o>=</span> <span class=s2>&#34;03-resourcegroups/your-subscription/rg-default-eastus/terraform.tfstate&#34;</span><span class=cm>
+</span></span></span><span class=line><span class=cl><span class=cm>    /* Pozostały kod pominięty dla przejrzystości */</span>
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>Oraz dzięki zadeklarowaniu outputów w innym root module. Na przykład w root module <a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups/your-subscription/rg-default-eastus target=_blank rel="noopener noreffer">03-resourcegroups/your-subscription/rg-default-eastus</a>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>output</span> <span class=s2>&#34;resource&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  value</span> <span class=o>=</span> <span class=k>module</span><span class=p>.</span><span class=k>rg</span><span class=p>.</span><span class=k>resource</span>
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><h4 id=kolejność-wykonania>Kolejność wykonania</h4><p>Skoro już poznałeś zawartość <a href=https://github.com/infra-at-scale/organization-template target=_blank rel="noopener noreffer">organization-template</a>, konwencję nazewniczą, hierarchię, zawartość root modułów i zależności między nimi, pora przejść do tworzenia faktycznych zasobow. Root moduły powinny być uruchamiane zgodnie z ich numeracją w katalogu głównym projektu. Numeracja ta odzwierciedla zależności między modułami i pozwala na równoległe wykonanie tych, które ich nie mają.</p><p>Poniższy diagram stanów pokazuje zależności i kolejności wykonania root modułów.</p><div class=mermaid id=id-4></div><div class="details admonition note open"><div class="details-summary admonition-title"><i class="icon fas fa-pencil-alt fa-fw" aria-hidden=true></i>Przypomnienie<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>Dla przypomnienia, katalogi o tym samym numerze (np. <a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-backupvaults target=_blank rel="noopener noreffer">04-backupvaults</a> i <a href=https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-networking-nsgs target=_blank rel="noopener noreffer">04-networking-nsgs</a>) mogą być wykonywane równolegle, ponieważ nie mają między sobą zależności.</div></div></div><h4 id=rozbudowa-infrastruktury>Rozbudowa infrastruktury</h4><p>Projekt <a href=https://github.com/infra-at-scale/organization-template target=_blank rel="noopener noreffer">organization-template</a> został celowo zaprojektowany jako niewielki i zwięzły — stanowi fundament, który można bezpiecznie rozbudowywać. W przypadku chęci dodawania kolejnych obszarów infrastruktury zachęcam Cię do podążania za konwencją nazewniczą, tworzenia niedużych stanów, używania <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">Azure Verified Modules</a> tam, gdzie to możliwe oraz przekazywania wartości z jednego modułu do drugiego przy pomocy outputów i remote state.</p><h3 id=infrastruktura-aplikacji>Infrastruktura aplikacji</h3><p>Przeglądając <a href=https://github.com/infra-at-scale/organization-template target=_blank rel="noopener noreffer">organization-template</a> może pojawić się pytanie: <em>gdzie umieścić infrastrukturę aplikacji?</em> Na przykład maszynę wirtualną, <a href=https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview target=_blank rel="noopener noreffer">Storage Account</a>, bazę danych, <a href=https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview target=_blank rel="noopener noreffer">Azure Function</a>. Te wszystkie komponenty w podejściu, które preferuję są utrzymywane razem z kodem aplikacji.</p><p>Dzięki temu zespół aplikacyjny samodzielnie zarządza swoją infrastrukturą — we wspólnym repozytorium i cyklu życia, obok kodu aplikacji. To skraca czas dostarczania i minimalizuje zależności od zespołu platformowego.</p><p>W tym podejściu w głównym folderze repozytorium znajduje się katalog <code>infra</code> (1️⃣), który zawiera podkatalogi ze środowiskami, gdzie aplikacja jest (lub może być zdeployowana). Na przykład <code>dev</code> (2️⃣) i <code>prod</code> (3️⃣). Kod aplikacji znajduje się natomiast w katalogu <code>src</code> lub innym zgodnym z Twoją konwencją lub konwencją danego języka programowania.</p><p>Przykładowa struktura w takim przypadku wygląda, jak poniżej:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>app-repo
+</span></span><span class=line><span class=cl>├── infra 1️⃣
+</span></span><span class=line><span class=cl>│   ├── dev 2️⃣
+</span></span><span class=line><span class=cl>│   │   ├── data.tf
+</span></span><span class=line><span class=cl>│   │   ├── main.tf
+</span></span><span class=line><span class=cl>│   │   ├── outputs.tf
+</span></span><span class=line><span class=cl>│   │   └── providers.tf
+</span></span><span class=line><span class=cl>│   └── prod 3️⃣
+</span></span><span class=line><span class=cl>│       ├── data.tf
+</span></span><span class=line><span class=cl>│       ├── main.tf
+</span></span><span class=line><span class=cl>│       ├── outputs.tf
+</span></span><span class=line><span class=cl>│       └── providers.tf
+</span></span><span class=line><span class=cl>├── README.md
+</span></span><span class=line><span class=cl>└── src
+</span></span></code></pre></td></tr></table></div></div><p>Dodawanie nowego zasobu do aplikacji wiąże się z dodaniem go w poszczególnych katalogach środowisk. Aby uniknąć zjawiska &ldquo;configuration drift&rdquo;, warto opakować zasoby w moduły i umieścić je w prywatnym rejestrze. Jeśli kilka aplikacji potrzebuje tych samych zasobów np. bazy danych oraz storage account, warto jest stworzyć dla nich wspólny moduł.</p><p>Dodawanie nowego środowiska wymaga stworzenia nowego folderu w katalogu <code>infra</code>, a następnie wywołania odpowiednich modułów.</p><p>Jeżeli jest potrzeba zmian w logice, tworzy się nową wersję modułu, a następnie wdraża się ją stopniowo do wszystkich środowisk. Tak samo, jak w podejściach <a href=#repo-per-us%c5%82uga--repo-per-module rel>repo per usługa + repo per module</a> albo <a href=#monorepo--repo-per-module rel>monorepo + repo per module</a>.</p><p>Utrzymanie również przypomina poprzednie podejścia — aktualizacje wersji modułów lub providerów są wykonywane bezpośrednio w katalogach środowisk.</p><div class="details admonition tip open"><div class="details-summary admonition-title"><i class="icon fas fa-lightbulb fa-fw" aria-hidden=true></i>Chcesz więcej?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content>Żeby dowiedzieć się więcej o tych modułach oraz o rejestrze zapraszam Cię do kolejnego artykułu z tej serii: <strong>Zbuduj elastyczne moduły infrastruktury oraz ich rejestr</strong>.</div></div></div><h4 id=gdy-organization-template-wystarczy>Gdy <code>organization-template</code> wystarczy</h4><p>W niektórych przypadkach oddzielenie głównej infrastruktury od infrastruktury aplikacyjnej nie jest konieczne — ani optymalne. Dotyczy to zwłaszcza organizacji, które rozwijają jedną, monolityczną aplikację wdrażaną na kilku środowiskach (np. <code>dev</code>, <code>test</code>, <code>prod</code>), lub takich, gdzie zespoły aplikacyjne nie czują się swobodnie w pracy z kodem infrastruktury.</p><p>W takich sytuacjach bardziej praktycznym i skalowalnym podejściem może być trzymanie całej infrastruktury — zarówno platformowej, jak i aplikacyjnej — w jednym repozytorium. Upraszcza to zarządzanie, przyspiesza wdrożenia i zmniejsza próg wejścia dla zespołu.</p><h3 id=porównanie-1>Porównanie</h3><p>Wracając do wcześniejszych podejść, poniżej przedstawiam tabelę porównującą moje podejście z poprzednimi.</p><table><thead><tr><th>Podejście</th><th style=text-align:center>Dodawanie zasobów</th><th style=text-align:center>Onboarding środowiska</th><th style=text-align:center>Refactoring</th><th style=text-align:center>Utrzymanie</th><th style=text-align:center>Wielkość stanu</th></tr></thead><tbody><tr><td><a href=#monorepo rel>Monorepo</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>szybki</td><td style=text-align:center>trudny</td><td style=text-align:center>trudne</td><td style=text-align:center>duża</td></tr><tr><td><a href=#monorepo--lokalne-modu%c5%82y rel>Monorepo + lokalne moduły</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>szybki</td><td style=text-align:center>średni</td><td style=text-align:center>średnie</td><td style=text-align:center>duża</td></tr><tr><td><a href=#repo-per-us%c5%82uga--repo-per-module rel>Repo per usługa + repo per module</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>wolny</td><td style=text-align:center>łatwy</td><td style=text-align:center>średnie</td><td style=text-align:center>średnia</td></tr><tr><td><a href=#monorepo--repo-per-module rel>Monorepo + repo per module</a></td><td style=text-align:center>szybkie</td><td style=text-align:center>szybki</td><td style=text-align:center>łatwy</td><td style=text-align:center>średnie</td><td style=text-align:center>duża</td></tr><tr><td>👉 <a href=#jak-ja-projektuj%c4%99-iac-w-azure rel><strong>Moje podejście</strong></a></td><td style=text-align:center><strong>szybkie</strong></td><td style=text-align:center><strong>szybki</strong></td><td style=text-align:center><strong>łatwy</strong></td><td style=text-align:center><strong>średnie</strong></td><td style=text-align:center><strong>mały</strong></td></tr></tbody></table><p>Poniższy diagram radarowy ilustruje te różnice w sposób wizualny.</p><div class=echarts id=id-5 style=width:100%;height:30rem></div><h2 id=podsumowanie>Podsumowanie</h2><p>W tym wpisie poznałeś różne podejścia do organizowania infrastruktury jako kod na platformie <a href=https://azure.microsoft.com/ target=_blank rel="noopener noreffer">Microsoft Azure</a> przy użyciu <a href=https://opentofu.org/ target=_blank rel="noopener noreffer">OpenTofu</a>. Od prostego monorepo, przez lokalne moduły, aż po wersjonowane moduły i repozytoria per usługa — każde z nich ma swoje zalety i ograniczenia. Nie istnieje rozwiązanie uniwersalne. Wybór zależy od potrzeb zespołu, skali organizacji i sposobu pracy.</p><p>Pokazałem Ci też, jak sam podchodzę do tego tematu: używam <a href=https://github.com/infra-at-scale/organization-template target=_blank rel="noopener noreffer">organization-template</a> jako fundamentu, a infrastrukturę aplikacyjną trzymam bezpośrednio w repozytorium aplikacji. To połączenie daje skalowalność, przejrzystość i prostsze utrzymanie — bez odbierania zespołom aplikacyjnym autonomii.</p><p>To jednak dopiero początek. W kolejnej części tej serii pokażę, jak tworzę wersjonowane moduły zgodne z <a href=https://azure.github.io/Azure-Verified-Modules/ target=_blank rel="noopener noreffer">AVM</a> oraz jak buduję lekki rejestr, który upraszcza współdzielenie i rozwój infrastruktury między zespołami.</p><div class="details admonition example open"><div class="details-summary admonition-title"><i class="icon fas fa-list-ol fa-fw" aria-hidden=true></i>Co dalej?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden=true></i></div><div class=details-content><div class=admonition-content><p>Spodobał Ci się koncept <a href=https://github.com/infra-at-scale/organization-template target=_blank rel="noopener noreffer"><code>organization-template</code></a>?</p><p>👉 Skorzystaj z przycisku <strong><a href="https://github.com/new?template_name=organization-template&amp;template_owner=infra-at-scale" target=_blank rel="noopener noreffer">Use this template</a></strong> albo zrób <a href=https://github.com/infra-at-scale/organization-template/fork target=_blank rel="noopener noreffer">forka</a> — i sprawdź, jak ten szkielet zadziała w Twojej organizacji.</p><p>Masz pomysł na rozwój?</p><p>👉 Przejrzyj <a href=https://github.com/infra-at-scale/organization-template/blob/v1.0.0/docs/CONTRIBUTING.md target=_blank rel="noopener noreffer">CONTRIBUTING.md</a> i zobacz, jak możesz się włączyć.</p><p>Znalazłeś błąd?</p><p>👉 Zgłoś issue <a href=https://github.com/infra-at-scale/organization-template/issues target=_blank rel="noopener noreffer">tutaj</a>.</p></div></div></div><div style="display:flex;align-items:center;justify-content:space-between;margin:24px 0;padding:16px;background:#f8f9fa;border-radius:8px"><span style=font-weight:500;color:#333>Do you like this blog and my work?</span>
+<a href=https://coff.ee/paweloczadly target=_blank rel=noopener><img src=https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png alt="Buy Me A Coffee" style=height:40px></a></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Zaktualizowano 2025-09-26</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Udostępnij na Twitter" data-sharer=twitter data-url=https://oczadly.io/pl/posts/2025-09-26-azure-iac-built-for-your-needs/ data-title="Azure IaC zbudowana dla Twoich potrzeb"><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Udostępnij na Facebook" data-sharer=facebook data-url=https://oczadly.io/pl/posts/2025-09-26-azure-iac-built-for-your-needs/><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Udostępnij na Linkedin" data-sharer=linkedin data-url=https://oczadly.io/pl/posts/2025-09-26-azure-iac-built-for-your-needs/><i class="fab fa-linkedin fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Wstecz</a></span>&nbsp;|&nbsp;<span><a href=/pl/>Strona główna</a></span></section></div><div class=post-nav><a href=/pl/posts/2025-08-28-gradle-init-for-spring-boot/ class=prev rel=prev title="gradle init dla Spring Boot"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>gradle init dla Spring Boot</a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2025</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/pl/ target=_blank>Paweł Oczadły</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Powrót do góry"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="Zobacz komentarze"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Skopiuj do schowka",maxShownLines:50},comment:{},data:{"id-1":'{"legend":{"data":["Monorepo","Monorepo + lokalne moduły","Repo per usługa + repo per module","Monorepo + repo per module"],"top":"90%"},"radar":{"indicator":[{"max":3,"name":"Dodawanie zasobów"},{"max":3,"name":"Onboarding środowiska"},{"max":3,"name":"Refactoring"},{"max":3,"name":"Utrzymanie"},{"max":3,"name":"Wielkość stanu"}]},"series":[{"data":[{"name":"Monorepo","value":[3,3,1,1,1]},{"name":"Monorepo + lokalne moduły","value":[3,3,2,2,1]},{"name":"Repo per usługa + repo per module","value":[3,1,3,2,2]},{"name":"Monorepo + repo per module","value":[3,3,3,2,1]}],"type":"radar"}],"title":{"left":"center","text":"Wzorce architektury IaC – porównanie","top":"1%"}}',"id-2":`
+<center>
+<span style="font-size: 2em; font-weight:600;">
+<span style="color:#bcb908;">\${nn}</span>-<span style="color:#765306;">\${optional-area}</span>-<span style="color:#718051;">\${azure-service}</span>
+</span>
+</center>
+`,"id-3":`
+<center>
+<span style="font-size: 1.5em; font-weight:600;">
+<span style="color:#bcb908;">\${area}</span>/<span style="color:#765306;">\${optional-subscription-name}</span>/<span style="color:#718051;">\${optional-resources-group-name}</span>/<span style="color:#e4d297ff;">\${root-module}</span>
+</span>
+</center>
+`,"id-4":`stateDiagram-v2
+    01_iam_custom_roles: 01-iam-custom-roles
+    02_iam_applications: 02-iam-applications
+    03_resource_groups: 03-resourcegroups
+    04_backup_vaults: 04-backupvaults
+    04_networking_nsgs: 04-networking-nsgs
+    05_networking_vnets: 05-networking-vnets
+    06_networking_dnszones: 06-networking-dnszones
+    07_keyvaults: 07-keyvaults
+
+    [*] --> 01_iam_custom_roles
+    01_iam_custom_roles --> 02_iam_applications : potrzebuje roles
+    02_iam_applications --> 03_resource_groups : potrzebuje SPN assignments
+
+    03_resource_groups --> 04_backup_vaults : potrzebuje RG name
+    04_backup_vaults --> [*]
+
+    03_resource_groups --> 04_networking_nsgs : potrzebuje RG name
+    03_resource_groups --> 05_networking_vnets : potrzebuje RG name
+    03_resource_groups --> 06_networking_dnszones : potrzebuje RG name
+    03_resource_groups --> 07_keyvaults : potrzebuje RG name
+
+    04_networking_nsgs --> 05_networking_vnets : NSGs dołączona do sieci
+    05_networking_vnets --> 06_networking_dnszones : private DNS zones mogą potrzebowac VNet ID
+    06_networking_dnszones --> 07_keyvaults : moze potrzebowac private DNS zone
+
+    07_keyvaults --> [*]`,"id-5":'{"legend":{"data":["Monorepo","Monorepo + lokalne moduły","Repo per usługa + repo per module","Monorepo + repo per module","Moje podejście"],"top":"90%"},"radar":{"indicator":[{"max":3,"name":"Dodawanie zasobów"},{"max":3,"name":"Onboarding środowiska"},{"max":3,"name":"Refactoring"},{"max":3,"name":"Utrzymanie"},{"max":3,"name":"Wielkość stanu"}]},"series":[{"data":[{"name":"Monorepo","value":[3,3,1,1,1]},{"name":"Monorepo + lokalne moduły","value":[3,3,2,2,1]},{"name":"Repo per usługa + repo per module","value":[3,1,3,2,2]},{"name":"Monorepo + repo per module","value":[3,3,3,2,1]},{"name":"Moje podejście","value":[3,3,3,2,3]}],"type":"radar"}],"title":{"left":"center","text":"Porównanie podejść IaC z organization-template","top":"1%"}}'},echarts:{darkTheme:{backgroundColor:"rgba(41,52,65,1)",bar:{itemStyle:{barBorderColor:"#ccc",barBorderWidth:0}},boxplot:{itemStyle:{borderColor:"#ccc",borderWidth:0}},candlestick:{itemStyle:{borderColor:"#fc97af",borderColor0:"#87f7cf",borderWidth:1,color:"#fc97af",color0:"transparent"}},categoryAxis:{axisLabel:{color:"#aaaaaa",show:!0},axisLine:{lineStyle:{color:"#666666"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.05)","rgba(200,200,200,0.02)"]},show:!1},splitLine:{lineStyle:{color:["#e6e6e6"]},show:!1}},color:["#fc97af","#87f7cf","#f7f494","#72ccff","#f7c5a0","#d4a4eb","#d2f5a6","#76f2f2"],dataZoom:{backgroundColor:"rgba(255,255,255,0)",dataBackgroundColor:"rgba(114,204,255,1)",fillerColor:"rgba(114,204,255,0.2)",handleColor:"#72ccff",handleSize:"100%",textStyle:{color:"#333333"}},funnel:{itemStyle:{borderColor:"#ccc",borderWidth:0}},gauge:{itemStyle:{borderColor:"#ccc",borderWidth:0}},geo:{emphasis:{itemStyle:{areaColor:"rgba(255,178,72,1)",borderColor:"#eb8146",borderWidth:1},label:{color:"rgb(137,52,72)"}},itemStyle:{areaColor:"#f3f3f3",borderColor:"#999999",borderWidth:.5},label:{color:"#893448"}},graph:{color:["#fc97af","#87f7cf","#f7f494","#72ccff","#f7c5a0","#d4a4eb","#d2f5a6","#76f2f2"],itemStyle:{borderColor:"#ccc",borderWidth:0},label:{color:"#293441"},lineStyle:{color:"#ffffff",width:1},smooth:!0,symbol:"emptyCircle",symbolSize:3},legend:{textStyle:{color:"#999999"}},line:{itemStyle:{borderWidth:1},lineStyle:{width:2},smooth:!0,symbol:"circle",symbolSize:6},logAxis:{axisLabel:{color:"#aaaaaa",show:!0},axisLine:{lineStyle:{color:"#666666"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.05)","rgba(200,200,200,0.02)"]},show:!0},splitLine:{lineStyle:{color:["#e6e6e6"]},show:!0}},map:{emphasis:{itemStyle:{areaColor:"rgba(255,178,72,1)",borderColor:"#eb8146",borderWidth:1},label:{color:"rgb(137,52,72)"}},itemStyle:{areaColor:"#f3f3f3",borderColor:"#999999",borderWidth:.5},label:{color:"#893448"}},markPoint:{emphasis:{label:{color:"#293441"}},label:{color:"#293441"}},parallel:{itemStyle:{borderColor:"#ccc",borderWidth:0}},pie:{itemStyle:{borderColor:"#ccc",borderWidth:0}},radar:{itemStyle:{borderWidth:1},lineStyle:{width:2},smooth:!0,symbol:"circle",symbolSize:3},sankey:{itemStyle:{borderColor:"#ccc",borderWidth:0}},scatter:{itemStyle:{borderColor:"#ccc",borderWidth:0}},textStyle:{},timeAxis:{axisLabel:{color:"#aaaaaa",show:!0},axisLine:{lineStyle:{color:"#666666"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.05)","rgba(200,200,200,0.02)"]},show:!1},splitLine:{lineStyle:{color:["#e6e6e6"]},show:!0}},timeline:{checkpointStyle:{borderColor:"#fc97af",color:"#fc97af"},controlStyle:{borderColor:"#87f7cf",borderWidth:.5,color:"#87f7cf"},emphasis:{controlStyle:{borderColor:"#87f7cf",borderWidth:.5,color:"#87f7cf"},itemStyle:{color:"#f7f494"},label:{color:"#87f7cf"}},itemStyle:{borderWidth:1,color:"#87f7cf"},label:{color:"#87f7cf"},lineStyle:{color:"#87f7cf",width:1}},title:{subtextStyle:{color:"#dddddd"},textStyle:{color:"#ffffff"}},toolbox:{emphasis:{iconStyle:{borderColor:"#666666"}},iconStyle:{borderColor:"#999999"}},tooltip:{axisPointer:{crossStyle:{color:"#cccccc",width:1},lineStyle:{color:"#cccccc",width:1}}},valueAxis:{axisLabel:{color:"#aaaaaa",show:!0},axisLine:{lineStyle:{color:"#666666"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.05)","rgba(200,200,200,0.02)"]},show:!1},splitLine:{lineStyle:{color:["#e6e6e6"]},show:!0}},visualMap:{color:["#fc97af","#87f7cf"]}},lightTheme:{backgroundColor:"rgba(0,0,0,0)",bar:{itemStyle:{barBorderColor:"#ccc",barBorderWidth:0}},boxplot:{itemStyle:{borderColor:"#ccc",borderWidth:0}},candlestick:{itemStyle:{borderColor:"#d87a80",borderColor0:"#2ec7c9",borderWidth:1,color:"#d87a80",color0:"#2ec7c9"}},categoryAxis:{axisLabel:{color:"#333",show:!0},axisLine:{lineStyle:{color:"#008acd"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.3)","rgba(200,200,200,0.3)"]},show:!1},splitLine:{lineStyle:{color:["#eee"]},show:!1}},color:["#2ec7c9","#b6a2de","#5ab1ef","#ffb980","#d87a80","#8d98b3","#e5cf0d","#97b552","#95706d","#dc69aa","#07a2a4","#9a7fd1","#588dd5","#f5994e","#c05050","#59678c","#c9ab00","#7eb00a","#6f5553","#c14089"],dataZoom:{backgroundColor:"rgba(47,69,84,0)",dataBackgroundColor:"#efefff",fillerColor:"rgba(182,162,222,0.2)",handleColor:"#008acd",handleSize:"100%",textStyle:{color:"#333333"}},funnel:{itemStyle:{borderColor:"#ccc",borderWidth:0}},gauge:{itemStyle:{borderColor:"#ccc",borderWidth:0}},geo:{emphasis:{itemStyle:{areaColor:"rgba(254,153,78,1)",borderColor:"#444",borderWidth:1},label:{color:"rgb(100,0,0)"}},itemStyle:{areaColor:"#dddddd",borderColor:"#eeeeee",borderWidth:.5},label:{color:"#d87a80"}},graph:{color:["#2ec7c9","#b6a2de","#5ab1ef","#ffb980","#d87a80","#8d98b3","#e5cf0d","#97b552","#95706d","#dc69aa","#07a2a4","#9a7fd1","#588dd5","#f5994e","#c05050","#59678c","#c9ab00","#7eb00a","#6f5553","#c14089"],itemStyle:{borderColor:"#ccc",borderWidth:0},label:{color:"#eeeeee"},lineStyle:{color:"#aaaaaa",width:1},smooth:!0,symbol:"emptyCircle",symbolSize:3},legend:{textStyle:{color:"#333333"}},line:{itemStyle:{borderWidth:1},lineStyle:{width:2},smooth:!0,symbol:"emptyCircle",symbolSize:5},logAxis:{axisLabel:{color:"#333",show:!0},axisLine:{lineStyle:{color:"#008acd"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.3)","rgba(200,200,200,0.3)"]},show:!0},splitLine:{lineStyle:{color:["#eee"]},show:!0}},map:{emphasis:{itemStyle:{areaColor:"rgba(254,153,78,1)",borderColor:"#444",borderWidth:1},label:{color:"rgb(100,0,0)"}},itemStyle:{areaColor:"#dddddd",borderColor:"#eeeeee",borderWidth:.5},label:{color:"#d87a80"}},markPoint:{emphasis:{label:{color:"#eeeeee"}},label:{color:"#eeeeee"}},parallel:{itemStyle:{borderColor:"#ccc",borderWidth:0}},pie:{itemStyle:{borderColor:"#ccc",borderWidth:0}},radar:{itemStyle:{borderWidth:1},lineStyle:{width:2},smooth:!0,symbol:"emptyCircle",symbolSize:3},sankey:{itemStyle:{borderColor:"#ccc",borderWidth:0}},scatter:{itemStyle:{borderColor:"#ccc",borderWidth:0}},textStyle:{},timeAxis:{axisLabel:{color:"#333",show:!0},axisLine:{lineStyle:{color:"#008acd"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.3)","rgba(200,200,200,0.3)"]},show:!1},splitLine:{lineStyle:{color:["#eee"]},show:!0}},timeline:{checkpointStyle:{borderColor:"#2ec7c9",color:"#2ec7c9"},controlStyle:{borderColor:"#008acd",borderWidth:.5,color:"#008acd"},emphasis:{controlStyle:{borderColor:"#008acd",borderWidth:.5,color:"#008acd"},itemStyle:{color:"#a9334c"},label:{color:"#008acd"}},itemStyle:{borderWidth:1,color:"#008acd"},label:{color:"#008acd"},lineStyle:{color:"#008acd",width:1}},title:{subtextStyle:{color:"#aaaaaa"},textStyle:{color:"#008acd"}},toolbox:{emphasis:{iconStyle:{borderColor:"#18a4a6"}},iconStyle:{borderColor:"#2ec7c9"}},tooltip:{axisPointer:{crossStyle:{color:"#008acd",width:1},lineStyle:{color:"#008acd",width:1}}},valueAxis:{axisLabel:{color:"#333",show:!0},axisLine:{lineStyle:{color:"#008acd"},show:!0},axisTick:{lineStyle:{color:"#333"},show:!0},splitArea:{areaStyle:{color:["rgba(250,250,250,0.3)","rgba(200,200,200,0.3)"]},show:!0},splitLine:{lineStyle:{color:["#eee"]},show:!0}},visualMap:{color:["#5ab1ef","#e0ffff"]}}}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
