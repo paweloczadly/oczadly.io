@@ -12,11 +12,16 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
     languageName = "English"
     [[languages.en.menu.main]]
       weight = 1
+      identifier = "series"
+      name = "Series"
+      url = "/series/"
+    [[languages.en.menu.main]]
+      weight = 2
       identifier = "posts"
       name = "Posts"
       url = "/posts/"
     [[languages.en.menu.main]]
-      weight = 2
+      weight = 3
       identifier = "about"
       name = "About"
       url = "/about/"
@@ -27,11 +32,16 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
     languageName = "Polski"
     [[languages.pl.menu.main]]
       weight = 1
+      identifier = "series"
+      name = "Serie"
+      url = "/series/"
+    [[languages.pl.menu.main]]
+      weight = 2
       identifier = "posts"
       name = "Wpisy"
       url = "/posts/"
     [[languages.pl.menu.main]]
-      weight = 2
+      weight = 3
       identifier = "about"
       name = "O blogu"
       url = "/about/"
@@ -40,6 +50,11 @@ title = "oczadly.io - production-ready tooling. Clean solutions."
   [markup.highlight]
     lineNos = true
     noClasses = false
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+  series = "series"
 
 [menu]
   [[menu.main]]

@@ -1,6 +1,7 @@
 ---
 title: "Azure IaC built for your needs"
 subtitle: "Architectural patterns. A foundation to scale — powered by OpenTofu and AVM."
+series: ["Infrastructure at scale with Azure and OpenTofu"]
 date: 2025-09-26
 description: "Architectural patterns. A foundation to scale — powered by OpenTofu and AVM."
 draft: false

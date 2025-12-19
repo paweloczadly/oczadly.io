@@ -1,6 +1,7 @@
 ---
 title: "Azure IaC zbudowana dla Twoich potrzeb"
 subtitle: "Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."
+series: ["Infrastructure at scale with Azure and OpenTofu"]
 date: 2025-09-26
 description: "Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."
 draft: false
