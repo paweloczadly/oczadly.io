@@ -13,7 +13,7 @@ type: "page"
 
 ## Platform Engineer. Gradler.
 
-I build systems, not setups. My focus is on creating clean, reproducible developer tooling and infrastructure that scales, tests, and integrates seamlessly into engineering workflows.
+I build systems, not _"setups"_. I focus on creating **repeatable, testable, and auditable** developer tools and infrastructure that naturally fit into engineering workflows.
 
 ### Work
 
@@ -27,7 +27,8 @@ Currently working at **[Gradle](https://gradle.org/)** on building systems and i
 
 ### After work
 
-Exploring tools for AI-native workflows and reproducible prompt registries.
+I explore tools and approaches for building repeatable engineering workflows: from platform engineering and infrastructure to selected, practical applications of AI. These explorations often turn into **concrete, technical case studies** on the blog.
+
 
 ### Privately
 
@@ -39,23 +40,23 @@ Husband. Specialty coffee lover. EMTB rider. You can find my activity on [Strava
 
 * Gradle, Groovy, Spring Boot
 * OpenTofu, GitOps, modular (cloud) infrastructure
-* RAG pipelines, AI-native DX
+* RAG pipelines and selected elements of AI-native DX
 
 ---
 
 ## Why this blog
 
-Besides keeping my code in repositories, I wanted a place to document **structured, reusable solutions** for:
+This blog is not a collection of tutorials or loose thoughts. It is a place where I document **structured, repeatable solutions** in the areas of:
 
 * cloud architecture
 * platform engineering
 * AI-native tooling
 
-Everything in a clear and accessible way.
+All presented in a clear and accessible way.
 
-This blog serves as my personal engineering compendium — a space I return to when designing systems, just like revisiting ADRs during architecture work.
+This blog serves as my personal engineering compendium: a space I return to when designing systems, just like revisiting ADRs during architecture work.
 
-It's my way of capturing patterns, learnings, and production-ready decisions that help me—and hopefully others—build **clean, scalable, and maintainable platforms**.
+It's my way of capturing patterns, learnings, and production-ready decisions that help me, and hopefully others, build **clean, scalable, and maintainable platforms**.
 
 ---
 
@@ -63,7 +64,7 @@ It's my way of capturing patterns, learnings, and production-ready decisions tha
 
 * Platform Engineers looking for production-ready tooling.
 * Software Engineers interested in clean CI/CD, Gradle, OpenTofu, and GitOps workflows.
-* Developers exploring AI-native infrastructure and prompt engineering.
+* Engineers exploring practical applications of AI in the context of infrastructure and workflows.
 * Anyone who values clarity, reproducibility, and systems thinking in engineering.
 
 ---
