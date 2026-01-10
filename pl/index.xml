@@ -2,15 +2,15 @@
 <p>Ostatnio chciałem poszerzyć swoją wiedzę o <a href="https://docs.gradle.org/9.0.0/userguide/build_scans.html" target="_blank" rel="noopener noreffer ">Build Scanach</a>, <a href="https://gradle.com/develocity/" target="_blank" rel="noopener noreffer ">Develocity</a> i ich praktycznym zastosowaniu, dlatego zacząłem przerabiać kursy na naszej platformie <a href="https://dpeuniversity.gradle.com/app/catalog" target="_blank" rel="noopener noreffer ">DPE University</a>. Na co dzień mam styczność z <a href="https://gradle.com/develocity/" target="_blank" rel="noopener noreffer ">Develocity</a> od strony operacyjnej i produkcyjnej – utrzymuję między innymi <a href="https://github.com/gradle/develocity-oss-projects" target="_blank" rel="noopener noreffer ">instancje open source</a>, więc zależało mi na lepszym zrozumieniu produktu, a zwłaszcza użycia od strony użytkowników, w mojej codziennej pracy inżyniera.</p>
 <p>Aby usystematyzować zdobytą wiedzę, postanowiłem zbudować projekt zgodny z best practices omawianymi na kursach. Równolegle pracowałem nad mikroserwisem w <a href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener noreffer ">Spring Boot</a>, generowanym ze <a href="https://start.spring.io/" target="_blank" rel="noopener noreffer ">Spring Initializr</a>, i zauważyłem brak <a href="https://docs.gradle.org/9.0.0/userguide/plugins.html" target="_blank" rel="noopener noreffer ">pluginu Gradle</a>, który automatyzowałby ten proces w sposób przyjazny build cache i CI/CD. W efekcie każdy nowy projekt wymagał ręcznej konfiguracji. Chciałem to uprościć i zbliżyć doświadczenie do znanego <code>gradle init</code> – ale w wersji dla <a href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener noreffer ">Spring Boot</a>.</p>]]></description></item><item><title>Start bloga oczadly.io</title><link>https://oczadly.io/pl/posts/2025-07-05-starting-oczadly-io/</link><pubDate>Sat, 05 Jul 2025 00:00:00 +0000</pubDate><author>Paweł Oczadły</author><guid>https://oczadly.io/pl/posts/2025-07-05-starting-oczadly-io/</guid><description><![CDATA[<p>Witaj na moim blogu!</p>
 <p>Stworzyłem go, aby dokumentować i dzielić się swoimi osobistymi doświadczeniami w budowaniu rozwiązań z zakresu architektury chmurowej, platform engineeringu oraz AI-native tooling.</p>
-<p>Blog będzie pełnił rolę mojego <strong>osobistego notesu inżynierskiego</strong> – miejsca, w którym zapisuję uporządkowane lekcje, wzorce i decyzje w sposób przejrzysty i dostępny.</p>
+<p>Znajdziesz tu materiały, które nie są wprowadzeniami ani tutorialami, ale próbą uchwycenia sprawdzonych wzorców i decyzji w realnych, produkcyjnych kontekstach.</p>
 <hr>
 <h2 id="czego-możesz-się-spodziewać">Czego możesz się spodziewać</h2>
 <ul>
-<li>Praktycznych wpisów skupionych na implementacji.</li>
+<li>Praktycznych, opartych na realnych projektach wpisów skupionych na implementacji.</li>
 <li>Uporządkowanych wzorców do budowania skalowalnych platform.</li>
-<li>Insightów dotyczących Gradle, OpenTofu, workflowów GitOps i AI-native systems.</li>
-<li>Czystych, minimalistycznych, pozbawionych szumu treści.</li>
+<li>Technicznych insightów dotyczących Gradle, OpenTofu, workflowów GitOps i AI-native systems.</li>
+<li>Czystych, minimalistycznych, pozbawionych zbędnego szumu treści.</li>
 </ul>
 <hr>
 <h2 id="zaczynamy">Zaczynamy</h2>
-<p>Żeby nie zostawiać Cię z samym powitaniem i zapowiedzą, co będzie na blogu, przedstawiam, jak uruchomiony jest ten blog. <strong>W pełni automatycznie i w sposób deklaratywny</strong>. W myśl z jednej moich ulubionych zasad:</p>]]></description></item></channel></rss>
+<p>Żeby uszanować Twój czas oraz nie zostawiać Cię z samym powitaniem i zapowiedzą, co będzie na blogu, przedstawiam, jak uruchomiony jest ten blog. <strong>W pełni automatycznie i w sposób deklaratywny</strong>. W myśl z jednej moich ulubionych zasad:</p>]]></description></item></channel></rss>
