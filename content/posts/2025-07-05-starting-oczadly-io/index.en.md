@@ -1,9 +1,10 @@
 ---
 title: "Starting oczadly.io"
+subtitle: "Engineering notes on building, platforms, infrastructure, and systems that scales responsibly."
 date: 2025-07-05
-description: "Welcome to my blog"
+description: "Engineering notes on building, platforms, infrastructure, and systems that scales responsibly."
 draft: false
-images: []
+lastmod: 2026-01-10
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -13,22 +14,22 @@ Welcome to my blog!
 
 I've built it to document and share my personal experiences in building solutions for cloud architecture, platform engineering, and AI-native tooling.
 
-It will serve as my **personal engineering notebook** - a place to capture structured learnings, patterns, and decisions—cleanly and accessibly.
+You won't find beginner tutorials here. This blog focuses on documenting real-world decisions, trade-offs and patterns that emerge in production systems.
 
 ---
 
 ## What to expect
 
-- Practical, implementation-focused posts.
-- Structured patterns for building scalable platforms.
-- Insights on Gradle, OpenTofu, GitOps workflows, and AI-native systems.
-- Clean, minimal, and noise-free.
+- Practical, implementation-focused posts grounded in real projects.
+- Structured patterns for building and evolving platform architectures.
+- Technical insights on Gradle, OpenTofu, GitOps workflows, and AI-native systems.
+- Clean, minimal, and deliberately noise-free.
 
 ---
 
 ## Let’s get started
 
-Instead of leaving you with just a welcome and a list of future topics, I want to share how this blog is set up: **fully automated and declaratively managed**. Following one of my favourite principles:
+To respect your time and avoid leaving you with just a welcome and a list of future topics, I want to share how this blog is set up: **fully automated and declaratively managed**. Following one of my favourite principles:
 
 > *"If something is worth doing, it’s worth doing well."*
 

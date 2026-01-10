@@ -1,9 +1,10 @@
 ---
 title: "Start bloga oczadly.io"
+subtitle: "Notes inżynierski o budowaniu platform, infrastruktury i systemów bez zbędnego szumu."
 date: 2025-07-05
-description: "Witaj na moim blogu"
+description: "Notes inżynierski o budowaniu platform, infrastruktury i systemów bez zbędnego szumu."
 draft: false
-images: []
+lastmod: 2026-01-10
 resources:
 - name: "featured-image"
   src: "featured-image.jpg"
@@ -13,22 +14,22 @@ Witaj na moim blogu!
 
 Stworzyłem go, aby dokumentować i dzielić się swoimi osobistymi doświadczeniami w budowaniu rozwiązań z zakresu architektury chmurowej, platform engineeringu oraz AI-native tooling.
 
-Blog będzie pełnił rolę mojego **osobistego notesu inżynierskiego** – miejsca, w którym zapisuję uporządkowane lekcje, wzorce i decyzje w sposób przejrzysty i dostępny.
+Znajdziesz tu materiały, które nie są wprowadzeniami ani tutorialami, ale próbą uchwycenia sprawdzonych wzorców i decyzji w realnych, produkcyjnych kontekstach.
 
 ---
 
 ## Czego możesz się spodziewać
 
-- Praktycznych wpisów skupionych na implementacji.
+- Praktycznych, opartych na realnych projektach wpisów skupionych na implementacji.
 - Uporządkowanych wzorców do budowania skalowalnych platform.
-- Insightów dotyczących Gradle, OpenTofu, workflowów GitOps i AI-native systems.
-- Czystych, minimalistycznych, pozbawionych szumu treści.
+- Technicznych insightów dotyczących Gradle, OpenTofu, workflowów GitOps i AI-native systems.
+- Czystych, minimalistycznych, pozbawionych zbędnego szumu treści.
 
 ---
 
 ## Zaczynamy
 
-Żeby nie zostawiać Cię z samym powitaniem i zapowiedzą, co będzie na blogu, przedstawiam, jak uruchomiony jest ten blog. **W pełni automatycznie i w sposób deklaratywny**. W myśl z jednej moich ulubionych zasad:
+Żeby uszanować Twój czas oraz nie zostawiać Cię z samym powitaniem i zapowiedzą, co będzie na blogu, przedstawiam, jak uruchomiony jest ten blog. **W pełni automatycznie i w sposób deklaratywny**. W myśl z jednej moich ulubionych zasad:
 
 > *"Jak coś robić, to robić to do porządku."*
 
