@@ -17,7 +17,7 @@ I build systems, not _"setups"_. I focus on creating **repeatable, testable, and
 
 ### Work
 
-Currently working at **[Gradle](https://gradle.org/)** on building systems and internal developer platforms.
+Currently working at **[Gradle Technologies](https://gradle.com/)** on building systems and internal developer platforms.
 
 {{< admonition note "Note" >}}
 *Posts about [Gradle](https://gradle.org/), [DPE University](https://dpeuniversity.gradle.com/app), [Build Scans](https://docs.gradle.org/8.14.3/userguide/build_scans.html), or [Develocity](https://gradle.com/develocity/) reflect my **personal experiences and perspectives**. They are not official product endorsements or company statements but insights I've gained while working with these tools in real engineering workflows.*
@@ -32,7 +32,7 @@ I explore tools and approaches for building repeatable engineering workflows: fr
 
 ### Privately
 
-Husband. Specialty coffee lover. EMTB rider. You can find my activity on [Strava](https://www.strava.com/athletes/67135909).
+Specialty coffee lover. EMTB rider. You can find my activity on [Strava](https://www.strava.com/athletes/67135909).
 
 ---
 

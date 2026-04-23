@@ -17,7 +17,7 @@ Buduję systemy, nie _"setupy"_. Skupiam się na tworzeniu **powtarzalnych, test
 
 ### Praca
 
-Obecnie pracuję w **[Gradle](https://gradle.org/)**, budując systemy i wewnętrzne platformy developerskie.
+Obecnie pracuję w **[Gradle Technologies](https://gradle.com/)**, budując systemy i wewnętrzne platformy developerskie.
 
 {{< admonition note "Uwaga" >}}
 *Wpisy dotyczące [Gradle](https://gradle.org/), [DPE University](https://dpeuniversity.gradle.com/app), [Build Scans](https://docs.gradle.org/8.14.3/userguide/build_scans.html) czy [Develocity](https://gradle.com/develocity/) odzwierciedlają moje **osobiste doświadczenia i perspektywy**. Nie są oficjalnymi rekomendacjami produktów ani stanowiskiem firmy, lecz insightami, które zdobyłem, pracując z tymi narzędziami w realnych workflow inżynierskich.*
@@ -31,7 +31,7 @@ Eksploruję narzędzia i podejścia do budowania powtarzalnych workflow inżynie
 
 ### Prywatnie
 
-Mąż. Miłośnik kawy speciality. Jeżdżę EMTB. Moje aktywności znajdziesz na [Strava](https://www.strava.com/athletes/67135909).
+Miłośnik kawy speciality. Jeżdżę EMTB. Moje aktywności znajdziesz na [Strava](https://www.strava.com/athletes/67135909).
 
 ---
 
