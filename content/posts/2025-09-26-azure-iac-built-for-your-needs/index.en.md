@@ -1,9 +1,9 @@
 ---
 title: "Azure IaC built for your needs"
-subtitle: "Architectural patterns. A foundation to scale — powered by OpenTofu and AVM."
+subtitle: "Architectural patterns. A foundation to scale powered by OpenTofu and AVM."
 series: ["Infrastructure at scale with Azure and OpenTofu"]
 date: 2025-09-26
-description: "Architectural patterns. A foundation to scale — powered by OpenTofu and AVM."
+description: "Architectural patterns. A foundation to scale powered by OpenTofu and AVM."
 draft: false
 resources:
 - name: "featured-image"
@@ -11,12 +11,12 @@ resources:
 ---
 
 Over the years, I've had the opportunity to work on many projects and see a wide range of approaches to Infrastructure as Code using [Terraform](https://developer.hashicorp.com/terraform).
-Some of them scaled well, others didn't. A few worked great early on — but as the project grew, and new resources had to be added under time pressure and shifting priorities, the codebase became harder and harder to maintain.
+Some of them scaled well, others didn't. A few worked great early on, but as the project grew, and new resources had to be added under time pressure and shifting priorities, the codebase became harder and harder to maintain.
 It was still "infrastructure as code", but each change took longer, and refactoring became too costly to be worth the effort.
 
-These experiences helped me define **how I want to structure Infrastructure as Code** in new projects — and how I'd approach migrating existing cloud resources into version-controlled repositories.
+These experiences helped me define **how I want to structure Infrastructure as Code** in new projects and how I'd approach migrating existing cloud resources into version-controlled repositories.
 
-This series is also a great chance to organize and consolidate my [Microsoft Azure](https://azure.microsoft.com/) knowledge in a practical way — one that brings real value to both you and me.
+This series is also a great chance to organize and consolidate my [Microsoft Azure](https://azure.microsoft.com/) knowledge in a practical way: one that brings real value to both you and me.
 
 So let me invite you to the series **"Infrastructure at Scale with Azure and OpenTofu"**.
 Below is a list of articles and what you'll find in each one.
@@ -47,9 +47,9 @@ This article is part of the **"Infrastructure at Scale with Azure and OpenTofu"*
 Before we dive in, let's quickly go over a few assumptions.
 In this series, I'll be using:
 
-* [Microsoft Azure](https://azure.microsoft.com/) — because I want to solidify my knowledge of Azure while building something genuinely useful.
-* [OpenTofu](https://opentofu.org/) — because it's a fully open-source alternative to [Terraform](https://developer.hashicorp.com/terraform).
-* [GitHub](https://github.com/) — because it's still the most common platform for hosting code and automating CI/CD pipelines.
+* [Microsoft Azure](https://azure.microsoft.com/) because I want to solidify my knowledge of Azure while building something genuinely useful.
+* [OpenTofu](https://opentofu.org/) because it's a fully open-source alternative to [Terraform](https://developer.hashicorp.com/terraform).
+* [GitHub](https://github.com/) because it's still the most common platform for hosting code and automating CI/CD pipelines.
 
 While the series is focused on [Microsoft Azure](https://azure.microsoft.com/), [OpenTofu](https://opentofu.org/) and [GitHub](https://github.com/), most of the infrastructure patterns you'll see here can be adapted to other clouds, or used with [Terraform](https://developer.hashicorp.com/terraform), [GitLab](https://gitlab.com/) or any CI/CD tool of your choice.
 
@@ -69,7 +69,7 @@ We'll revisit the technical patterns later in this series.
 
 <!-- 1. Description -->
 In this model, all infrastructure code lives in a single repository.
-It's typically structured by environments — for example, `dev` (1️⃣) and `prod` (2️⃣) — and within each environment, directories like `databases` (3️⃣) or `network` (4️⃣) group related resources (`resource`) and/or modules (`module`).
+It's typically structured by environments (for example, `dev` (1️⃣) and `prod` (2️⃣)) and within each environment, directories like `databases` (3️⃣) or `network` (4️⃣) group related resources (`resource`) and/or modules (`module`).
 Each state file covers many components, which becomes harder to manage over time.
 
 <!-- 2. Example structure -->
@@ -249,9 +249,9 @@ In my opinion: _this may work well for small teams and limited infrastructure �
 ### Repo per service + repo per module
 
 <!-- 1. Description -->
-This approach is the opposite of a monorepo. It resembles microservice architecture — each part is isolated and managed independently. Every repository corresponds to a specific service or infrastructure layer — for example, `tofu-networking` for networking, `tofu-databases` for the data layer (1️⃣). Each of them contains environment-specific folders — like `dev` (2️⃣) and `prod` (3️⃣).
+This approach is the opposite of a monorepo. It resembles microservice architecture: each part is isolated and managed independently. Every repository corresponds to a specific service or infrastructure layer (for example, `tofu-networking` for networking, `tofu-databases` for the data layer (1️⃣)). Each of them contains environment-specific folders — like `dev` (2️⃣) and `prod` (3️⃣).
 
-These service repos contain module invocations, while the actual logic for resource creation lives in separate module repositories — for example, [terraform-azurerm-avm-res-resources-resourcegroup](https://github.com/Azure/terraform-azurerm-avm-res-resources-resourcegroup) from the [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/), or your organization's private registry. Modules can be used from a registry (by version) or directly from the repo (by commit or tag), following [OpenTofu documentation](https://opentofu.org/docs/language/modules/sources/).
+These service repos contain module invocations, while the actual logic for resource creation lives in separate module repositories (for example, [terraform-azurerm-avm-res-resources-resourcegroup](https://github.com/Azure/terraform-azurerm-avm-res-resources-resourcegroup) from the [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/), or your organization's private registry). Modules can be used from a registry (by version) or directly from the repo (by commit or tag), following [OpenTofu documentation](https://opentofu.org/docs/language/modules/sources/).
 
 Alternatively, modules can be stored locally — in a `modules` folder within the service repository. However, be mindful of the limitations described earlier.
 
@@ -346,9 +346,9 @@ In my opinion: _best suited for larger teams and more complex infrastructures �
 ### Monorepo + repo per module
 
 <!-- 1. Description -->
-This approach combines centralized root modules with versioned infrastructure logic stored in separate module repositories. The root modules — which hold the state files — live in a single repository. Typically, the structure is segmented by environment (`dev` (1️⃣), `prod` (2️⃣), etc.). Inside each environment folder are directories for specific infrastructure areas — such as `databases` (3️⃣) and `network` (4️⃣).
+This approach combines centralized root modules with versioned infrastructure logic stored in separate module repositories. The root modules (which hold the state files) live in a single repository. Typically, the structure is segmented by environment (`dev` (1️⃣), `prod` (2️⃣), etc.). Inside each environment folder are directories for specific infrastructure areas such as `databases` (3️⃣) and `network` (4️⃣).
 
-Infrastructure modules are located in separate repositories — just like in the previous approach — and can be referenced from a remote registry (using a version) or directly from a repository (using a commit or tag).
+Infrastructure modules are located in separate repositories (just like in the previous approach) and can be referenced from a remote registry (using a version) or directly from a repository (using a commit or tag).
 
 By centralizing state files, it's easier to coordinate deployments across teams. However, these state files often still manage many resources, which can make independent development and testing more difficult.
 
@@ -513,7 +513,7 @@ The radar chart below visualizes the key traits of each model to help you choose
 
 ## How I Design IaC in Azure
 
-After reviewing various strategies for organizing infrastructure as code, it's time to show you the structure I personally use — scalable, modular, and aligned with [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/). It builds on the [Monorepo + repo per module](#monorepo--repo-per-module) approach, but includes several important nuances.
+After reviewing various strategies for organizing infrastructure as code, it's time to show you the structure I personally use: scalable, modular, and aligned with [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/). It builds on the [Monorepo + repo per module](#monorepo--repo-per-module) approach, but includes several important nuances.
 
 This approach consists of two main parts:
 
@@ -524,7 +524,7 @@ Each is described in detail in the following sections.
 
 ### Core: `organization-template`
 
-The monorepo portion is called [organization-template](https://github.com/infra-at-scale/organization-template), and I treat it as a solid starting point for any organization — regardless of size or complexity. It provides ready-to-use [OpenTofu](https://opentofu.org/) code based on [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/), helping you set up foundational infrastructure for your [Microsoft Azure](https://azure.microsoft.com/) environment.
+The monorepo portion is called [organization-template](https://github.com/infra-at-scale/organization-template), and I treat it as a solid starting point for any organization, regardless of size or complexity. It provides ready-to-use [OpenTofu](https://opentofu.org/) code based on [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/), helping you set up foundational infrastructure for your [Microsoft Azure](https://azure.microsoft.com/) environment.
 
 #### Contents
 
@@ -553,7 +553,7 @@ For example:
 * [02-iam-applications](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/02-iam-applications)
 * [03-resourcegroups](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups)
 
-If multiple directories share the same prefix number — such as [04-backupvaults](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-backupvaults) and [04-networking-nsgs](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-networking-nsgs) — they can be applied in parallel since they are not interdependent.
+If multiple directories share the same prefix number (such as [04-backupvaults](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-backupvaults) and [04-networking-nsgs](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-networking-nsgs)), they can be applied in parallel since they are not interdependent.
 
 This naming convention makes the execution order immediately clear. It also enables partial parallelization during deployment, which reduces execution time.
 
@@ -573,9 +573,9 @@ Each infrastructure domain follows a consistent directory structure:
 
 Examples:
 
-* [02-iam-applications/github-actions](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/02-iam-applications/github-actions) — applications in [Microsoft Entra ID](https://www.microsoft.com/security/business/microsoft-entra) are not bound to any [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) or [Resource Group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group), so both are omitted.
-* [03-resourcegroups/your-subscription/rg-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups/your-subscription/rg-default-eastus) — the [resource group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) `rg-default-eastus` belongs to a specific [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions), so only the `${optional-subscription-name}` segment is used.
-* [05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus) — the virtual network is scoped under both a [Resource Group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) and a [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions), so both segments are defined.
+* [02-iam-applications/github-actions](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/02-iam-applications/github-actions): applications in [Microsoft Entra ID](https://www.microsoft.com/security/business/microsoft-entra) are not bound to any [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) or [Resource Group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group), so both are omitted.
+* [03-resourcegroups/your-subscription/rg-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups/your-subscription/rg-default-eastus): the [resource group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) `rg-default-eastus` belongs to a specific [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions), so only the `${optional-subscription-name}` segment is used.
+* [05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus): the virtual network is scoped under both a [Resource Group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) and a [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions), so both segments are defined.
 
 This hierarchy mirrors Azure's native resource path convention, for example:
 
@@ -688,7 +688,7 @@ output "resource" {
 
 #### Execution Order
 
-Now that you've seen how [organization-template](https://github.com/infra-at-scale/organization-template) is structured — naming conventions, folder hierarchy, root module layout, and interdependencies — let's discuss how to actually apply these modules.
+Now that you've seen how [organization-template](https://github.com/infra-at-scale/organization-template) is structured (naming conventions, folder hierarchy, root module layout, and interdependencies), let's discuss how to actually apply these modules.
 
 Each root module should be applied according to the numeric prefix in its directory name. These numbers reflect dependencies and allow for parallel execution of modules that do not depend on one another.
 
@@ -732,16 +732,16 @@ Remember: directories sharing the same prefix number (e.g., [04-backupvaults](ht
 
 The [organization-template](https://github.com/infra-at-scale/organization-template) repository was intentionally kept small and focused. It provides a strong foundation that can be safely extended.
 
-When adding new infrastructure areas, I recommend following the naming convention, keeping state scopes small, using [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) whenever possible, and passing values across modules using outputs and remote state — not hardcoded references.
+When adding new infrastructure areas, I recommend following the naming convention, keeping state scopes small, using [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) whenever possible, and passing values across modules using outputs and remote state, not hardcoded references.
 
 ### Application infrastructure
 
 While exploring the [organization-template](https://github.com/infra-at-scale/organization-template), you might be wondering: _where should the application infrastructure go?_ Things like a virtual machine, a [Storage Account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview), a database, or an [Azure Function](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview). In the approach I prefer, all of these components are managed alongside the application code.
 
-This means that the application team is fully responsible for its infrastructure — maintained within the same repository and lifecycle as the application itself. This significantly reduces delivery time and minimizes dependencies on the platform team.
+This means that the application team is fully responsible for its infrastructure, maintained within the same repository and lifecycle as the application itself. This significantly reduces delivery time and minimizes dependencies on the platform team.
 
 <!-- 1. Description -->
-In this setup, the repository's root directory contains an `infra` folder (1️⃣), which holds subdirectories for each environment the application is (or might be) deployed to — like `dev` (2️⃣) and `prod` (3️⃣). The application code itself lives in a `src` folder or any other directory that matches your language or project conventions.
+In this setup, the repository's root directory contains an `infra` folder (1️⃣), which holds subdirectories for each environment the application is (or might be) deployed to, like `dev` (2️⃣) and `prod` (3️⃣). The application code itself lives in a `src` folder or any other directory that matches your language or project conventions.
 
 <!-- 2. Example structure -->
 An example project structure might look like this:
@@ -764,7 +764,7 @@ app-repo
 ```
 
 <!-- 3. Adding a resource -->
-To add a new infrastructure resource, simply declare it inside the appropriate environment folder. To prevent configuration drift, I recommend wrapping such resources into reusable modules and placing them in a private registry. If multiple applications require the same types of infrastructure — such as a database or storage account — it's worth creating shared modules for those resources.
+To add a new infrastructure resource, simply declare it inside the appropriate environment folder. To prevent configuration drift, I recommend wrapping such resources into reusable modules and placing them in a private registry. If multiple applications require the same types of infrastructure (such as a database or storage account), it's worth creating shared modules for those resources.
 
 <!-- 4. Adding an environment -->
 Onboarding a new environment is as simple as creating a new subdirectory inside the `infra` folder and calling the appropriate modules.
@@ -789,7 +789,7 @@ In these scenarios, keeping both platform and application infrastructure togethe
 
 ### Comparison
 
-Let’s revisit the previous approaches — the table below compares **my recommended setup** with the earlier strategies.
+Let's revisit the previous approaches. The table below compares **my recommended setup** with the earlier strategies.
 
 
 | Approach                                                                 | Adding resources  | Environment onboarding | Refactoring | Maintenance | State size |
@@ -860,9 +860,9 @@ The radar chart below provides a visual overview of the key differences.
 
 ## Summary
 
-In this article, you've explored multiple approaches to structuring Infrastructure as Code on [Microsoft Azure](https://azure.microsoft.com/) using [OpenTofu](https://opentofu.org/). From a basic monorepo to local modules, to versioned modules and service-specific repositories — each approach has its strengths and trade-offs. There is no one-size-fits-all solution. The best choice depends on your team's needs, the scale of your organization, and how you collaborate on infrastructure.
+In this article, you've explored multiple approaches to structuring Infrastructure as Code on [Microsoft Azure](https://azure.microsoft.com/) using [OpenTofu](https://opentofu.org/). From a basic monorepo to local modules, to versioned modules and service-specific repositories, each approach has its strengths and trade-offs. There is no one-size-fits-all solution. The best choice depends on your team's needs, the scale of your organization, and how you collaborate on infrastructure.
 
-I also showed you how I personally approach this: I use the [organization-template](https://github.com/infra-at-scale/organization-template) as the core foundation and keep application infrastructure in the same repository as the app itself. This gives me scalability, clarity, and easier maintenance — without taking away autonomy from application teams.
+I also showed you how I personally approach this: I use the [organization-template](https://github.com/infra-at-scale/organization-template) as the core foundation and keep application infrastructure in the same repository as the app itself. This gives me scalability, clarity, and easier maintenance without taking away autonomy from application teams.
 
 But this is just the beginning.  
 In the next part of this series, I’ll walk you through how I design versioned infrastructure modules compliant with [AVM](https://azure.github.io/Azure-Verified-Modules/), and how I build a lightweight registry that makes it easy to share and scale infrastructure across teams.

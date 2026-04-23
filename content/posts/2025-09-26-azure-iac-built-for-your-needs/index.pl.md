@@ -1,20 +1,20 @@
 ---
 title: "Azure IaC zbudowana dla Twoich potrzeb"
-subtitle: "Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."
+subtitle: "Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy: oparte na OpenTofu i AVM."
 series: ["Infrastructure at scale with Azure and OpenTofu"]
 date: 2025-09-26
-description: "Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy — oparte na OpenTofu i AVM."
+description: "Wzorce architektoniczne i gotowe narzędzia do dalszej rozbudowy: oparte na OpenTofu i AVM."
 draft: false
 resources:
 - name: "featured-image"
   src: "featured-image.png"
 ---
 
-Przez lata pracy miałem okazję uczestniczyć w wielu projektach i widzieć różne podejścia do organizacji infrastruktury jako kod przy użyciu [Terraforma](https://developer.hashicorp.com/terraform). Niektóre z nich działały lepiej, inne gorzej. Część świetnie sprawdzała się na początku, ale w miarę rozwoju projektu — przy dodawaniu nowych zasobów pod presją czasu i priorytetów organizacji — kod stawał się trudny w utrzymaniu. Infrastruktura nadal była zapisana w kodzie, ale każda zmiana zajmowała więcej czasu, a refaktoryzacja przestawała być opłacalna.
+Przez lata pracy miałem okazję uczestniczyć w wielu projektach i widzieć różne podejścia do organizacji infrastruktury jako kod przy użyciu [Terraforma](https://developer.hashicorp.com/terraform). Niektóre z nich działały lepiej, inne gorzej. Część świetnie sprawdzała się na początku, ale w miarę rozwoju projektu, przy dodawaniu nowych zasobów pod presją czasu i priorytetów organizacji, kod stawał się trudny w utrzymaniu. Infrastruktura nadal była zapisana w kodzie, ale każda zmiana zajmowała więcej czasu, a refaktoryzacja przestawała być opłacalna.
 
-Dzięki tym doświadczeniom wiem, jak **ja sam** chciałbym budować infrastrukturę jako kod w nowych projektach — i jak podszedłbym do migracji istniejących zasobów chmurowych do repozytoriów.
+Dzięki tym doświadczeniom wiem, jak **ja sam** chciałbym budować infrastrukturę jako kod w nowych projektach i jak podszedłbym do migracji istniejących zasobów chmurowych do repozytoriów.
 
-Pomyślałem też, że seria tych artykułów będzie dobrą okazją do uporządkowania wiedzy o [Microsoft Azure](https://azure.microsoft.com/) — w sposób praktyczny, z realną wartością zarówno dla mnie, jak i dla Ciebie.
+Pomyślałem też, że seria tych artykułów będzie dobrą okazją do uporządkowania wiedzy o [Microsoft Azure](https://azure.microsoft.com/): w sposób praktyczny, z realną wartością zarówno dla mnie, jak i dla Ciebie.
 
 Zapraszam Cię zatem do serii **"Infrastruktura w skali z Azure i OpenTofu"**. Poniżej znajdziesz listę artykułów i to, czego możesz się z nich dowiedzieć.
 
@@ -23,7 +23,7 @@ Ten artykuł jest częścią serii **"Infrastruktura w skali z Azure i OpenTofu"
 
 - [ ] [**Azure IaC zbudowana dla Twoich potrzeb**](#) (czytasz go właśnie teraz).
   
-  Poznasz podejścia do projektowania infrastruktury jako kod — ich zalety oraz ograniczenia. Zobaczysz szkielet, który możesz wdrożyć u siebie lub w swoim zespole.
+  Poznasz podejścia do projektowania infrastruktury jako kod: ich zalety oraz ograniczenia. Zobaczysz szkielet, który możesz wdrożyć u siebie lub w swoim zespole.
 
 - [ ] Zbuduj elastyczne moduły infrastruktury oraz ich rejestr. 
 
@@ -39,15 +39,15 @@ Ten artykuł jest częścią serii **"Infrastruktura w skali z Azure i OpenTofu"
 
 Zanim zaczniemy, ustalmy kilka podstawowych założeń. W tej serii korzystam z:
 
-* [Microsoft Azure](https://azure.microsoft.com/) — bo chcę przy okazji uporządkować swoją wiedzę z tej chmury, tworząc coś realnie przydatnego.
-* [OpenTofu](https://opentofu.org/) — bo to w pełni open source’owa alternatywa dla [Terraforma](https://developer.hashicorp.com/terraform).
-* [GitHub](https://github.com/) — bo to najczęściej wybierane narzędzie do hostowania kodu i automatyzacji CI/CD.
+* [Microsoft Azure](https://azure.microsoft.com/) - bo chcę przy okazji uporządkować swoją wiedzę z tej chmury, tworząc coś realnie przydatnego.
+* [OpenTofu](https://opentofu.org/) - bo to w pełni open source'owa alternatywa dla [Terraforma](https://developer.hashicorp.com/terraform).
+* [GitHub](https://github.com/) - bo to najczęściej wybierane narzędzie do hostowania kodu i automatyzacji CI/CD.
 
 Choć seria koncentruje się na [Microsoft Azure](https://azure.microsoft.com/), [OpenTofu](https://opentofu.org/) i [GitHubie](https://github.com/), większość omawianych wzorców możesz zaadaptować do innych chmur, używać z [Terraformem](https://developer.hashicorp.com/terraform), [GitLabem](https://gitlab.com/) czy dowolnym innym narzędziem CI/CD.
 
 ## Jak można zaprojektować IaC w Azure
 
-Zacznijmy od przeglądu podejść do organizowania infrastruktury jako kod w [Microsoft Azure](https://azure.microsoft.com/), z użyciem [OpenTofu](https://opentofu.org/). Pokażę Ci kilka modeli, z którymi spotkałem się w praktyce – wraz z ich zaletami i ograniczeniami.
+Zacznijmy od przeglądu podejść do organizowania infrastruktury jako kod w [Microsoft Azure](https://azure.microsoft.com/), z użyciem [OpenTofu](https://opentofu.org/). Pokażę Ci kilka modeli, z którymi spotkałem się w praktyce: wraz z ich zaletami i ograniczeniami.
 
 Po tej sekcji przedstawię podejście, które sam wybrałem do tworzenia infrastruktury jako kod w moich projektach.
 
@@ -58,7 +58,7 @@ W przykładach celowo nie używam `for_each` ani `count`. Chcę, aby skupiały s
 ### Monorepo
 
 <!-- 1. Opis -->
-W tym podejściu cała infrastruktura jako kod znajduje się w jednym repozytorium. Najczęściej jest ona podzielona na środowiska, na przykład `dev` (1️⃣) i `prod` (2️⃣), a w nich na katalogi, takie jak `databases` (3️⃣) czy `network` (4️⃣), w których definiuje się zasoby (`resource`) i/lub moduły (`module`). Pliki stanu zawierają wiele elementów, co z czasem utrudnia ich utrzymanie.
+W tym podejściu cała infrastruktura jako kod znajduje się w jednym repozytorium. Najczęściej jest ona podzielona na środowiska (na przykład `dev` (1️⃣) i `prod` (2️⃣)), a w nich na katalogi, takie jak `databases` (3️⃣) czy `network` (4️⃣), w których definiuje się zasoby (`resource`) i/lub moduły (`module`). Pliki stanu zawierają wiele elementów, co z czasem utrudnia ich utrzymanie.
 
 <!-- 2. Przykładowa struktura -->
 Przykładowa struktura repozytorium w takim podejściu może wyglądać tak:
@@ -242,13 +242,13 @@ Moim zdaniem: _dla bardzo małych zespołów i niewielkiej infrastruktury to roz
 ### Repo per usługa + repo per module
 
 <!-- 1. Opis -->
-To podejście jest przeciwieństwem monorepo. Przypomina to architekturę mikroserwisów: każda część jest izolowana i zarządzana osobno. Każde repozytorium odpowiada za konkretną usługę lub obszar infrastruktury — np. `tofu-networking` dla sieci, `tofu-databases` dla warstwy danych (1️⃣). Wewnątrz każdego z nich znajdują się katalogi środowiskowe — np. `dev` (2️⃣) i `prod` (3️⃣).
+To podejście jest przeciwieństwem monorepo. Przypomina to architekturę mikroserwisów: każda część jest izolowana i zarządzana osobno. Każde repozytorium odpowiada za konkretną usługę lub obszar infrastruktury (np. `tofu-networking` dla sieci, `tofu-databases` dla warstwy danych (1️⃣)). Wewnątrz każdego z nich znajdują się katalogi środowiskowe (np. `dev` (2️⃣) i `prod` (3️⃣)).
 
-Repozytoria zawierają wywołania modułów, natomiast sama logika tworzenia zasobów znajduje się w osobnych repozytoriach z modułami — np. [terraform-azurerm-avm-res-resources-resourcegroup](https://github.com/Azure/terraform-azurerm-avm-res-resources-resourcegroup) z [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) lub w prywatnym rejestrze w Twojej organizacji. Moduły mogą być wywoływane z rejestru (po wersji) lub bezpośrednio z repozytorium (po commicie lub tagu), zgodnie z [dokumentacją OpenTofu](https://opentofu.org/docs/language/modules/sources/).
+Repozytoria zawierają wywołania modułów, natomiast sama logika tworzenia zasobów znajduje się w osobnych repozytoriach z modułami (np. [terraform-azurerm-avm-res-resources-resourcegroup](https://github.com/Azure/terraform-azurerm-avm-res-resources-resourcegroup) z [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) lub w prywatnym rejestrze w Twojej organizacji). Moduły mogą być wywoływane z rejestru (po wersji) lub bezpośrednio z repozytorium (po commicie lub tagu), zgodnie z [dokumentacją OpenTofu](https://opentofu.org/docs/language/modules/sources/).
 
-Można też trzymać moduły lokalnie — w katalogu `modules` wewnątrz repozytorium usługi. Warto jednak pamiętać o ich ograniczeniach opisanych wcześniej.
+Można też trzymać moduły lokalnie w katalogu `modules` wewnątrz repozytorium usługi. Warto jednak pamiętać o ich ograniczeniach opisanych wcześniej.
 
-Chociaż same repozytoria są mniejsze, pliki stanu często obejmują wiele zasobów — co z czasem może utrudniać utrzymanie.
+Chociaż same repozytoria są mniejsze, pliki stanu często obejmują wiele zasobów, co z czasem może utrudniać utrzymanie.
 
 <!-- 2. Przykładowa struktura -->
 Przykładowa struktura repozytorium dla warstwy baz danych:
@@ -306,13 +306,13 @@ module "shipping_db" {
 ```
 
 <!-- 3. Dodawanie zasobu -->
-Dodawanie nowych zasobów przez moduły jest szybkie. Mniejsze repozytoria ograniczają konflikty i blokowanie pracy — typowe problemy dużego monorepo.
+Dodawanie nowych zasobów przez moduły jest szybkie. Mniejsze repozytoria ograniczają konflikty i blokowanie pracy: typowe problemy dużego monorepo.
 
 <!-- 4. Onboarding środowiska -->
 Trzeba jednak pamiętać, że duża liczba repozytoriów dedykowanych konkretnym usługom może być uciążliwa przy tworzeniu nowych środowisk. W takim przypadku w każdym z tych repozytoriów trzeba utworzyć pull request z dodaniem nowego folderu środowiska.
 
 <!-- 5. Zmiany w logice -->
-Zmiany w module nie wpływają bezpośrednio na kod repozytorium usługi, co upraszcza rozwój i testowanie. Trzeba jednak uważać na zależności — jeśli moduł A udostępnia outputy wykorzystywane przez moduł B, zmiana outputów wymaga odświeżenia stanu modułu zależnego.
+Zmiany w module nie wpływają bezpośrednio na kod repozytorium usługi, co upraszcza rozwój i testowanie. Trzeba jednak uważać na zależności: jeśli moduł A udostępnia outputy wykorzystywane przez moduł B, zmiana outputów wymaga odświeżenia stanu modułu zależnego.
 
 Warto zadbać o CI/CD dla modułów, co przyspiesza ich rozwój i poprawia jakość.
 
@@ -340,9 +340,9 @@ Moim zdaniem: _dla większych zespołów i bardziej rozbudowanej infrastruktury,
 ### Monorepo + repo per module
 
 <!-- 1. Opis -->
-Podejście łączące centralizację root modułów z wersjonowaniem logiki infrastruktury w osobnych repozytoriach modułów. Root moduły, zawierające pliki stanu, znajdują się w jednym repozytorium. Typowo struktura jest podzielona według środowisk (`dev` (1️⃣), `prod` (2️⃣), itd.). Wewnątrz każdego z nich znajdują się katalogi definiujące obszary infrastruktury - np. `databases` (3️⃣) i `network` (4️⃣).
+Podejście łączące centralizację root modułów z wersjonowaniem logiki infrastruktury w osobnych repozytoriach modułów. Root moduły (zawierające pliki stanu) znajdują się w jednym repozytorium. Typowo struktura jest podzielona według środowisk (`dev` (1️⃣), `prod` (2️⃣), itd.). Wewnątrz każdego z nich znajdują się katalogi definiujące obszary infrastruktury (np. `databases` (3️⃣) i `network` (4️⃣)).
 
-Moduły infrastrukturalne umieszczone są w osobnych repozytoriach – jak w poprzednim podejściu – i mogą być wywoływane ze zdalnego rejestru (z określoną wersją) lub bezpośrednio z repozytorium (poprzez commit lub tag).
+Moduły infrastrukturalne umieszczone są w osobnych repozytoriach (jak w poprzednim podejściu) i mogą być wywoływane ze zdalnego rejestru (z określoną wersją) lub bezpośrednio z repozytorium (poprzez commit lub tag).
 
 Dzięki centralizacji plików stanu, koordynacja wdrożeń między zespołami jest łatwiejsza. Jednak pliki stanu nadal często obejmują wiele zasobów, co może utrudniać niezależny rozwój i testowanie.
 
@@ -413,7 +413,7 @@ module "shipping_db" {
 Dodawanie kolejnych zasobów, podobnie jak w monorepo z lokalnymi modułami, polega zazwyczaj na ponownym wywołaniu istniejącego modułu. Dzięki modularności unika się powielania logiki.
 
 <!-- 4. Onboarding środowiska -->
-Dodanie nowego środowiska polega na utworzeniu folderu w strukturze katalogów oraz inicjalizacji backendu stanu. Dzięki centralizacji wszystko znajduje się w jednym repozytorium, co przyspiesza onboarding — o ile struktura katalogów jest dobrze zorganizowana.
+Dodanie nowego środowiska polega na utworzeniu folderu w strukturze katalogów oraz inicjalizacji backendu stanu. Dzięki centralizacji wszystko znajduje się w jednym repozytorium, co przyspiesza onboarding (o ile struktura katalogów jest dobrze zorganizowana).
 
 <!-- 5. Zmiany w logice -->
 Zmiany w module wymagają utworzenia nowej wersji (np. 1.1.0) i jej wdrożenia w konkretnym katalogu środowiskowym. Dzięki temu dodawanie nowych funkcjonalności lub przeprowadzanie refaktoryzacji jest proste do zrobienia. Należy jednak pamiętać o CI/CD dla modułów, które ułatwią dostarczanie.
@@ -508,7 +508,7 @@ Poniższy diagram radarowy wizualizuje kluczowe cechy każdego podejścia, ułat
 ## Jak ja projektuję IaC w Azure
 
 
-Po omówieniu różnych strategii organizacji infrastruktury jako kodu, czas pokazać strukturę wykorzystywaną przeze mnie — skalowalną, modularną i zgodną z [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/). Bazuje ona na podejściu [Monorepo + repo per module](#monorepo--repo-per-module), ale została wzbogacona o kilka istotnych niuansów.
+Po omówieniu różnych strategii organizacji infrastruktury jako kodu, czas pokazać strukturę wykorzystywaną przeze mnie: skalowalną, modularną i zgodną z [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/). Bazuje ona na podejściu [Monorepo + repo per module](#monorepo--repo-per-module), ale została wzbogacona o kilka istotnych niuansów.
 
 Całość dzieli się na dwie części:
 
@@ -519,7 +519,7 @@ W kolejnych sekcjach opisuję szczegółowo każdą z nich.
 
 ### Core: `organization-template`
 
-Część monorepo nazywam [organization-template](https://github.com/infra-at-scale/organization-template) i traktuję jako solidny punkt wyjścia dla każdej organizacji — niezależnie od skali czy złożoności. Znajdziesz tam gotowy do użycia kod [OpenTofu](https://opentofu.org/) oparty o [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/), który pomoże Ci stworzyć fundamenty dla Twojej organizacji w [Microsoft Azure](https://azure.microsoft.com/).
+Część monorepo nazywam [organization-template](https://github.com/infra-at-scale/organization-template) i traktuję jako solidny punkt wyjścia dla każdej organizacji, niezależnie od skali czy złożoności. Znajdziesz tam gotowy do użycia kod [OpenTofu](https://opentofu.org/) oparty o [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/), który pomoże Ci stworzyć fundamenty dla Twojej organizacji w [Microsoft Azure](https://azure.microsoft.com/).
 
 #### Zawartość
 
@@ -550,7 +550,7 @@ Na przykład:
 
 Jeżeli dwa lub więcej katalogów mają ten sam numer, na przykład [04-backupvaults](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-backupvaults) i [04-networking-nsgs](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/04-networking-nsgs) mogą być wykonywane równolegle, ponieważ nie mają między sobą zależności.
 
-Dzięki tej konwencji nazewniczej w głównym katalogu od razu wiadomo, jaka jest kolejność wykonywania. Taka numeracja i struktura katalogów pozwala z jednej strony jasno odczytać kolejność, a z drugiej — umożliwia równoległe wykonywanie części modułów, co skraca czas wdrożeń.
+Dzięki tej konwencji nazewniczej w głównym katalogu od razu wiadomo, jaka jest kolejność wykonywania. Taka numeracja i struktura katalogów pozwala z jednej strony jasno odczytać kolejność, a z drugiej umożliwia równoległe wykonywanie części modułów, co skraca czas wdrożeń.
 
 W przypadku rozbudowy o kolejne obszary dodaje się nowy katalog z odpowiednią numeracją, w razie potrzeby zmieniając istniejącą numerację. Jeżeli poszczególne obszary nie są od siebie zależne mogą być umieszczane na tym samym poziomie poprzez dodanie tego samego numeru.
 
@@ -569,9 +569,9 @@ Każdy obszar infrastruktury ma odpowiednią hierarchię:
 
 Na przykład:
 
-* [02-iam-applications/github-actions](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/02-iam-applications/github-actions) – aplikacje w [Microsoft Entra ID](https://www.microsoft.com/security/business/microsoft-entra) nie są przypisane do [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) ani [Resource Group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) dlatego oba parametry są pominięte.
-* [03-resourcegroups/your-subscription/rg-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups/your-subscription/rg-default-eastus) – ponieważ [Resource Group'a](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) `rg-default-eastus` należy do [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) `dev`, tylko `${optional-subscription-name}` jest zdefiniowane.
-* [05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus) – ponieważ [Azure Virtual Network](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) `vnet-default-eastus` należy do [Resource Group'y](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) `dev`, która z kolei należy do [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) `dev`, zdefiniowane są zarówno `${optional-resources-group-name}`, jak i `${optional-subscription-name}`.
+* [02-iam-applications/github-actions](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/02-iam-applications/github-actions): aplikacje w [Microsoft Entra ID](https://www.microsoft.com/security/business/microsoft-entra) nie są przypisane do [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) ani [Resource Group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) dlatego oba parametry są pominięte.
+* [03-resourcegroups/your-subscription/rg-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/03-resourcegroups/your-subscription/rg-default-eastus): ponieważ [Resource Group'a](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) `rg-default-eastus` należy do [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) `dev`, tylko `${optional-subscription-name}` jest zdefiniowane.
+* [05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus](https://github.com/infra-at-scale/organization-template/tree/v1.0.0/05-networking-vnets/your-subscription/rg-default-eastus/vnet-default-eastus): ponieważ [Azure Virtual Network](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) `vnet-default-eastus` należy do [Resource Group'y](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#what-is-a-resource-group) `dev`, która z kolei należy do [Subscription](https://learn.microsoft.com/en-us/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants-for-microsoft-cloud-offerings?view=o365-worldwide#subscriptions) `dev`, zdefiniowane są zarówno `${optional-resources-group-name}`, jak i `${optional-subscription-name}`.
 
 Hierarchia ta nawiązuje do konwencji nazewniczej zasobów w [Microsoft Azure](https://azure.microsoft.com/). Na przykład:
 
@@ -598,9 +598,9 @@ terraform {
 
 #### Zawartość root modułu
 
-Root moduł to katalog, który inicjuje backend stanu (`terraform` block) i zarządza konkretnym zestawem zasobów. Typowo zawiera on pliki takie jak:
+Root moduł to katalog, który inicjuje backend stanu (blok `terraform`) i zarządza konkretnym zestawem zasobów. Typowo zawiera on pliki takie jak:
 
-* `data.tf` – data lookups oraz wykorzystanie remote states z innych root modułów.
+* `data.tf` - data lookups oraz wykorzystanie remote states z innych root modułów.
 * `locals.tf` - powtarzalne wartości są definiowane tutaj.
 * `main.tf` - wywołanie modułów i/lub tworzenie zasobów.
 * `outputs.tf` - zwracanie wartości potrzebne w innych root modułach.
@@ -724,17 +724,17 @@ Dla przypomnienia, katalogi o tym samym numerze (np. [04-backupvaults](https://g
 
 #### Rozbudowa infrastruktury
 
-Projekt [organization-template](https://github.com/infra-at-scale/organization-template) został celowo zaprojektowany jako niewielki i zwięzły — stanowi fundament, który można bezpiecznie rozbudowywać. W przypadku chęci dodawania kolejnych obszarów infrastruktury zachęcam Cię do podążania za konwencją nazewniczą, tworzenia niedużych stanów, używania [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) tam, gdzie to możliwe oraz przekazywania wartości z jednego modułu do drugiego przy pomocy outputów i remote state.
+Projekt [organization-template](https://github.com/infra-at-scale/organization-template) został celowo zaprojektowany jako niewielki i zwięzły: stanowi fundament, który można bezpiecznie rozbudowywać. W przypadku chęci dodawania kolejnych obszarów infrastruktury zachęcam Cię do podążania za konwencją nazewniczą, tworzenia niedużych stanów, używania [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) tam, gdzie to możliwe oraz przekazywania wartości z jednego modułu do drugiego przy pomocy outputów i remote state.
 
 ### Infrastruktura aplikacji
 
 Przeglądając [organization-template](https://github.com/infra-at-scale/organization-template) może pojawić się pytanie: _gdzie umieścić infrastrukturę aplikacji?_ Na przykład maszynę wirtualną, [Storage Account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview), bazę danych, [Azure Function](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview). Te wszystkie komponenty w podejściu, które preferuję są utrzymywane razem z kodem aplikacji.
 
-Dzięki temu zespół aplikacyjny samodzielnie zarządza swoją infrastrukturą — we wspólnym repozytorium i cyklu życia, obok kodu aplikacji. To skraca czas dostarczania i minimalizuje zależności od zespołu platformowego.
+Dzięki temu zespół aplikacyjny samodzielnie zarządza swoją infrastrukturą we wspólnym repozytorium i cyklu życia, obok kodu aplikacji. To skraca czas dostarczania i minimalizuje zależności od zespołu platformowego.
 
 <!-- 1. Opis -->
 
-W tym podejściu w głównym folderze repozytorium znajduje się katalog `infra` (1️⃣), który zawiera podkatalogi ze środowiskami, gdzie aplikacja jest (lub może być zdeployowana). Na przykład `dev` (2️⃣) i `prod` (3️⃣). Kod aplikacji znajduje się natomiast w katalogu `src` lub innym zgodnym z Twoją konwencją lub konwencją danego języka programowania.
+W tym podejściu w głównym folderze repozytorium znajduje się katalog `infra` (1️⃣), który zawiera podkatalogi ze środowiskami, gdzie aplikacja jest (lub może być zdeployowana), na przykład `dev` (2️⃣) i `prod` (3️⃣). Kod aplikacji znajduje się natomiast w katalogu `src` lub innym zgodnym z Twoją konwencją lub konwencją danego języka programowania.
 
 <!-- 2. Przykładowa struktura -->
 Przykładowa struktura w takim przypadku wygląda, jak poniżej:
@@ -766,7 +766,7 @@ Dodawanie nowego środowiska wymaga stworzenia nowego folderu w katalogu `infra`
 Jeżeli jest potrzeba zmian w logice, tworzy się nową wersję modułu, a następnie wdraża się ją stopniowo do wszystkich środowisk. Tak samo, jak w podejściach [repo per usługa + repo per module](#repo-per-usługa--repo-per-module) albo [monorepo + repo per module](#monorepo--repo-per-module).
 
 <!-- 6. Utrzymanie -->
-Utrzymanie również przypomina poprzednie podejścia — aktualizacje wersji modułów lub providerów są wykonywane bezpośrednio w katalogach środowisk.
+Utrzymanie również przypomina poprzednie podejścia: aktualizacje wersji modułów lub providerów są wykonywane bezpośrednio w katalogach środowisk.
 
 {{< admonition tip "Chcesz więcej?" >}}
 Żeby dowiedzieć się więcej o tych modułach oraz o rejestrze zapraszam Cię do kolejnego artykułu z tej serii: **Zbuduj elastyczne moduły infrastruktury oraz ich rejestr**.
@@ -774,9 +774,9 @@ Utrzymanie również przypomina poprzednie podejścia — aktualizacje wersji mo
 
 #### Gdy `organization-template` wystarczy
 
-W niektórych przypadkach oddzielenie głównej infrastruktury od infrastruktury aplikacyjnej nie jest konieczne — ani optymalne. Dotyczy to zwłaszcza organizacji, które rozwijają jedną, monolityczną aplikację wdrażaną na kilku środowiskach (np. `dev`, `test`, `prod`), lub takich, gdzie zespoły aplikacyjne nie czują się swobodnie w pracy z kodem infrastruktury.
+W niektórych przypadkach oddzielenie głównej infrastruktury od infrastruktury aplikacyjnej nie jest konieczne ani optymalne. Dotyczy to zwłaszcza organizacji, które rozwijają jedną, monolityczną aplikację wdrażaną na kilku środowiskach (np. `dev`, `test`, `prod`) lub takich, gdzie zespoły aplikacyjne nie czują się swobodnie w pracy z kodem infrastruktury.
 
-W takich sytuacjach bardziej praktycznym i skalowalnym podejściem może być trzymanie całej infrastruktury — zarówno platformowej, jak i aplikacyjnej — w jednym repozytorium. Upraszcza to zarządzanie, przyspiesza wdrożenia i zmniejsza próg wejścia dla zespołu.
+W takich sytuacjach bardziej praktycznym i skalowalnym podejściem może być trzymanie całej infrastruktury (zarówno platformowej, jak i aplikacyjnej) w jednym repozytorium. Upraszcza to zarządzanie, przyspiesza wdrożenia i zmniejsza próg wejścia dla zespołu.
 
 ### Porównanie
 
@@ -850,16 +850,16 @@ Poniższy diagram radarowy ilustruje te różnice w sposób wizualny.
 
 ## Podsumowanie
 
-W tym wpisie poznałeś różne podejścia do organizowania infrastruktury jako kod na platformie [Microsoft Azure](https://azure.microsoft.com/) przy użyciu [OpenTofu](https://opentofu.org/). Od prostego monorepo, przez lokalne moduły, aż po wersjonowane moduły i repozytoria per usługa — każde z nich ma swoje zalety i ograniczenia. Nie istnieje rozwiązanie uniwersalne. Wybór zależy od potrzeb zespołu, skali organizacji i sposobu pracy.
+W tym wpisie poznałeś różne podejścia do organizowania infrastruktury jako kod na platformie [Microsoft Azure](https://azure.microsoft.com/) przy użyciu [OpenTofu](https://opentofu.org/). Od prostego monorepo, przez lokalne moduły, aż po wersjonowane moduły i repozytoria per usługa: każde z nich ma swoje zalety i ograniczenia. Nie istnieje rozwiązanie uniwersalne. Wybór zależy od potrzeb zespołu, skali organizacji i sposobu pracy.
 
-Pokazałem Ci też, jak sam podchodzę do tego tematu: używam [organization-template](https://github.com/infra-at-scale/organization-template) jako fundamentu, a infrastrukturę aplikacyjną trzymam bezpośrednio w repozytorium aplikacji. To połączenie daje skalowalność, przejrzystość i prostsze utrzymanie — bez odbierania zespołom aplikacyjnym autonomii.
+Pokazałem Ci też, jak sam podchodzę do tego tematu: używam [organization-template](https://github.com/infra-at-scale/organization-template) jako fundamentu, a infrastrukturę aplikacyjną trzymam bezpośrednio w repozytorium aplikacji. To połączenie daje skalowalność, przejrzystość i prostsze utrzymanie bez odbierania zespołom aplikacyjnym autonomii.
 
 To jednak dopiero początek. W kolejnej części tej serii pokażę, jak tworzę wersjonowane moduły zgodne z [AVM](https://azure.github.io/Azure-Verified-Modules/) oraz jak buduję lekki rejestr, który upraszcza współdzielenie i rozwój infrastruktury między zespołami.
 
 {{< admonition example "Co dalej?" >}}
 Spodobał Ci się koncept [`organization-template`](https://github.com/infra-at-scale/organization-template)?
 
-👉 Skorzystaj z przycisku **[Use this template](https://github.com/new?template_name=organization-template&template_owner=infra-at-scale)** albo zrób [forka](https://github.com/infra-at-scale/organization-template/fork) — i sprawdź, jak ten szkielet zadziała w Twojej organizacji.
+👉 Skorzystaj z przycisku **[Use this template](https://github.com/new?template_name=organization-template&template_owner=infra-at-scale)** albo zrób [forka](https://github.com/infra-at-scale/organization-template/fork) i sprawdź, jak ten szkielet zadziała w Twojej organizacji.
 
 Masz pomysł na rozwój?
 
