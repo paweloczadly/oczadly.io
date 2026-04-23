@@ -125,7 +125,7 @@ Plugin wspiera także eksperymentalny tryb interaktywny wzorowany na komendzie `
 Dzięki temu możesz wprowadzić wszystkie parametry projektu bez konieczności zapamiętywania flag wiersza poleceń - plugin przeprowadza go krok po kroku przez proces wyboru wersji [Spring Boot](https://spring.io/projects/spring-boot), języka, typu projektu i zależności. To szczególnie przydatne dla nowych członków zespołu lub w sytuacjach, gdy chcemy szybko przygotować projekt w standardzie naszej organizacji.
 
 {{< admonition warning "UWAGA" >}}
-Tryb interaktywny jest wciąż eksperymentalny — świetny do nauki i szybkiego startu. W pipeline’ach CI/CD rekomenduję jawne flagi -P.
+Tryb interaktywny jest wciąż eksperymentalny: świetny do nauki i szybkiego startu. W pipeline'ach CI/CD rekomenduję jawne flagi -P.
 {{< /admonition >}}
 
 Aby skorzystać z trybu interaktywnego, należy podążać za instrukcjami z [FAQ](https://github.com/paweloczadly/gradle-springinitializr-plugin/blob/v1.0.0/FAQ.md#is-interactive-mode-supported).

@@ -13,11 +13,11 @@ resources:
 
 ## Why yet another Gradle plugin
 
-Recently, I wanted to deepen my understanding of [Build Scans](https://docs.gradle.org/9.0.0/userguide/build_scans.html), [Develocity](https://gradle.com/develocity/), and their practical applications, so I started going through the courses on our [DPE University](https://dpeuniversity.gradle.com/app/catalog) platform. In my daily work, I interact with [Develocity](https://gradle.com/develocity/) from the operational and production side — maintaining [open-source instances](https://github.com/gradle/develocity-oss-projects) among other things — so I wanted to better understand the product, especially from the end-user perspective, to support my daily engineering work.
+Recently, I wanted to deepen my understanding of [Build Scans](https://docs.gradle.org/9.0.0/userguide/build_scans.html), [Develocity](https://gradle.com/develocity/), and their practical applications, so I started going through the courses on our [DPE University](https://dpeuniversity.gradle.com/app/catalog) platform. In my daily work, I interact with [Develocity](https://gradle.com/develocity/) from the operational and production side (maintaining [open-source instances](https://github.com/gradle/develocity-oss-projects) among other things), so I wanted to better understand the product, especially from the end-user perspective, to support my daily engineering work.
 
 To systematize what I was learning, I decided to build a project that aligns with the best practices discussed in these courses. At the same time, I was working on a [Spring Boot](https://spring.io/projects/spring-boot) microservice generated via [Spring Initializr](https://start.spring.io) and noticed there was no [Gradle plugin](https://docs.gradle.org/9.0.0/userguide/plugins.html) that would automate this process in a way that is build cache-friendly and CI/CD-friendly.
 
-That’s how the [gradle-springinitializr-plugin](https://plugins.gradle.org/plugin/io.oczadly.springinitializr) was born—a production-ready tool that simplifies bootstrapping [Spring Boot](https://spring.io/projects/spring-boot) projects directly from [Gradle](https://gradle.org/). This post covers how it was built, how it works, and how you can use it to speed up starting new projects within your team.
+That's how the [gradle-springinitializr-plugin](https://plugins.gradle.org/plugin/io.oczadly.springinitializr) was born: a production-ready tool that simplifies bootstrapping [Spring Boot](https://spring.io/projects/spring-boot) projects directly from [Gradle](https://gradle.org/). This post covers how it was built, how it works, and how you can use it to speed up starting new projects within your team.
 
 {{< admonition example "Quick start" >}}
 The plugin is open-source and available on the [Gradle - Plugins](https://plugins.gradle.org/plugin/io.oczadly.springinitializr). You can install and start using it right away.
@@ -126,7 +126,7 @@ The plugin also supports an experimental interactive mode inspired by `gradle in
 This allows you to enter all project parameters without remembering command line flags – the plugin guides you step by step through choosing [Spring Boot](https://spring.io/projects/spring-boot) version, language, project type, and dependencies. It’s particularly useful for new team members or when you want to quickly prepare a project aligned with your organization’s standards.
 
 {{< admonition warning "WARNING" >}}
-Interactive mode is still experimental — great for learning and quick start. In CI/CD pipelines I recommend explicit -P flags.
+Interactive mode is still experimental: great for learning and quick start. In CI/CD pipelines I recommend explicit -P flags.
 {{< /admonition >}}
 
 To use interactive mode, follow the instructions in the [FAQ](https://github.com/paweloczadly/gradle-springinitializr-plugin/blob/v1.0.0/FAQ.md#is-interactive-mode-supported).
@@ -233,7 +233,7 @@ See [official Gradle documentation on configuration cache](https://docs.gradle.o
 
 ### `-P` parameters and validation mechanism
 
-The plugin accepts all parameters available at https://start.spring.io — the same ones you can set in the web UI of [Spring Initializr](https://start.spring.io).
+The plugin accepts all parameters available at https://start.spring.io, the same ones you can set in the web UI of [Spring Initializr](https://start.spring.io).
 
 After users set parameters or default values are assigned, validation is performed inside the `initSpringBootProject` task. At the beginning, the task fetches the list of supported [Spring Boot](https://spring.io/projects/spring-boot) versions, project types, and languages from the [Metadata endpoint](https://docs.spring.io/initializr/docs/current/reference/html/#project-metadata). If a user provides an invalid parameter value that is not supported, the task will fail. For example:
 
@@ -265,12 +265,12 @@ BUILD FAILED in 5s
 
 Based on the [Gradle Build Caching path](https://dpeuniversity.gradle.com/app/learning_paths/b82f8dd7-d61e-450f-820e-3e719ef70bee) at [DPE University](https://dpeuniversity.gradle.com/app/catalog) and the knowledge gained there, the plugin was given support for [incremental build](https://docs.gradle.org/9.0.0/userguide/incremental_build.html) and [Build Cache](https://docs.gradle.org/9.0.0/userguide/build_cache.html). Thanks to this, subsequent executions are instant, and results can be reused.
 
-The `initSpringBootProject` task declares both inputs (`@Input`) and outputs (`@OutputDirectory` — in this case `outputDir`, tied to a `DirectoryProperty`). This is aligned with the definition of a correctly configured task in [Gradle](https://gradle.org), described here.
+The `initSpringBootProject` task declares both inputs (`@Input`) and outputs (`@OutputDirectory`, in this case `outputDir`, tied to a `DirectoryProperty`). This is aligned with the definition of a correctly configured task in [Gradle](https://gradle.org), described here.
 
 Thanks to this, [Gradle](https://gradle.org) has full control over tracking the state of inputs and outputs, which enables:
 
-* Skipping the task (`UP-TO-DATE`) if the outputs have not changed — incremental build.
-* Restoring results (`FROM-CACHE`) if outputs exist in the local cache — build cache.
+* Skipping the task (`UP-TO-DATE`) if the outputs have not changed: incremental build.
+* Restoring results (`FROM-CACHE`) if outputs exist in the local cache: build cache.
 
 Below is an example of how the task behaves in both cases.
 
@@ -389,7 +389,7 @@ type=org.gradle.api.internal.tasks.execution.TaskExecution
 gradleVersion=8.14
 ```
 
-In the `tree-outputDir/` folder there is the archived `starter.zip` file and the project folder — exactly what was previously downloaded from [Spring Initializr](https://start.spring.io) and saved as the task’s outputs.
+In the `tree-outputDir/` folder there is the archived `starter.zip` file and the project folder, exactly what was previously downloaded from [Spring Initializr](https://start.spring.io) and saved as the task's outputs.
 {{< /admonition >}}
 
 For more on incremental build and Build Cache, see the official documentation:
@@ -488,9 +488,9 @@ After the CI process described above, when a commit lands in `main`, [GitHub Act
 
 ## Summary
 
-While building [gradle-springinitializr-plugin](https://plugins.gradle.org/plugin/io.oczadly.springinitializr), I not only enjoyed recreating `gradle init` for [Spring Boot](https://spring.io/projects/spring-boot), going through [DPE University](https://dpeuniversity.gradle.com/app/catalog) courses, exploring the [Spring Initializr](https://start.spring.io) API, [Gradle best practices](https://docs.gradle.org/9.0.0/userguide/best_practices_general.html), [Spock](https://spockframework.org/spock/docs/1.0/spock_primer.html) and [Groovy](https://groovy-lang.org/style-guide.html). I am also fully satisfied with the final result. This is not just another sample plugin. It is a tool **ready to use** locally and as part of a platform — built consciously, solidly, and following the best patterns.
+While building [gradle-springinitializr-plugin](https://plugins.gradle.org/plugin/io.oczadly.springinitializr), I not only enjoyed recreating `gradle init` for [Spring Boot](https://spring.io/projects/spring-boot), going through [DPE University](https://dpeuniversity.gradle.com/app/catalog) courses, exploring the [Spring Initializr](https://start.spring.io) API, [Gradle best practices](https://docs.gradle.org/9.0.0/userguide/best_practices_general.html), [Spock](https://spockframework.org/spock/docs/1.0/spock_primer.html) and [Groovy](https://groovy-lang.org/style-guide.html). I am also fully satisfied with the final result. This is not just another sample plugin. It is a tool **ready to use** locally and as part of a platform (built consciously, solidly, and following the best patterns).
 
-For Platform Engineers it’s a ready-to-use asset for the platform, for Software Engineers – a quick start in daily work, and for explorers – a practical reference for building Gradle plugins.
+For Platform Engineers it's a ready-to-use asset for the platform, for Software Engineers: a quick start in daily work, and for explorers: a practical reference for building Gradle plugins.
 
 {{< admonition example "What’s next?" >}}
 Interested in contributing to the plugin?
