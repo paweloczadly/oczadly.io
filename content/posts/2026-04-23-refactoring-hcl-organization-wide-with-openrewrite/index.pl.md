@@ -17,6 +17,8 @@ W teorii są to _"proste"_ zmiany: zmiana wersji, usunięcie parametru, dodanie 
 
 W tym artykule pokazuję, jak podejść do migracji infrastruktury jako kod w sposób deterministyczny, powtarzalny i bezpieczny, wykorzystując refaktoryzację opartą o strukturalną analizę konfiguracji, zachowującą jej semantykę i formatowanie. Na przykładzie rzeczywistych migracji modułów [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) (AVM) pokazuję, jak przygotować zmiany, które trafiają do pull requesta jako czytelny diff zamiast ręcznej pracy rozproszonej po repozytorium.
 
+---
+
 ## Dlaczego OpenRewrite
 
 Kluczową różnicą pomiędzy podejściem opartym o refaktoryzację strukturalną a klasycznymi narzędziami tekstowymi jest to, że operujemy na **semantycznej reprezentacji konfiguracji**, a nie na jej surowej postaci tekstowej. [OpenRewrite](https://docs.openrewrite.org/) wykorzystuje tzw. _lossless semantic trees (LST)_, czyli strukturę, która zachowuje pełną informację o oryginalnym pliku, w tym formatowanie, komentarze i kolejność elementów, jednocześnie umożliwiając bezpieczne modyfikacje semantyczne.
@@ -32,6 +34,8 @@ Warto też zauważyć, że to podejście nie jest ograniczone do HCL ani [OpenTo
 Oznacza to, że ten sam model pracy, czyli jawne recipes, deterministyczne wykonanie i pull request jako wynik, może być zastosowany również do migracji manifestów Kubernetesowych, zmian API czy refaktoryzacji konfiguracji GitOps. To temat na osobne case study.
 
 {{< /admonition >}}
+
+---
 
 ## Case study
 
@@ -247,9 +251,9 @@ Jak widać powyżej, zmiany dotyczą trzech plików:
 
 To, co robisz dla jednej Private DNS Zone, możesz odtworzyć dla dziesięciu. Ta sama recipe i parametry zawsze dają ten sam efekt. Bez skryptów, bez ręcznych poprawek, bez ryzyka, że coś przeoczyłeś.
 
----
-
 Na tym etapie migracja jest gotowa do uruchomienia przez taska `rewriteRun` i zatwierdzenia w standardowym procesie code review jako zwykły pull request, bez dodatkowych skryptów, wyjątków czy ręcznych poprawek.
+
+---
 
 ## Architektura rozwiązania
 
@@ -282,6 +286,8 @@ W praktyce YAML recipes pełnią rolę warstwy decyzyjnej (_"policy layer"_). Po
 Aby uczynić te migracje powtarzalnymi, wykorzystuję [Gradle](https://gradle.org/) jako silnik wykonawczy. Odpowiada on za uruchamianie recipes [OpenRewrite](https://docs.openrewrite.org/), zapewnia spójność wykonania i umożliwia łatwe odtworzenie tego samego procesu lokalnie oraz w CI.
 
 W organizacjach, które już korzystają z [Develocity](https://gradle.com/develocity/), ten sam workflow może publikować [Build Scan'y](https://docs.gradle.org/9.0.0/userguide/build_scans.html), co daje dodatkowe observability przebiegu migracji oraz możliwość porównywania wyników pomiędzy projektami, bez zmiany samego modelu wykonania.
+
+---
 
 ## Gwarancje bezpieczeństwa
 
@@ -331,6 +337,8 @@ Daje to przestrzeń na:
 
 Bezpieczeństwo przedstawionego podejścia nie opiera się na ręcznej kontroli ani ostrożności, lecz na **właściwościach systemu**: deterministyczności, idempotentności oraz jawności zmian. Dzięki temu migracje infrastruktury jako kod przestają być jednorazowym, ryzykownym wydarzeniem, a stają się powtarzalnym i kontrolowanym procesem.
 
+---
+
 ## Dlaczego to skaluje się w organizacji
 
 Opisane podejście skaluje się w organizacji nie dlatego, że wykorzystuje konkretne narzędzia, ale dlatego, że **adresuje problem na właściwym poziomie abstrakcji**. Migracje nie są tu traktowane jako jednorazowe zadania wykonywane ręcznie w poszczególnych repozytoriach, lecz jako **jawnie opisany proces**, który można wielokrotnie zastosować w różnych kontekstach.
@@ -345,6 +353,8 @@ Dzięki temu ta sama migracja może być zastosowana w wielu repozytoriach, uruc
 
 Co istotne, to podejście nie wymaga centralnego systemu, ani dedykowanej platformy. Wystarczają repozytoria Git oraz standardowy workflow pull requestów. To wszystko sprawia, że rozwiązanie dobrze wpisuje się w realia organizacji o różnym poziomie dojrzałości.
 
+---
+
 ## Kiedy to podejście nie ma sensu
 
 Opisane podejście nie będzie dobrym rozwiązaniem w sytuacji, gdy projekt infrastruktury jako kod jest niewielki, obejmuje pojedynczy moduł i nie planuje się jego dalszego rozwoju ani aktualizacji. W tym przypadku koszt wprowadzenia dodatkowego procesu może przewyższyć potencjalne korzyści.
@@ -352,6 +362,8 @@ Opisane podejście nie będzie dobrym rozwiązaniem w sytuacji, gdy projekt infr
 Podobnie, w sytuacjach wymagających jednorazowej, standardowej zmiany (np. tylko podbicia wersji w jednym miejscu), modyfikacja przez [Renovate](https://docs.renovatebot.com/) / inną automatyzację lub nawet ręczna może być prostszym i bardziej adekwatnym rozwiązaniem.
 
 Warto też podkreślić, że podejście to zakłada pewien poziom dojrzałości organizacyjnej: pracę z pull requestami, code review oraz gotowość do traktowania migracji jako elementu długofalowego utrzymania, a nie incydentalnej poprawki.
+
+---
 
 ## Podsumowanie
 
