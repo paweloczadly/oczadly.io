@@ -17,6 +17,8 @@ In theory, these are _"simple"_ updates: bumping a version, removing an input, a
 
 In this article, I show how to approach infrastructure-as-code migrations in a deterministic, repeatable, and safe way, using lossless, structure-aware refactoring rather than text-based transformations. Using real-world [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) (AVM) module migrations as examples, I demonstrate how to produce changes that land as clean, reviewable pull requests instead of manual edits scattered across a repository.
 
+---
+
 ## Why OpenRewrite
 
 The key difference between structural refactoring and traditional text-based tooling is that changes are applied to the **semantic structure of the configuration**, not to its raw textual representation. [OpenRewrite](https://docs.openrewrite.org/) is built around _lossless semantic trees (LST)_. It's a representation that preserves all information from the original source files, including formatting, comments, and ordering, while still allowing safe, semantic transformations.
@@ -32,6 +34,8 @@ It's also worth noting that this approach is not limited to HCL or [OpenTofu](ht
 This means the same workflow: explicit recipes, deterministic execution, and pull requests as output can be applied to [Kubernetes](https://kubernetes.io/) manifest migrations, API changes, or GitOps refactoring. This, however, deserves a separate case study.
 
 {{< /admonition >}}
+
+---
 
 ## Case study
 
@@ -248,9 +252,9 @@ As shown above, changes span three files:
 
 What you do for one Private DNS Zone, you can replicate for ten. The same recipe and parameters always yield the same result. Without scripts, without manual fixes, without the risk of missing something.
 
----
-
 At this point, the migration is ready for `rewriteRun` execution and can be approved in the standard code review process as a normal pull request, without additional scripts, exceptions, or manual fixes.
+
+---
 
 ## Architecture of the solution
 
@@ -283,6 +287,8 @@ In practice, YAML recipes form a __policy layer__, enabling repeatable, determin
 To make these migrations repeatable, I run them through a [Gradle](https://gradle.org/) based workflow. [Gradle](https://gradle.org/) acts as the execution engine: it resolves [OpenRewrite](https://docs.openrewrite.org/) recipes, applies them consistently across repositories, and produces deterministic results that can be validated locally or in CI.
 
 In environments where [Develocity](https://gradle.com/develocity/) is already in use, the same workflow can publish [Build Scans](https://docs.gradle.org/9.0.0/userguide/build_scans.html). This makes it easier to observe execution characteristics and compare results across repositories without requiring any changes to the underlying workflow.
+
+---
 
 ## Safety guarantees
 
@@ -320,6 +326,8 @@ Additionally, Java recipes are published to [Maven Central](https://central.sona
 
 Running migrations in `rewriteDryRun` mode, similarly to `tofu plan` / `terraform plan`, allows inspecting the full scope of planned changes without modifying code. This creates space to assess impact, catch unexpected effects, and make informed decisions before applying changes.
 
+---
+
 ## Why this scales across organizations
 
 This approach scales not because of the tools involved, but because it addresses the problem at the right level of abstraction. Migrations are treated not as one-off tasks performed manually in individual repositories, but as an explicitly described process that can be reused accross contexts.
@@ -332,6 +340,8 @@ Responsibilities are clearly separated:
 
 As a result, the same migration can be applied across many repositories, executed by different teams, and integrated into existing CI/CD and code review workflows without requiring a centralized platform.
 
+---
+
 ## When this approach does not make sense
 
 This approach is not a universal solution. For small IaC projects consisting of a single module with no planned evolution, the overhead of introducing an additional process may outweigh its benefits.
@@ -339,6 +349,8 @@ This approach is not a universal solution. For small IaC projects consisting of 
 Similarly, for one-off, trivial changes, such as bumping a version in a single place, tools like [Renovate](https://docs.renovatebot.com/) or even manual edits may be simpler and more appropriate.
 
 The approach also assumes a certain level of organizational maturity: working with pull requests, code review, and treating migrations as part of long-term maintenance rather than incidental fixes.
+
+---
 
 ## Summary
 
