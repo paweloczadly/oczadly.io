@@ -1,0 +1,57 @@
+{{- $mermaidBlocks := split .Inner "```mermaid" -}}
+{{- $matches := findRESubmatch "(?s)^(.*?)```mermaid[ \\t]*[\\r\\n]+(.*?)[\\r\\n]+```[ \\t]*[\\r\\n]*(.*)$" .Inner 1 -}}
+{{- if or (ne (len $mermaidBlocks) 2) (ne (len $matches) 1) -}}
+    {{- errorf "The %q shortcode in %s must contain exactly one fenced mermaid block" .Name .Position -}}
+{{- else -}}
+    {{- $match := index $matches 0 -}}
+    {{- $contentBeforeSource := trim (index $match 1) " \n\r\t" -}}
+    {{- $diagram := trim (index $match 2) " \n\r\t" -}}
+    {{- $contentAfterSource := trim (index $match 3) " \n\r\t" -}}
+    {{- $renderOptions := dict "display" "block" -}}
+    {{- $contentBefore := .Page.RenderString $renderOptions $contentBeforeSource -}}
+    {{- $contentAfter := .Page.RenderString $renderOptions $contentAfterSource -}}
+        {{- $count := .Page.Store.Get "admonitionMermaidCount" | default 1 -}}
+        {{- $id := printf "admonition-mermaid-%d" $count -}}
+        {{- .Page.Store.Set "admonitionMermaidCount" (add $count 1) -}}
+        {{- .Page.Store.SetInMap "admonitionMermaid" $id $diagram -}}
+
+        {{- $iconMap := dict "note" "fas fa-pencil-alt fa-fw" -}}
+        {{- $iconMap  = dict "abstract" "fas fa-list-ul fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "info" "fas fa-info-circle fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "tip" "fas fa-lightbulb fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "success" "fas fa-check-circle fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "question" "fas fa-question-circle fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "warning" "fas fa-exclamation-triangle fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "failure" "fas fa-times-circle fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "danger" "fas fa-skull-crossbones fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "bug" "fas fa-bug fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "example" "fas fa-list-ol fa-fw" | merge $iconMap -}}
+        {{- $iconMap  = dict "quote" "fas fa-quote-right fa-fw" | merge $iconMap -}}
+        {{- $iconDetails := "fas fa-angle-right fa-fw" -}}
+
+        {{- $type := "note" -}}
+        {{- $title := "" -}}
+        {{- $open := true -}}
+        {{- if .IsNamedParams -}}
+            {{- $type = .Get "type" | default "note" -}}
+            {{- $title = .Get "title" | default (T $type) -}}
+            {{- $open = .Get "open" | ne false -}}
+        {{- else -}}
+            {{- $type = .Get 0 | default "note" -}}
+            {{- $title = .Get 1 | default (T $type) -}}
+            {{- $open = .Get 2 | ne false -}}
+        {{- end -}}
+
+        <div class="details admonition admonition-mermaid {{ $type }}{{ if $open }} open{{ end }}">
+            <div class="details-summary admonition-title">
+                <i class="icon {{ index $iconMap $type | default (index $iconMap "note") }}" aria-hidden="true"></i>{{ $title }}<i class="details-icon {{ $iconDetails }}" aria-hidden="true"></i>
+            </div>
+            <div class="details-content">
+                <div class="admonition-content">
+                    {{- $contentBefore -}}
+                    <div class="mermaid" id="{{ $id }}"></div>
+                    {{- $contentAfter -}}
+                </div>
+            </div>
+        </div>
+{{- end -}}

@@ -1,0 +1,3 @@
+{{- with .Store.Get "admonitionMermaid" -}}
+    {{- dict "mermaid" true "config" (dict "data" .) | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+{{- end -}}
