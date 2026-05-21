@@ -95,7 +95,7 @@
         let restoreDarkThemeAfterPrint = false;
 
         window.addEventListener("beforeprint", () => {
-            if (!document.querySelector(".echarts") || document.body.getAttribute("theme") !== "dark") {
+            if (!document.querySelector(".echarts, .mermaid") || document.body.getAttribute("theme") !== "dark") {
                 return;
             }
 

@@ -29,12 +29,12 @@ This article is part of the **"Infrastructure at Scale with Azure and OpenTofu"*
   Explore multiple patterns for organizing Infrastructure as Code: their strengths, tradeoffs, and when to use which.
   I'll walk you through a proven skeleton that you can adapt in your org or team.
 
-- [ ] Build flexible infrastructure modules and a custom registry
+- [ ] [Truly reusable IaC modules](../2026-04-23-build-reusable-modules-and-registry)
 
-  Learn how to design [OpenTofu](https://opentofu.org/) modules that are idiomatic, reusable, versioned, and ready to share.
+  Learn how to design [OpenTofu](https://opentofu.org/) modules with stable APIs, predictable resource identity, practical testing, and safe versioning.
   I'll also show you how to build a lightweight module registry you can host anywhere.
 
-- [ ] Design CI/CD for your Infrastructure as Code workflows
+- [ ] Secure CI/CD for OpenTofu
 
   See how a solid CI/CD pipeline can streamline your infrastructure development.
   We'll cover tools, automation, and proven patterns to help your code ship faster and safer.

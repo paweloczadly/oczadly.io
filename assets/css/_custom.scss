@@ -27,6 +27,16 @@
   clear: left;
 }
 
+// Center diagrams rendered by the combined admonition and Mermaid shortcode.
+.single .content .admonition-mermaid .mermaid {
+  display: flex;
+  justify-content: center;
+}
+
+.single .content .admonition-mermaid .mermaid > svg {
+  display: block;
+}
+
 // Align the English About-page tagline's full quote block beside the portrait.
 .single .content > h2#paweł-oczadły + blockquote {
   margin-left: 215px;
@@ -186,6 +196,15 @@
       svg {
         max-width: 100% !important;
         height: auto !important;
+      }
+
+      .admonition-mermaid.mermaid-compact .mermaid > svg {
+        width: auto !important;
+        max-width: 92% !important;
+      }
+
+      .admonition-mermaid.mermaid-compact-tight .mermaid > svg {
+        max-height: 16rem !important;
       }
 
       table {

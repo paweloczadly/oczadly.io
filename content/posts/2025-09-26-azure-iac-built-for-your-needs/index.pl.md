@@ -25,7 +25,7 @@ Ten artykuł jest częścią serii **"Infrastruktura w skali z Azure i OpenTofu"
   
   Poznasz podejścia do projektowania infrastruktury jako kod: ich zalety oraz ograniczenia. Zobaczysz szkielet, który możesz wdrożyć u siebie lub w swoim zespole.
 
-- [ ] Zbuduj elastyczne moduły infrastruktury oraz ich rejestr. 
+- [ ] [Zbuduj elastyczne moduły infrastruktury oraz ich rejestr](../2026-04-23-build-reusable-modules-and-registry). 
 
   Dowiesz się, jak tworzyć moduły [OpenTofu](https://opentofu.org/) zgodnie z dobrymi praktykami: elastyczne, wersjonowane i gotowe na współdzielenie. Pokażę też, jak uruchomić własny lekki rejestr.
 
