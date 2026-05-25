@@ -26,7 +26,7 @@ This article is part of the **"Infrastructure at Scale with Azure and OpenTofu"*
 
 - [ ] [**Azure IaC built for your needs**](#) (you're reading this one now)
 
-  Explore multiple patterns for organizing Infrastructure as Code — their strengths, tradeoffs, and when to use which.
+  Explore multiple patterns for organizing Infrastructure as Code: their strengths, tradeoffs, and when to use which.
   I'll walk you through a proven skeleton that you can adapt in your org or team.
 
 - [ ] Build flexible infrastructure modules and a custom registry
@@ -55,7 +55,7 @@ While the series is focused on [Microsoft Azure](https://azure.microsoft.com/), 
 
 ## How you can design IaC on Azure
 
-Let's start with a broad overview of how Infrastructure as Code can be structured on [Microsoft Azure](https://azure.microsoft.com/) using [OpenTofu](https://opentofu.org/). I'll walk you through several real-world models — each with its strengths and tradeoffs.
+Let's start with a broad overview of how Infrastructure as Code can be structured on [Microsoft Azure](https://azure.microsoft.com/) using [OpenTofu](https://opentofu.org/). I'll walk you through several real-world models, each with its strengths and tradeoffs.
 
 After that, I'll show you the structure I use in my own projects.
 
@@ -126,7 +126,7 @@ Adding a new resource requires duplicating it across every relevant environment.
 Creating a new environment means adding another folder in the monorepo and defining all required resources there.
 
 <!-- 5. Logic changes -->
-Adding functionality or refactoring often requires updates across multiple folders — both within a single environment and between them. This wide blast radius increases friction and makes such initiatives less likely to happen.
+Adding functionality or refactoring often requires updates across multiple folders, both within a single environment and between them. This wide blast radius increases friction and makes such initiatives less likely to happen.
 
 <!-- 6. Maintenance -->
 Upgrading module or provider versions often means editing many directories at once. This discourages regular updates and increases the risk of technical debt.
@@ -215,7 +215,7 @@ module "shipping_db" {
 
 <!-- 3. Adding resources -->
 Adding new resources typically means reusing an existing module.
-This reduces duplication — the only repetition is in module declarations.
+This reduces duplication; the only repetition is in module declarations.
 
 <!-- 4. Environment onboarding -->
 Creating a new environment involves adding a directory and referencing the required local modules.
@@ -241,7 +241,7 @@ Upgrading module or provider versions still requires multiple edits across the c
 
 <!-- 8. When to choose it? -->
 {{< admonition question "When is this a good fit?" >}}
-In my opinion: _this may work well for small teams and limited infrastructure — even in production. But as your infra grows, maintaining many local module versions becomes a serious burden._
+In my opinion: _this may work well for small teams and limited infrastructure, even in production. But as your infra grows, maintaining many local module versions becomes a serious burden._
 {{< /admonition >}}
 
 ---
@@ -249,13 +249,13 @@ In my opinion: _this may work well for small teams and limited infrastructure �
 ### Repo per service + repo per module
 
 <!-- 1. Description -->
-This approach is the opposite of a monorepo. It resembles microservice architecture: each part is isolated and managed independently. Every repository corresponds to a specific service or infrastructure layer (for example, `tofu-networking` for networking, `tofu-databases` for the data layer (1️⃣)). Each of them contains environment-specific folders — like `dev` (2️⃣) and `prod` (3️⃣).
+This approach is the opposite of a monorepo. It resembles microservice architecture: each part is isolated and managed independently. Every repository corresponds to a specific service or infrastructure layer (for example, `tofu-networking` for networking, `tofu-databases` for the data layer (1️⃣)). Each of them contains environment-specific folders, like `dev` (2️⃣) and `prod` (3️⃣).
 
 These service repos contain module invocations, while the actual logic for resource creation lives in separate module repositories (for example, [terraform-azurerm-avm-res-resources-resourcegroup](https://github.com/Azure/terraform-azurerm-avm-res-resources-resourcegroup) from the [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/), or your organization's private registry). Modules can be used from a registry (by version) or directly from the repo (by commit or tag), following [OpenTofu documentation](https://opentofu.org/docs/language/modules/sources/).
 
-Alternatively, modules can be stored locally — in a `modules` folder within the service repository. However, be mindful of the limitations described earlier.
+Alternatively, modules can be stored locally, in a `modules` folder within the service repository. However, be mindful of the limitations described earlier.
 
-Although the repositories are smaller, the state files still often cover many resources — which may become hard to maintain over time.
+Although the repositories are smaller, the state files still often cover many resources, which may become hard to maintain over time.
 
 <!-- 2. Example structure -->
 Example structure for the database layer repo:
@@ -313,13 +313,13 @@ module "shipping_db" {
 ```
 
 <!-- 3. Adding resources -->
-Adding new resources using modules is fast. Smaller repos reduce conflicts and developer friction — a common pain point in large monorepos.
+Adding new resources using modules is fast. Smaller repos reduce conflicts and developer friction, a common pain point in large monorepos.
 
 <!-- 4. Environment onboarding -->
-That said, having many repositories — each tied to a specific service — can make onboarding new environments cumbersome. You'll often need to create pull requests in every repo to add the new environment folder.
+That said, having many repositories, each tied to a specific service, can make onboarding new environments cumbersome. You'll often need to create pull requests in every repo to add the new environment folder.
 
 <!-- 5. Logic changes -->
-Module changes do not directly impact the service repo, which simplifies testing and development. However, be careful with dependencies — if module A exposes outputs used by module B, any change to those outputs requires refreshing the state in dependent modules.
+Module changes do not directly impact the service repo, which simplifies testing and development. However, be careful with dependencies: if module A exposes outputs used by module B, any change to those outputs requires refreshing the state in dependent modules.
 
 It's worth setting up CI/CD for modules to accelerate their development and ensure quality.
 
@@ -328,7 +328,7 @@ Maintaining this setup requires discipline. Module and provider versions must be
 
 #### Pros & cons
 
-✅ **Low entry barrier**. Thanks to their small size, service repos are easy to understand — especially for new team members.
+✅ **Low entry barrier**. Thanks to their small size, service repos are easy to understand, especially for new team members.
 
 ✅ **Safe refactoring**. Logic updates don't directly affect live infrastructure. You can test them independently.
 
@@ -338,7 +338,7 @@ Maintaining this setup requires discipline. Module and provider versions must be
 
 <!-- 8. When to choose? -->
 {{< admonition question "When should you choose this approach?" >}}
-In my opinion: _best suited for larger teams and more complex infrastructures — especially when environments don't change frequently. Make sure to set up CI/CD for your modules and automate version updates._
+In my opinion: _best suited for larger teams and more complex infrastructures, especially when environments don't change frequently. Make sure to set up CI/CD for your modules and automate version updates._
 {{< /admonition >}}
 
 ---
@@ -416,10 +416,10 @@ module "shipping_db" {
 ```
 
 <!-- 3. Adding resources -->
-Adding new resources works similarly to monorepo setups with local modules — it typically means invoking an existing module again. The modular structure avoids code duplication.
+Adding new resources works similarly to monorepo setups with local modules: it typically means invoking an existing module again. The modular structure avoids code duplication.
 
 <!-- 4. Environment onboarding -->
-Onboarding a new environment involves creating a new folder and initializing the backend for state. Since everything is centralized in one repository, onboarding is relatively fast — assuming the folder structure is well-organized.
+Onboarding a new environment involves creating a new folder and initializing the backend for state. Since everything is centralized in one repository, onboarding is relatively fast, assuming the folder structure is well-organized.
 
 <!-- 5. Logic changes -->
 Changing module logic means creating a new version (e.g., 1.1.0) and rolling it out in the appropriate environment folder. This makes it easy to introduce new features or refactor existing logic. CI/CD pipelines for modules are recommended to streamline delivery.
@@ -781,7 +781,7 @@ To learn more about how I build reusable modules and the infrastructure registry
 
 #### When `organization-template` alone is enough
 
-In some situations, separating platform infrastructure from application infrastructure may not be necessary — or even optimal.
+In some situations, separating platform infrastructure from application infrastructure may not be necessary or even optimal.
 
 This is especially true for organizations working on a single monolithic application that only runs in a few environments (like `dev`, `test`, and `prod`), or in cases where application teams aren't comfortable working with infrastructure code.
 
@@ -870,7 +870,7 @@ In the next part of this series, I’ll walk you through how I design versioned 
 {{< admonition example "What’s next?" >}}
 Do you like the concept behind [`organization-template`](https://github.com/infra-at-scale/organization-template)?
 
-👉 Use the **[Use this template](https://github.com/new?template_name=organization-template&template_owner=infra-at-scale)** button or [fork](https://github.com/infra-at-scale/organization-template/fork) the repository — and see how this skeleton works in your organization.
+👉 Use the **[Use this template](https://github.com/new?template_name=organization-template&template_owner=infra-at-scale)** button or [fork](https://github.com/infra-at-scale/organization-template/fork) the repository, and see how this skeleton works in your organization.
 
 Have ideas for improvement?
 
