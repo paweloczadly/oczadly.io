@@ -68,6 +68,16 @@ To mój sposób na uchwycenie wzorców, lekcji i decyzji produkcyjnych, które p
 
 ---
 
+## Wspomniane przez
+
+Wybrane artykuły i projekty z tego bloga zostały przywołane przez społeczności inżynierskie i oficjalną dokumentację:
+
+* [Dokumentacja OpenRewrite](https://docs.openrewrite.org/running-recipes/running-rewrite-on-an-infrastructure-as-code-project#option-2-host-gradle-project): wskazuje [avm-openrewrite-migrations](https://github.com/infra-at-scale/avm-openrewrite-migrations) oraz towarzyszące case study jako kompletną, działającą konfigurację do uruchamiania OpenRewrite na projektach Infrastructure-as-Code.
+* [Gradle Newsletter, maj 2026](https://newsletter.gradle.org/2026/05#refactoring-hcl-w-openrewrite): wyróżnia [Refaktoryzację HCL z OpenRewrite](../posts/2026-04-23-refactoring-hcl-organization-wide-with-openrewrite) jako społecznościowy artykuł o ustrukturyzowanych migracjach Terraform/OpenTofu.
+* [Gradle Newsletter, wrzesień 2025](https://newsletter.gradle.org/2025/09#level-up-your-builds-with-plugins-from-the-gradle-team): prezentuje [Spring Initializr Gradle Plugin](https://plugins.gradle.org/plugin/io.oczadly.springinitializr) jako referencyjną implementację produkcyjnego rozwoju pluginów Gradle.
+
+---
+
 ## Więcej
 
 Moje projekty znajdziesz na [GitHub](https://github.com/paweloczadly) lub możesz skontaktować się ze mną pod adresem [contact@oczadly.io](mailto:contact@oczadly.io).
