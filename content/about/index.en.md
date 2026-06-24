@@ -73,6 +73,7 @@ It's my way of capturing patterns, learnings, and production-ready decisions tha
 
 Selected articles and projects from this blog have been referenced by engineering communities and official documentation:
 
+* [Terraform Weekly #278](https://www.weekly.tf/p/issue-278-scale-azure-iac-on-opentofu-and-avm-clone-full-ecs-stacks-govern-terraform-on-github): featured [Azure IaC built for your needs](../posts/2025-09-26-azure-iac-built-for-your-needs) as a practical article on organizing Azure IaC with OpenTofu, Azure Verified Modules, and isolated state files.
 * [OpenRewrite Documentation](https://docs.openrewrite.org/running-recipes/running-rewrite-on-an-infrastructure-as-code-project#option-2-host-gradle-project): referenced [avm-openrewrite-migrations](https://github.com/infra-at-scale/avm-openrewrite-migrations) and the accompanying case study as a complete working setup for running OpenRewrite on Infrastructure-as-Code projects.
 * [Gradle Newsletter, May 2026](https://newsletter.gradle.org/2026/05#refactoring-hcl-w-openrewrite): featured [Refactoring HCL with OpenRewrite](../posts/2026-04-23-refactoring-hcl-organization-wide-with-openrewrite) as a community article on structured Terraform/OpenTofu migrations.
 * [Gradle Newsletter, September 2025](https://newsletter.gradle.org/2025/09#level-up-your-builds-with-plugins-from-the-gradle-team): featured the [Spring Initializr Gradle Plugin](https://plugins.gradle.org/plugin/io.oczadly.springinitializr) as a reference implementation for production-ready Gradle plugin development.
