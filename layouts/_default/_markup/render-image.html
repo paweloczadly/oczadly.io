@@ -1,0 +1,14 @@
+{{- $class := "" -}}
+{{- if and (or (eq .Page.File.Path "about/index.en.md") (eq .Page.File.Path "about/index.pl.md")) (eq .Destination "/featured-image.jpeg") -}}
+    {{- $class = "about-portrait" -}}
+{{- end -}}
+{{- if .Title -}}
+    <figure>
+        {{- dict "Src" .Destination "Title" .Text "Caption" .Title "Linked" true "Class" $class "Resources" .Page.Resources | partial "plugin/img.html" -}}
+        <figcaption class="image-caption">
+            {{- .Title | safeHTML -}}
+        </figcaption>
+    </figure>
+{{- else -}}
+    {{- dict "Src" .Destination "Title" .Text "Class" $class "Resources" .Page.Resources | partial "plugin/img.html" -}}
+{{- end -}}
