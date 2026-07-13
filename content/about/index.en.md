@@ -5,7 +5,7 @@ draft: false
 type: "page"
 ---
 
-![about](/featured-image.jpeg)
+![about portrait](/featured-image.jpeg)
 
 ## Paweł Oczadły
 
@@ -22,8 +22,6 @@ Currently working at **[Gradle Technologies](https://gradle.com/)** on building 
 {{< admonition note "Note" >}}
 *Posts about [Gradle](https://gradle.org/), [DPE University](https://dpeuniversity.gradle.com/app), [Build Scans](https://docs.gradle.org/8.14.3/userguide/build_scans.html), or [Develocity](https://gradle.com/develocity/) reflect my **personal experiences and perspectives**. They are not official product endorsements or company statements but insights I've gained while working with these tools in real engineering workflows.*
 {{< /admonition >}}
-
----
 
 ### After work
 

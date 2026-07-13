@@ -12,3 +12,36 @@
   color: #123b34;
   margin-left: 0.01em;
 }
+
+.single .content .about-portrait {
+  float: left;
+  width: 30.4%;
+  max-width: 191px;
+  margin: 0 1.5rem 1rem 0;
+  border-radius: .5rem;
+}
+
+// Keep the About-page disclaimer below the floated portrait.
+.single .content > h3#work + p + .admonition,
+.single .content > h3#praca + p + .admonition {
+  clear: left;
+}
+
+// Align the English About-page tagline's full quote block beside the portrait.
+.single .content > h2#paweł-oczadły + blockquote {
+  margin-left: 215px;
+}
+
+@media (max-width: 680px) {
+  .single .content .about-portrait {
+    float: none;
+    display: block;
+    width: 100%;
+    max-width: 191px;
+    margin: 0 auto 1rem;
+  }
+
+  .single .content > h2#paweł-oczadły + blockquote {
+    margin-left: 0;
+  }
+}
