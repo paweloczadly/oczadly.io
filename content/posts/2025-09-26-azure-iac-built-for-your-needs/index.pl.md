@@ -35,6 +35,8 @@ Ten artykuł jest częścią serii **"Infrastruktura w skali z Azure i OpenTofu"
 
 {{< /admonition >}}
 
+---
+
 ## Założenia
 
 Zanim zaczniemy, ustalmy kilka podstawowych założeń. W tej serii korzystam z:
@@ -44,6 +46,8 @@ Zanim zaczniemy, ustalmy kilka podstawowych założeń. W tej serii korzystam z:
 * [GitHub](https://github.com/) - bo to najczęściej wybierane narzędzie do hostowania kodu i automatyzacji CI/CD.
 
 Choć seria koncentruje się na [Microsoft Azure](https://azure.microsoft.com/), [OpenTofu](https://opentofu.org/) i [GitHubie](https://github.com/), większość omawianych wzorców możesz zaadaptować do innych chmur, używać z [Terraformem](https://developer.hashicorp.com/terraform), [GitLabem](https://gitlab.com/) czy dowolnym innym narzędziem CI/CD.
+
+---
 
 ## Jak można zaprojektować IaC w Azure
 
@@ -132,8 +136,6 @@ Podbijanie wersji providerów lub modułów wymaga modyfikacji w wielu folderach
 {{< admonition question "Kiedy wybrać?" >}}
 Moim zdaniem: _tylko dla bardzo małych projektów lub własnych eksperymentów. W przypadku produkcyjnych rozwiązań zdecydowanie je odradzam._
 {{< /admonition >}}
-
----
 
 ### Monorepo + lokalne moduły
 
@@ -236,8 +238,6 @@ Aktualizacja wersji providerów lub modułów nadal wymaga zmian w wielu miejsca
 {{< admonition question "Kiedy wybrać?" >}}
 Moim zdaniem: _dla bardzo małych zespołów i niewielkiej infrastruktury to rozwiązanie może sprawdzać się nawet w środowisku produkcyjnym. Przy większej skali utrzymywanie wielu wersji lokalnych modułów szybko staje się uciążliwe._
 {{< /admonition >}}
-
----
 
 ### Repo per usługa + repo per module
 
@@ -436,8 +436,6 @@ Utrzymanie jest umiarkowanie złożone. Wersjonowanie modułów zapewnia przewid
 {{< admonition question "Kiedy wybrać?" >}}
 Moim zdaniem: _To podejście może sprawdzić się dobrze w średnich oraz dużych zespołach, które chcą zachować centralne repozytorium, ale korzystać z elastyczności i wersjonowania modułów. Wymaga dobrej dyscypliny w strukturze folderów, CI/CD dla modułów oraz automatyzacji aktualizacji wersji._
 {{< /admonition >}}
-
----
 
 ### Porównanie
 
@@ -847,6 +845,8 @@ Poniższy diagram radarowy ilustruje te różnice w sposób wizualny.
   ]
 }
 {{< /echarts >}}
+
+---
 
 ## Podsumowanie
 
