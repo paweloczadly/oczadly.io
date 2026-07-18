@@ -41,6 +41,7 @@ This article is part of the **"Infrastructure at Scale with Azure and OpenTofu"*
 
 {{< /admonition >}}
 
+---
 
 ## Assumptions
 
@@ -52,6 +53,8 @@ In this series, I'll be using:
 * [GitHub](https://github.com/) because it's still the most common platform for hosting code and automating CI/CD pipelines.
 
 While the series is focused on [Microsoft Azure](https://azure.microsoft.com/), [OpenTofu](https://opentofu.org/) and [GitHub](https://github.com/), most of the infrastructure patterns you'll see here can be adapted to other clouds, or used with [Terraform](https://developer.hashicorp.com/terraform), [GitLab](https://gitlab.com/) or any CI/CD tool of your choice.
+
+---
 
 ## How you can design IaC on Azure
 
@@ -144,8 +147,6 @@ Upgrading module or provider versions often means editing many directories at on
 {{< admonition question "When is this a good fit?" >}}
 In my opinion: _only for small side projects or internal experiments. I wouldn't recommend it for any serious production-grade infrastructure._
 {{< /admonition >}}
-
----
 
 ### Monorepo + local modules
 
@@ -244,8 +245,6 @@ Upgrading module or provider versions still requires multiple edits across the c
 In my opinion: _this may work well for small teams and limited infrastructure, even in production. But as your infra grows, maintaining many local module versions becomes a serious burden._
 {{< /admonition >}}
 
----
-
 ### Repo per service + repo per module
 
 <!-- 1. Description -->
@@ -340,8 +339,6 @@ Maintaining this setup requires discipline. Module and provider versions must be
 {{< admonition question "When should you choose this approach?" >}}
 In my opinion: _best suited for larger teams and more complex infrastructures, especially when environments don't change frequently. Make sure to set up CI/CD for your modules and automate version updates._
 {{< /admonition >}}
-
----
 
 ### Monorepo + repo per module
 
@@ -443,8 +440,6 @@ Maintenance is moderately complex. Versioning modules makes changes more predict
 In my opinion: _this works well for medium and large teams that prefer a centralized repository while leveraging the flexibility and versioning of external modules. It does require a disciplined folder structure, CI/CD for modules, and automated version updates._
 {{< /admonition >}}
 
----
-
 ### Comparison
 
 To wrap up this section, I've compiled all the approaches into a single table to help you choose a strategy that best fits your team's structure, infrastructure scale, and operating model.
@@ -511,7 +506,7 @@ The radar chart below visualizes the key traits of each model to help you choose
 
 ---
 
-## How I Design IaC in Azure
+## How I design IaC in Azure
 
 After reviewing various strategies for organizing infrastructure as code, it's time to show you the structure I personally use: scalable, modular, and aligned with [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/). It builds on the [Monorepo + repo per module](#monorepo--repo-per-module) approach, but includes several important nuances.
 
@@ -857,6 +852,8 @@ The radar chart below provides a visual overview of the key differences.
   ]
 }
 {{< /echarts >}}
+
+---
 
 ## Summary
 
