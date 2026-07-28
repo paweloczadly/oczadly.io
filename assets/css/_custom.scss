@@ -45,3 +45,358 @@
     margin-left: 0;
   }
 }
+
+.post-footer .post-actions {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.post-footer .print-article {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  color: $single-link-color;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+
+  [theme=dark] & {
+    color: $single-link-color-dark;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $single-link-hover-color;
+
+    [theme=dark] & {
+      color: $single-link-hover-color-dark;
+    }
+  }
+}
+
+@media (max-width: 680px) {
+  .post-footer .post-info-more {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: .5rem;
+  }
+
+  .post-footer .post-tags {
+    max-width: 100%;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm 16mm 20mm;
+  }
+
+  html,
+  body {
+    min-width: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 10.5pt;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  #header-desktop,
+  #header-mobile,
+  #mask,
+  #fixed-buttons,
+  .footer,
+  .toc,
+  .post-footer,
+  .comment,
+  .buy-me-a-coffee {
+    display: none !important;
+  }
+
+  .wrapper,
+  .main,
+  .container,
+  .page,
+  .page.single {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  .single {
+    .single-title {
+      margin-top: 0;
+      font-size: 22pt;
+    }
+
+    .single-subtitle {
+      font-size: 13pt;
+      line-height: 1.35;
+    }
+
+    .post-meta {
+      color: #444 !important;
+    }
+
+    .featured-image {
+      break-inside: avoid;
+    }
+
+    .content {
+      font-size: 10.5pt;
+      line-height: 1.5;
+
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        break-after: avoid-page;
+        color: #000 !important;
+      }
+
+      a {
+        color: #000 !important;
+        text-decoration: underline;
+      }
+
+      .header-mark,
+      .header-mark::before {
+        text-decoration: none !important;
+      }
+
+      b,
+      strong {
+        color: #000 !important;
+      }
+
+      img,
+      svg {
+        max-width: 100% !important;
+        height: auto !important;
+      }
+
+      table {
+        width: 100% !important;
+        font-size: 9pt;
+      }
+
+      .table-wrapper {
+        overflow: visible !important;
+
+        > table {
+          color: #000 !important;
+          background: #fff !important;
+
+          thead {
+            color: #000 !important;
+            background: #ededed !important;
+          }
+
+          tbody,
+          tr,
+          th,
+          td {
+            color: #000 !important;
+            background: #fff !important;
+            border-color: #ddd !important;
+          }
+
+          thead tr,
+          thead th,
+          thead td {
+            background: #ededed !important;
+          }
+        }
+      }
+
+      .echarts {
+        width: 92% !important;
+        margin: .5rem auto 2.5rem !important;
+        break-inside: avoid-page;
+        page-break-inside: avoid;
+        background: #fff !important;
+
+        > div {
+          position: relative !important;
+          left: 50% !important;
+          transform: translateX(-50%);
+          overflow: visible !important;
+        }
+
+        svg {
+          overflow: visible !important;
+        }
+      }
+
+      pre,
+      code {
+        color: #000 !important;
+        background: #f5f5f5 !important;
+      }
+
+      .highlight,
+      .chroma,
+      .highlight table,
+      .highlight tr,
+      .highlight td,
+      .code-header {
+        background: #f5f5f5 !important;
+      }
+
+      .highlight {
+        break-inside: auto;
+
+        > .chroma {
+          break-inside: auto;
+        }
+
+        .code-header {
+          break-after: avoid-page;
+        }
+
+        .arrow,
+        .copy {
+          display: none !important;
+        }
+
+        .table-wrapper {
+          display: block !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+
+        .lntable,
+        .lntable tbody,
+        .lntable tr,
+        .lntd:last-child {
+          display: block !important;
+          width: 100% !important;
+        }
+
+        .lntd:first-child {
+          display: none !important;
+        }
+
+        .lntd:last-child pre {
+          width: 100% !important;
+          min-width: 0 !important;
+          box-sizing: border-box;
+        }
+
+        .line,
+        .cl {
+          white-space: pre-wrap !important;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+        }
+      }
+
+      pre {
+        width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box;
+        overflow: visible !important;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+
+        > code {
+          display: block !important;
+          width: 100% !important;
+          min-width: 0 !important;
+          box-sizing: border-box;
+        }
+      }
+
+      blockquote,
+      figure,
+      img,
+      svg,
+      .mermaid {
+        break-inside: avoid;
+      }
+    }
+  }
+
+  .details {
+    .details-summary {
+      break-after: avoid-page;
+    }
+
+    .details-icon {
+      display: none !important;
+    }
+
+    .details-content {
+      display: block !important;
+      max-height: none !important;
+      overflow: visible !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+  }
+
+  .admonition {
+    border: 1px solid #aaa !important;
+    box-shadow: none !important;
+
+    .admonition-title {
+      break-after: avoid-page;
+    }
+  }
+
+  .animate__animated {
+    animation: none !important;
+  }
+
+  body[theme=dark] .single .content {
+    code,
+    pre,
+    .highlight,
+    .chroma,
+    .highlight table,
+    .highlight tr,
+    .highlight td,
+    .code-header {
+      color: #000 !important;
+      background: #f5f5f5 !important;
+    }
+
+    .table-wrapper > table {
+      color: #000 !important;
+      background: #fff !important;
+
+      thead {
+        color: #000 !important;
+        background: #ededed !important;
+      }
+
+      tbody,
+      tr,
+      th,
+      td {
+        color: #000 !important;
+        background: #fff !important;
+        border-color: #ddd !important;
+      }
+
+      thead tr,
+      thead th,
+      thead td {
+        background: #ededed !important;
+      }
+    }
+  }
+}
