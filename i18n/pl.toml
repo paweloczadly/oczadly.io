@@ -1,3 +1,6 @@
 # Nadpisanie tłumaczeń z tematu
 [series]
 other = "Serie"
+
+[printArticle]
+other = "Drukuj artykuł"
